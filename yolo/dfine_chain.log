@@ -1,0 +1,8 @@
+10:14:09 start dfine-nano-backbone
+10:28:09 dfine-nano-backbone exit 0
+10:28:09 start dfine-nano-encoder
+10:29:09 dfine-nano-encoder exit 0
+10:29:09 start yolo26n-seg-proto
+./dfine_chain.sh: line 6: 2639886 Killed                  timeout 14400 "$@" > $tag.compile.log 2>&1
+11:39:11 yolo26n-seg-proto exit 0
+11:39:11 chain done

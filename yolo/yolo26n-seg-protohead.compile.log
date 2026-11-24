@@ -1,0 +1,5 @@
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+export ok 0.2s
+compile ok 170.8s
+order (0,) passthrough ()
+saved

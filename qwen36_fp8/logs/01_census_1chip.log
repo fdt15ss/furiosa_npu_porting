@@ -1,0 +1,1353 @@
+patched defaults 26 chips 1
+2026-11-06T08:13:38.396045788Z  INFO furiosa_generator::fxb::metadata: Using architecture Qwen3_5ForConditionalGeneration from config.json
+2026-11-06T08:13:38.396888987Z  INFO furiosa_generator::engine::buckets: computed bucket limits: max_executable_len=2048
+2026-11-06T08:13:38.409298291Z  INFO furiosa_generator::fxb::build: 
+  ──────────────────────────────────────────────────────────────────────────
+  Furiosa Executable Bundle - Build Summary  v2026.4.0  2026-11-06 08:13:38
+  ──────────────────────────────────────────────────────────────────────────
+
+  ── Versions ─────────────────────────────────────────────────────────────
+    - furiosa-llm          2026.4.0 (b1baffa75)
+    - furiosa-compiler     2026.4.0 (ae27d44cd8)
+    - furiosa-kernels      2026.4.0
+    - furiosa-kernels-contrib 2026.4.0
+
+  ── Config ───────────────────────────────────────────────────────────────
+    - model                /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/models/cfg
+    - output_dir           /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/build/census.fxb
+    - output_format        fxb
+    - tcc                  /usr/local/bin/furiosa-tcc
+    - max_model_len        2048
+    - optim_level          O0
+    - concurrency          4
+    - enable_collective_dq false
+    - kernel_package       furiosa-kernels
+    - kernel_module        furiosa.kernels.qwen3_5
+
+  ── Model ────────────────────────────────────────────────────────────────
+    - model_type           qwen3_5
+    - architecture         Qwen3_5ForConditionalGeneration
+    - hidden_size          5120
+    - intermediate_size    17408
+    - num_attention_heads  24
+    - vocab_size           248320
+    - num_key_value_heads  4
+    - head_dim             256
+    - num_hidden_layers    64
+    - max_position_embeddings 262144
+    - quant_method         fp8
+
+  ── Parallelism ──────────────────────────────────────────────────────────
+    - tensor_parallel_size 8
+    - pipeline_parallel_size 1
+
+  ── Buckets (31 total, 89 kernels) ───────────────────────────────────────
+    - kv_cache_blocks      8192
+    - max_cache            1024
+    - mtp                  not included
+    - sampler              included
+    - tokenwise            [1, 1024]
+    - sampler              [1, 1024]
+    - vision_encoder (24):
+        - batch=1    num_patches=256
+        - batch=1    num_patches=400
+        - batch=1    num_patches=576
+        - batch=1    num_patches=784
+        - batch=1    num_patches=1024
+        - batch=1    num_patches=1600
+        - batch=1    num_patches=2304
+        - batch=1    num_patches=3136
+        - batch=1    num_patches=4096
+        - batch=1    num_patches=6400
+        - batch=1    num_patches=9216
+        - batch=1    num_patches=16384
+        - batch=1    num_patches=65536
+        - batch=4    num_patches=256
+        - batch=4    num_patches=400
+        - batch=4    num_patches=576
+        - batch=4    num_patches=784
+        - batch=4    num_patches=1024
+        - batch=4    num_patches=1600
+        - batch=4    num_patches=3136
+        - batch=4    num_patches=4096
+        - batch=4    num_patches=6400
+        - batch=4    num_patches=9216
+        - batch=4    num_patches=16384
+    - prefill (1):
+        - batch=1    attn=1024     input_ids=1024
+    - decode (1):
+        - batch=1    attn=2048     input_ids=1
+    - append (1):
+        - batch=1    attn=2048     input_ids=1024
+  ──────────────────────────────────────────────────────────────────────────
+
+2026-11-06T08:13:38.409542764Z  INFO furiosa_generator::fxb::build::pipeline: Generating 89 TCL kernels ...
+2026-11-06T08:13:42.65812961Z  INFO furiosa_generator::fxb::build::pipeline: Generated 89 TCL kernels successfully in 4.25s
+2026-11-06T08:13:42.65817315Z  INFO furiosa_generator::fxb::build::pipeline: Compiling 89 kernels ...
+2026-11-06T08:13:51.059879797Z ERROR furiosa_generator::fxb::build::pipeline: Kernel compilation failed: tcc subprocess failed (exit=Some(1)) for txt_lin_out/tw1:
+--- info ---------------------------------------------------
+Kernel generator: qwen3_6_27b_w8fa8fdkv16_txt_lin_out
+  input_size: 1
+--- stdout -------------------------------------------------
+\x1b[2m2026-11-06T08:13:42.752311Z\x1b[0m \x1b[32m INFO\x1b[0m \x1b[1mcompile_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m\x1b[1mcompile_with_results_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_with_results_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m \x1b[2mnpu_utils::cache\x1b[0m\x1b[2m:\x1b[0m Using cache directory: /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/07a9ae95224177c4
+--- stderr -------------------------------------------------
+[1/13]  Compiling from tcl to dfg
+Done in 0.003585919s
+[2/13]  Compiling from dfg to primitive
+Done in 0.001576767s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.00184264s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.00101062s
+[5/13]  Compiling from prelower to postlower
+
+thread '<unnamed>' (2703208) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread '<unnamed>' (2703221) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703210) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703213) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703223) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703219) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703218) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703212) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703220) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703209) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703216) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703214) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703215) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703222) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703210) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703221) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703208) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703219) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703215) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703220) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703218) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703212) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703217) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703210) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703208) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703209) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703211) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703215) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703222) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703216) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703219) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703218) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703220) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703208) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703210) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703217) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703209) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703212) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703213) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703223) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703215) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703218) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703221) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703219) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703208) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703211) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703222) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703216) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703214) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+Compilation failed: (cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/07a9ae95224177c4)
+
+Caused by:
+   0: On populating O15
+   1: called `Option::unwrap()` on a `None` value
+
+Location:
+    /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-utils/src/panic.rs:22:5
+2026-11-06T08:14:01.151293503Z ERROR furiosa_generator::fxb::build::pipeline: Kernel compilation failed: tcc subprocess failed (exit=Some(1)) for txt_full_in/tw1:
+--- info ---------------------------------------------------
+Kernel generator: qwen3_6_27b_w8fa8fdkv16_txt_full_in
+  input_size: 1
+--- stdout -------------------------------------------------
+\x1b[2m2026-11-06T08:13:42.856585Z\x1b[0m \x1b[32m INFO\x1b[0m \x1b[1mcompile_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m\x1b[1mcompile_with_results_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_with_results_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m \x1b[2mnpu_utils::cache\x1b[0m\x1b[2m:\x1b[0m Using cache directory: /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/2bd1e4fd9d27df03
+--- stderr -------------------------------------------------
+[1/13]  Compiling from tcl to dfg
+Done in 0.006364729s
+[2/13]  Compiling from dfg to primitive
+Done in 0.003111593s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.004870193s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.002306125s
+[5/13]  Compiling from prelower to postlower
+Compilation failed: (cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/2bd1e4fd9d27df03)
+2026-11-06T08:14:11.860707384Z ERROR furiosa_generator::fxb::build::pipeline: Kernel compilation failed: tcc subprocess failed (exit=Some(1)) for txt_full_out/tw1:
+--- info ---------------------------------------------------
+Kernel generator: qwen3_6_27b_w8fa8fdkv16_txt_full_out
+  input_size: 1
+--- stdout -------------------------------------------------
+\x1b[2m2026-11-06T08:14:01.570319Z\x1b[0m \x1b[32m INFO\x1b[0m \x1b[1mcompile_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m\x1b[1mcompile_with_results_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_with_results_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m \x1b[2mnpu_utils::cache\x1b[0m\x1b[2m:\x1b[0m Using cache directory: /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/a08c25beaf6504a5
+--- stderr -------------------------------------------------
+[1/13]  Compiling from tcl to dfg
+Done in 0.009984428s
+[2/13]  Compiling from dfg to primitive
+Done in 0.00187139s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.002337276s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.013321515s
+[5/13]  Compiling from prelower to postlower
+
+thread '<unnamed>' (2703320) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread '<unnamed>' (2703305) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703310) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703318) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703317) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703314) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703319) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703309) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703313) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703308) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703312) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703315) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703316) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703306) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703307) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703310) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703309) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703318) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703315) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703308) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703312) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703306) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703320) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703307) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703319) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703310) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703318) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703313) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703315) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703306) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703308) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703307) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703320) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703312) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703310) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703319) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703318) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703313) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703306) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703315) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703314) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703308) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703307) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703309) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703311) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703312) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703310) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703316) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703320) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+Compilation failed: (cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/a08c25beaf6504a5)
+
+Caused by:
+   0: On populating O15
+   1: called `Option::unwrap()` on a `None` value
+
+Location:
+    /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-utils/src/panic.rs:22:5
+2026-11-06T08:18:06.382339746Z ERROR furiosa_generator::fxb::build::pipeline: Kernel compilation failed: tcc subprocess failed (exit=Some(1)) for txt_lin_out/tw1024:
+--- info ---------------------------------------------------
+Kernel generator: qwen3_6_27b_w8fa8fdkv16_txt_lin_out
+  input_size: 1024
+--- stdout -------------------------------------------------
+\x1b[2m2026-11-06T08:13:42.747271Z\x1b[0m \x1b[32m INFO\x1b[0m \x1b[1mcompile_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m\x1b[1mcompile_with_results_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_with_results_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m \x1b[2mnpu_utils::cache\x1b[0m\x1b[2m:\x1b[0m Using cache directory: /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/6582cae052ec84d4
+--- stderr -------------------------------------------------
+[1/13]  Compiling from tcl to dfg
+Done in 0.003996123s
+[2/13]  Compiling from dfg to primitive
+Done in 0.001609378s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.002053012s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.001070481s
+[5/13]  Compiling from prelower to postlower
+Compilation failed: (cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/6582cae052ec84d4)
+2026-11-06T08:18:54.30910088Z ERROR furiosa_generator::fxb::build::pipeline: Kernel compilation failed: tcc subprocess failed (exit=Some(1)) for txt_full_out/tw1024:
+--- info ---------------------------------------------------
+Kernel generator: qwen3_6_27b_w8fa8fdkv16_txt_full_out
+  input_size: 1024
+--- stdout -------------------------------------------------
+\x1b[2m2026-11-06T08:14:11.949207Z\x1b[0m \x1b[32m INFO\x1b[0m \x1b[1mcompile_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m\x1b[1mcompile_with_results_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_with_results_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m \x1b[2mnpu_utils::cache\x1b[0m\x1b[2m:\x1b[0m Using cache directory: /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/d7f404a47bcbd7cd
+--- stderr -------------------------------------------------
+[1/13]  Compiling from tcl to dfg
+Done in 0.004655711s
+[2/13]  Compiling from dfg to primitive
+Done in 0.002120223s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.00272409s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.001406666s
+[5/13]  Compiling from prelower to postlower
+Compilation failed: (cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/d7f404a47bcbd7cd)
+2026-11-06T08:18:56.921300524Z ERROR furiosa_generator::fxb::build::pipeline: Kernel compilation failed: tcc subprocess failed (exit=Some(1)) for txt_mlp/tw1:
+--- info ---------------------------------------------------
+Kernel generator: qwen3_6_27b_w8fa8fdkv16_txt_mlp
+  input_size: 1
+--- stdout -------------------------------------------------
+\x1b[2m2026-11-06T08:18:06.191526Z\x1b[0m \x1b[32m INFO\x1b[0m \x1b[1mcompile_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m\x1b[1mcompile_with_results_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_with_results_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m \x1b[2mnpu_utils::cache\x1b[0m\x1b[2m:\x1b[0m Using cache directory: /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/3403d5feafa3c59b
+--- stderr -------------------------------------------------
+[1/13]  Compiling from tcl to dfg
+Done in 0.008693483s
+[2/13]  Compiling from dfg to primitive
+Done in 0.008727253s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.015517024s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.001964653s
+[5/13]  Compiling from prelower to postlower
+
+thread '<unnamed>' (2703787) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread '<unnamed>' (2703787) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703787) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703787) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703787) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703787) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703788) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703796) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703788) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703791) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703788) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703791) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703788) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703795) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703784) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703795) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703787) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703784) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703796) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703787) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703793) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703784) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703790) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703789) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703796) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703788) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703797) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703784) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703789) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703788) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703796) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703790) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703795) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703794) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703783) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703793) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703784) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703797) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703792) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703789) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703796) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703788) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703791) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703790) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703795) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703787) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703785) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703786) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+
+thread '<unnamed>' (2703782) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/operator/generic.rs:1924:83:
+called `Option::unwrap()` on a `None` value
+Compilation failed: (cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/3403d5feafa3c59b)
+
+Caused by:
+   0: On populating O26
+   1: called `Option::unwrap()` on a `None` value
+
+Location:
+    /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-utils/src/panic.rs:22:5
+2026-11-06T08:21:04.714999112Z ERROR furiosa_generator::fxb::build::pipeline: Kernel compilation failed: tcc subprocess failed (exit=Some(1)) for txt_full_attention/b1_a1024_kv0:
+--- info ---------------------------------------------------
+Kernel generator: qwen3_6_27b_w8fa8fdkv16_txt_full_attention
+  batch_size: 1
+  attention_size: 1024
+  input_ids_size: 1024
+--- stdout -------------------------------------------------
+\x1b[2m2026-11-06T08:20:19.451046Z\x1b[0m \x1b[32m INFO\x1b[0m \x1b[1mcompile_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m\x1b[1mcompile_with_results_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_with_results_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m \x1b[2mnpu_utils::cache\x1b[0m\x1b[2m:\x1b[0m Using cache directory: /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/1824c8624ab3775b
+--- stderr -------------------------------------------------
+[1/13]  Compiling from tcl to dfg
+Done in 0.015159154s
+[2/13]  Compiling from dfg to primitive
+Done in 0.003608464s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.002742063s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.001414397s
+[5/13]  Compiling from prelower to postlower
+
+thread '<unnamed>' (2705080) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/tensor/mod.rs:307:90:
+called `Result::unwrap()` on an `Err` value: self.inter_chip_axes.volume() (4) != global_config().num_chips() (1)
+
+Location:
+    /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-ir-common/src/shape/kind/dram_shape.rs:99:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Compilation failed: (cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/1824c8624ab3775b)
+
+Caused by:
+   0: On populating O49
+   1: called `Result::unwrap()` on an `Err` value: self.inter_chip_axes.volume() (4) != global_config().num_chips() (1)
+
+      Location:
+          /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-ir-common/src/shape/kind/dram_shape.rs:99:9
+
+Location:
+    /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-utils/src/panic.rs:22:5
+2026-11-06T08:21:57.47431447Z ERROR furiosa_generator::fxb::build::pipeline: Kernel compilation failed: tcc subprocess failed (exit=Some(1)) for txt_full_attention/b1_a2048_kv2047:
+--- info ---------------------------------------------------
+Kernel generator: qwen3_6_27b_w8fa8fdkv16_txt_full_attention
+  batch_size: 1
+  attention_size: 2048
+  input_ids_size: 1
+--- stdout -------------------------------------------------
+\x1b[2m2026-11-06T08:21:04.993793Z\x1b[0m \x1b[32m INFO\x1b[0m \x1b[1mcompile_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m\x1b[1mcompile_with_results_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_with_results_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m \x1b[2mnpu_utils::cache\x1b[0m\x1b[2m:\x1b[0m Using cache directory: /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/5c21480cc0ae4085
+--- stderr -------------------------------------------------
+[1/13]  Compiling from tcl to dfg
+Done in 0.031134162s
+[2/13]  Compiling from dfg to primitive
+Done in 0.10343058s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.020157715s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.00168551s
+[5/13]  Compiling from prelower to postlower
+
+thread '<unnamed>' (2705123) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/tensor/mod.rs:307:90:
+called `Result::unwrap()` on an `Err` value: self.inter_chip_axes.volume() (4) != global_config().num_chips() (1)
+
+Location:
+    /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-ir-common/src/shape/kind/dram_shape.rs:99:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Compilation failed: (cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/5c21480cc0ae4085)
+
+Caused by:
+   0: On populating O65
+   1: called `Result::unwrap()` on an `Err` value: self.inter_chip_axes.volume() (4) != global_config().num_chips() (1)
+
+      Location:
+          /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-ir-common/src/shape/kind/dram_shape.rs:99:9
+
+Location:
+    /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-utils/src/panic.rs:22:5
+2026-11-06T08:22:42.434772507Z ERROR furiosa_generator::fxb::build::pipeline: Kernel compilation failed: tcc subprocess failed (exit=Some(1)) for txt_full_attention/b1_a2048_kv1024:
+--- info ---------------------------------------------------
+Kernel generator: qwen3_6_27b_w8fa8fdkv16_txt_full_attention
+  batch_size: 1
+  attention_size: 2048
+  input_ids_size: 1024
+--- stdout -------------------------------------------------
+\x1b[2m2026-11-06T08:21:57.782800Z\x1b[0m \x1b[32m INFO\x1b[0m \x1b[1mcompile_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m\x1b[1mcompile_with_results_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_with_results_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m \x1b[2mnpu_utils::cache\x1b[0m\x1b[2m:\x1b[0m Using cache directory: /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/d2f458169ee1f9e9
+--- stderr -------------------------------------------------
+[1/13]  Compiling from tcl to dfg
+Done in 0.018975014s
+[2/13]  Compiling from dfg to primitive
+Done in 0.001989614s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.008742628s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.004425914s
+[5/13]  Compiling from prelower to postlower
+
+thread '<unnamed>' (2705249) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-compiler/crates/tactic-populator/src/tensor/mod.rs:307:90:
+called `Result::unwrap()` on an `Err` value: self.inter_chip_axes.volume() (4) != global_config().num_chips() (1)
+
+Location:
+    /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-ir-common/src/shape/kind/dram_shape.rs:99:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Compilation failed: (cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/d2f458169ee1f9e9)
+
+Caused by:
+   0: On populating O49
+   1: called `Result::unwrap()` on an `Err` value: self.inter_chip_axes.volume() (4) != global_config().num_chips() (1)
+
+      Location:
+          /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-ir-common/src/shape/kind/dram_shape.rs:99:9
+
+Location:
+    /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/ae27d44/crates/npu-utils/src/panic.rs:22:5
+2026-11-06T08:36:31.429368745Z ERROR furiosa_generator::fxb::build::pipeline: Kernel compilation failed: tcc subprocess failed (exit=Some(1)) for txt_mlp/tw1024:
+--- info ---------------------------------------------------
+Kernel generator: qwen3_6_27b_w8fa8fdkv16_txt_mlp
+  input_size: 1024
+--- stdout -------------------------------------------------
+\x1b[2m2026-11-06T08:18:06.752486Z\x1b[0m \x1b[32m INFO\x1b[0m \x1b[1mcompile_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m\x1b[1mcompile_with_results_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_with_results_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m \x1b[2mnpu_utils::cache\x1b[0m\x1b[2m:\x1b[0m Using cache directory: /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/02ccff0160352632
+--- stderr -------------------------------------------------
+[1/13]  Compiling from tcl to dfg
+Done in 0.01270838s
+[2/13]  Compiling from dfg to primitive
+Done in 0.006468837s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.007527259s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.005481385s
+[5/13]  Compiling from prelower to postlower
+Compilation failed: (cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc/02ccff0160352632)
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      20m 0s  txt_lm_head                                   tw1024
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      20m 5s  txt_lm_head                                   tw1024
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 10s  txt_lm_head                                   tw1024
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 15s  txt_lm_head                                   tw1024
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 20s  txt_lm_head                                   tw1024
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 25s  txt_lm_head                                   tw1024
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 30s  txt_lm_head                                   tw1024
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      20m 2s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      20m 7s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 12s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 17s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 22s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 27s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 32s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 37s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 42s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 47s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 52s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     20m 57s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      21m 2s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      21m 7s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     21m 12s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     21m 17s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     21m 22s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     21m 27s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     21m 32s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     21m 37s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     21m 42s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     21m 47s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     21m 52s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     21m 57s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      22m 2s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      22m 7s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     22m 12s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     22m 17s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     22m 22s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     22m 27s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     22m 32s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     22m 37s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     22m 42s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     22m 47s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     22m 52s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     22m 57s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      23m 2s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      23m 7s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     23m 12s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     23m 17s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     23m 22s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     23m 27s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     23m 32s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     23m 37s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     23m 42s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     23m 47s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     23m 52s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     23m 57s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      24m 2s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      24m 7s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     24m 12s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     24m 17s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     24m 22s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     24m 27s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     24m 32s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     24m 37s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     24m 42s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     24m 47s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     24m 52s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     24m 57s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      25m 2s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      25m 7s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     25m 12s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     25m 17s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     25m 22s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     25m 27s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     25m 32s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     25m 37s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     25m 42s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     25m 47s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     25m 52s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     25m 57s  vis_first_block                               b1_vis576
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      26m 2s  vis_first_block                               b1_vis576
+      20m 1s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      26m 7s  vis_first_block                               b1_vis576
+      20m 6s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     26m 12s  vis_first_block                               b1_vis576
+     20m 11s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     26m 17s  vis_first_block                               b1_vis576
+     20m 16s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     26m 22s  vis_first_block                               b1_vis576
+     20m 21s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     26m 27s  vis_first_block                               b1_vis576
+     20m 26s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     26m 32s  vis_first_block                               b1_vis576
+     20m 31s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     26m 37s  vis_first_block                               b1_vis576
+     20m 36s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     26m 42s  vis_first_block                               b1_vis576
+     20m 41s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     26m 47s  vis_first_block                               b1_vis576
+     20m 46s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     26m 52s  vis_first_block                               b1_vis576
+     20m 51s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     26m 57s  vis_first_block                               b1_vis576
+     20m 56s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      27m 2s  vis_first_block                               b1_vis576
+      21m 1s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      27m 7s  vis_first_block                               b1_vis576
+      21m 6s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     27m 12s  vis_first_block                               b1_vis576
+     21m 11s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     27m 17s  vis_first_block                               b1_vis576
+     21m 16s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     27m 22s  vis_first_block                               b1_vis576
+     21m 21s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     27m 27s  vis_first_block                               b1_vis576
+     21m 26s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     27m 32s  vis_first_block                               b1_vis576
+     21m 31s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     27m 37s  vis_first_block                               b1_vis576
+     21m 36s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     27m 42s  vis_first_block                               b1_vis576
+     21m 41s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     27m 47s  vis_first_block                               b1_vis576
+     21m 46s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     27m 52s  vis_first_block                               b1_vis576
+     21m 51s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+     27m 57s  vis_first_block                               b1_vis576
+     21m 56s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      28m 2s  vis_first_block                               b1_vis576
+      22m 1s  vis_first_block                               b1_vis784
+
+  Slow kernels (>= 20m 0s, longest first):
+     Elapsed  Kernel                                        Bucket
+      28m 7s  vis_first_block                               b1_vis576
+      22m 6s  vis_first_block                               b1_vis784
+

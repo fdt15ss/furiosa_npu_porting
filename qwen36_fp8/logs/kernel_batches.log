@@ -1,0 +1,14 @@
+gated_delta_decode noctx_noar rc 0 stage 13 87.0 s 
+gdn_decode noctx_noar rc 0 stage 13 93.5 s 
+full_attention noctx_noar rc 0 stage 13 146.3 s 
+full_attention noctx_noar rc 0 stage 13 195.1 s 
+Traceback (most recent call last):
+AssertionError: qwen3_5 gated_delta_chunk is single-batch (kernel asserts B == 1); loop over batch on the host for batch_size > 1.
+random_sample noctx_noar rc 0 stage 13 6.4 s 
+full_in noctx_noar rc 1 stage 5 26.7 s 
+gdn_prefill noctx_noar rc 0 stage 13 263.0 s 
+BATCHDONE
+full_out noctx_noar_T1024 rc 0 stage 13 473.0 s 
+lin_in noctx_noar_T1024 rc 0 stage 13 545.1 s 
+lin_out noctx_noar_T1024 rc 0 stage 13 716.9 s 
+mlp noctx_noar_T1024 rc 0 stage 13 1349.1 s 

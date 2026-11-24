@@ -1,0 +1,184 @@
+patched defaults 38
+2026-11-06T20:14:50.749365588Z  INFO furiosa_generator::fxb::metadata: Using architecture Qwen3_5ForConditionalGeneration from config.json
+2026-11-06T20:14:50.760417128Z  INFO furiosa_generator::engine::buckets: computed bucket limits: max_executable_len=2048
+2026-11-06T20:14:50.861494473Z  INFO furiosa_generator::fxb::build: 
+  ──────────────────────────────────────────────────────────────────────────
+  Furiosa Executable Bundle - Build Summary  v2026.4.0  2026-11-06 20:14:50
+  ──────────────────────────────────────────────────────────────────────────
+
+  ── Versions ─────────────────────────────────────────────────────────────
+    - furiosa-llm          2026.4.0 (b1baffa75)
+    - furiosa-compiler     2026.4.0 (ae27d44cd8)
+    - furiosa-kernels      2026.4.0
+    - furiosa-kernels-contrib 2026.4.0
+
+  ── Config ───────────────────────────────────────────────────────────────
+    - model                /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/models/fxbcfg
+    - output_dir           /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/build/logics-swe-1card-text.fxb
+    - output_format        fxb
+    - tcc                  /usr/local/bin/furiosa-tcc
+    - max_model_len        2048
+    - optim_level          O0
+    - concurrency          3
+    - enable_collective_dq false
+    - kernel_package       furiosa-kernels
+    - kernel_module        furiosa.kernels.qwen3_5
+
+  ── Model ────────────────────────────────────────────────────────────────
+    - model_type           qwen3_5
+    - architecture         Qwen3_5ForConditionalGeneration
+    - hidden_size          5120
+    - intermediate_size    17408
+    - num_attention_heads  24
+    - vocab_size           248320
+    - num_key_value_heads  4
+    - head_dim             256
+    - num_hidden_layers    64
+    - max_position_embeddings 262144
+    - quant_method         fp8
+
+  ── Parallelism ──────────────────────────────────────────────────────────
+    - tensor_parallel_size 8
+    - pipeline_parallel_size 1
+
+  ── Buckets (31 total, 89 kernels) ───────────────────────────────────────
+    - kv_cache_blocks      8192
+    - max_cache            1024
+    - mtp                  not included
+    - sampler              included
+    - tokenwise            [1, 1024]
+    - sampler              [1, 1024]
+    - vision_encoder (24):
+        - batch=1    num_patches=256
+        - batch=1    num_patches=400
+        - batch=1    num_patches=576
+        - batch=1    num_patches=784
+        - batch=1    num_patches=1024
+        - batch=1    num_patches=1600
+        - batch=1    num_patches=2304
+        - batch=1    num_patches=3136
+        - batch=1    num_patches=4096
+        - batch=1    num_patches=6400
+        - batch=1    num_patches=9216
+        - batch=1    num_patches=16384
+        - batch=1    num_patches=65536
+        - batch=4    num_patches=256
+        - batch=4    num_patches=400
+        - batch=4    num_patches=576
+        - batch=4    num_patches=784
+        - batch=4    num_patches=1024
+        - batch=4    num_patches=1600
+        - batch=4    num_patches=3136
+        - batch=4    num_patches=4096
+        - batch=4    num_patches=6400
+        - batch=4    num_patches=9216
+        - batch=4    num_patches=16384
+    - prefill (1):
+        - batch=1    attn=1024     input_ids=1024
+    - decode (1):
+        - batch=1    attn=2048     input_ids=1
+    - append (1):
+        - batch=1    attn=2048     input_ids=1024
+  ──────────────────────────────────────────────────────────────────────────
+
+2026-11-06T20:14:50.863084972Z  INFO furiosa_generator::fxb::build::pipeline: Generating 89 TCL kernels ...
+2026-11-06T20:14:55.12921801Z  INFO furiosa_generator::fxb::build::pipeline: Generated 89 TCL kernels successfully in 4.27s
+2026-11-06T20:14:55.12926169Z  INFO furiosa_generator::fxb::build::pipeline: Compiling 89 kernels ...
+2026-11-06T20:15:00.833674927Z  INFO furiosa_generator::fxb::build::pipeline: Compilation finished: 89 succeeded, 0 failed, 89 total
+2026-11-06T20:15:00.833771068Z  INFO furiosa_generator::fxb::build::pipeline: 
+  Build Report:
+    Duration     Status  Kernel                                        Bucket
+  ──────────  ─────────  ───────────────────────────────────────────── ────────────────────
+        0.7s  succeeded  vis_mid_block                                 b1_vis65536
+        0.7s  succeeded  vis_last_block                                b1_vis65536
+        0.7s  succeeded  vis_first_block                               b1_vis65536
+        0.6s  succeeded  vis_first_block                               b1_vis16384
+        0.6s  succeeded  vis_mid_block                                 b1_vis16384
+        0.6s  succeeded  vis_last_block                                b1_vis16384
+        0.3s  succeeded  vis_last_block                                b4_vis9216
+        0.3s  succeeded  vis_last_block                                b4_vis6400
+        0.3s  succeeded  vis_first_block                               b4_vis256
+        0.3s  succeeded  vis_mid_block                                 b4_vis256
+        0.3s  succeeded  vis_last_block                                b4_vis256
+        0.3s  succeeded  vis_last_block                                b4_vis4096
+        0.3s  succeeded  vis_first_block                               b4_vis9216
+        0.3s  succeeded  vis_first_block                               b4_vis6400
+        0.3s  succeeded  vis_mid_block                                 b4_vis6400
+        0.3s  succeeded  vis_mid_block                                 b4_vis9216
+        0.3s  succeeded  vis_first_block                               b4_vis4096
+        0.3s  succeeded  vis_mid_block                                 b4_vis4096
+        0.3s  succeeded  vis_last_block                                b4_vis16384
+        0.3s  succeeded  vis_first_block                               b4_vis16384
+        0.3s  succeeded  vis_mid_block                                 b4_vis16384
+        0.2s  succeeded  txt_random_sample                             sampler1024
+        0.2s  succeeded  vis_last_block                                b1_vis9216
+        0.2s  succeeded  vis_first_block                               b1_vis9216
+        0.2s  succeeded  vis_mid_block                                 b1_vis9216
+        0.2s  succeeded  txt_lin_in                                    tw1
+        0.2s  succeeded  txt_lin_in                                    tw1024
+        0.2s  succeeded  txt_random_sample                             sampler1
+        0.2s  succeeded  vis_last_block                                b4_vis3136
+        0.2s  succeeded  txt_lin_out                                   tw1
+        0.2s  succeeded  txt_full_attention                            b1_a1024_kv0
+        0.2s  succeeded  txt_full_attention                            b1_a2048_kv2047
+        0.2s  succeeded  vis_first_block                               b1_vis256
+        0.2s  succeeded  vis_mid_block                                 b4_vis3136
+        0.2s  succeeded  vis_first_block                               b4_vis3136
+        0.1s  succeeded  vis_last_block                                b1_vis6400
+        0.1s  succeeded  txt_lm_head                                   tw1024
+        0.1s  succeeded  vis_first_block                               b1_vis6400
+        0.1s  succeeded  vis_mid_block                                 b1_vis6400
+        0.1s  succeeded  vis_last_block                                b4_vis784
+        0.1s  succeeded  vis_last_block                                b1_vis1600
+        0.1s  succeeded  vis_last_block                                b4_vis1600
+        0.1s  succeeded  vis_last_block                                b1_vis4096
+        0.1s  succeeded  vis_first_block                               b4_vis784
+        0.1s  succeeded  vis_first_block                               b4_vis1600
+        0.1s  succeeded  vis_last_block                                b4_vis1024
+        0.1s  succeeded  vis_mid_block                                 b4_vis1600
+        0.1s  succeeded  vis_first_block                               b1_vis4096
+        0.1s  succeeded  vis_last_block                                b4_vis400
+        0.1s  succeeded  vis_mid_block                                 b1_vis3136
+        0.1s  succeeded  vis_last_block                                b1_vis3136
+        0.1s  succeeded  vis_first_block                               b4_vis400
+        0.1s  succeeded  vis_mid_block                                 b1_vis4096
+        0.1s  succeeded  vis_mid_block                                 b4_vis784
+        0.1s  succeeded  vis_last_block                                b1_vis2304
+        0.1s  succeeded  vis_mid_block                                 b1_vis1600
+        0.1s  succeeded  vis_last_block                                b4_vis576
+        0.1s  succeeded  vis_mid_block                                 b4_vis1024
+        0.1s  succeeded  vis_first_block                               b1_vis3136
+        0.1s  succeeded  vis_mid_block                                 b1_vis2304
+        0.1s  succeeded  vis_first_block                               b1_vis1600
+        0.1s  succeeded  vis_first_block                               b1_vis784
+        0.1s  succeeded  vis_first_block                               b1_vis400
+        0.1s  succeeded  vis_last_block                                b1_vis400
+        0.1s  succeeded  vis_mid_block                                 b4_vis400
+        0.1s  succeeded  vis_first_block                               b4_vis1024
+        0.1s  succeeded  vis_last_block                                b1_vis1024
+        0.1s  succeeded  vis_first_block                               b4_vis576
+        0.1s  succeeded  txt_mlp                                       tw1024
+        0.1s  succeeded  vis_first_block                               b1_vis2304
+        0.1s  succeeded  vis_last_block                                b1_vis784
+        0.1s  succeeded  txt_mlp                                       tw1
+        0.1s  succeeded  vis_mid_block                                 b1_vis784
+        0.1s  succeeded  vis_last_block                                b1_vis576
+        0.1s  succeeded  vis_mid_block                                 b4_vis576
+        0.1s  succeeded  txt_lm_head                                   tw1
+        0.1s  succeeded  vis_mid_block                                 b1_vis400
+        0.1s  succeeded  vis_mid_block                                 b1_vis1024
+        0.1s  succeeded  vis_first_block                               b1_vis576
+        0.1s  succeeded  vis_last_block                                b1_vis256
+        0.1s  succeeded  vis_first_block                               b1_vis1024
+        0.1s  succeeded  vis_mid_block                                 b1_vis576
+        0.1s  succeeded  vis_mid_block                                 b1_vis256
+        0.1s  succeeded  txt_full_in                                   tw1024
+        0.1s  succeeded  txt_full_out                                  tw1
+        0.1s  succeeded  txt_full_in                                   tw1
+        0.1s  succeeded  txt_lin_out                                   tw1024
+        0.1s  succeeded  txt_full_attention                            b1_a2048_kv1024
+        0.1s  succeeded  txt_full_out                                  tw1024
+  ──────────  ─────────  ─────────────────────────────────────────────
+       16.8s             total (89 succeeded, 0 failed, concurrency=3)
+
+Artifact Build Completed

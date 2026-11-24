@@ -1,0 +1,27 @@
+[1/13]  Compiling from tcl to dfg
+Done in 0.02821227s
+[2/13]  Compiling from dfg to primitive
+Done in 0.013170193s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.01408195s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.026756855s
+[5/13]  Compiling from prelower to postlower
+Done in 80.16079s
+[6/13]  Compiling from postlower to precommandgen
+Done in 0.035507735s
+[7/13]  Compiling from precommandgen to commandgraph
+Done in 0.074988626s
+[8/13]  Compiling from commandgraph to tiledgraph
+Done in 0.032389175s
+[9/13]  Compiling from tiledgraph to ldfg
+Done in 0.024792567s
+[10/13]  Compiling from ldfg to cdfg
+Done in 0.120564155s
+[11/13]  Compiling from cdfg to lir
+Done in 5.457767s
+[12/13]  Compiling from lir to resourcelir
+Done in 0.27475956s
+[13/13]  Compiling from resourcelir to edf
+Done in 1.3773893s
+:-) Finished in 87.64449s

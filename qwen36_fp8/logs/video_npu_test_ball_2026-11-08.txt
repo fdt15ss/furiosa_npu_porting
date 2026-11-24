@@ -1,0 +1,4 @@
+이 영상은 회색 배경 위에 빨간색 원과 파란색 사각형이 나타나는 애니메이션입니다. 빨간색 원은 왼쪽에서 오른쪽으로 이동하고, 파란색 사각형은 화면 중앙 상단에 나타납니다.
+
+CompletionUsage(completion_tokens=53, prompt_tokens=297, total_tokens=350, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0), prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cache_write_tokens=None, cached_tokens=0))
+time 2.3s

@@ -1,0 +1,4 @@
+이 영상은 한 소녀의 아침 일상을 보여줍니다. 먼저, 소녀는 알람이 울리는 시계를 끄고 일어나서 신발을 신고 가방을 메고 집을 나섭니다.
+
+CompletionUsage(completion_tokens=43, prompt_tokens=297, total_tokens=340, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0), prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cache_write_tokens=None, cached_tokens=0))
+time 2.8s

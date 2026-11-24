@@ -1,0 +1,12 @@
+loaded
+long_1k_code: 1000 prompt tokens, 64 NPU tokens
+  pos 1: NPU ' function' (rank 1), CPU top ' `', gap 0.750 (CPU top logit 26.375)
+  pos 10: NPU ' tensor' (rank 0), CPU top ' specific', gap 0.000 (CPU top logit 19.375)
+  agree 62/64, largest gap 0.750
+long_1k_ko: 1000 prompt tokens, 24 NPU tokens
+  pos 19: NPU ' 않습니다' (rank 1), CPU top ' 않으며', gap 1.875 (CPU top logit 24.000)
+  agree 23/24, largest gap 1.875
+long_1850: 1850 prompt tokens, 64 NPU tokens
+  pos 20: NPU ' M' (rank 1), CPU top ' Constraints', gap 0.250 (CPU top logit 21.750)
+  pos 53: NPU ').' (rank 1), CPU top ');', gap 0.625 (CPU top logit 21.250)
+  agree 62/64, largest gap 0.625

@@ -1,0 +1,10 @@
+/*
+!/.gitignore
+!/qwen36_fp8/
+!/yolo/
+__pycache__/
+*.pyc
+*.edf
+*.pt
+*.fxb
+*.safetensors

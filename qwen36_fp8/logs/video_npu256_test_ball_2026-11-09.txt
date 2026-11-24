@@ -1,0 +1,4 @@
+이 영상은 흰색 배경 위에 빨간색 원과 파란색 사각형이 나타나는 애니메이션입니다. 빨간색 원은 왼쪽에서 오른쪽으로 이동하고, 파란색 사각형은 위에서 아래로 이동합니다. 두 도형은 서로 교차하지 않고 각각의 경로를 따라 이동합니다.
+
+CompletionUsage(completion_tokens=69, prompt_tokens=297, total_tokens=366, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0), prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cache_write_tokens=None, cached_tokens=0))
+time 3.2s

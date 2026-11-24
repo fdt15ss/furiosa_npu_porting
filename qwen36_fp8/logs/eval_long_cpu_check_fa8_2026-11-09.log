@@ -1,0 +1,13 @@
+FA8: quantizing inputs of 400 linears
+long_1k_code: 1000 prompt tokens, 64 NPU tokens
+  pos 1: NPU ' function' (rank 1), CPU top ' `', gap 0.875 (CPU top logit 26.375)
+  pos 10: NPU ' tensor' (rank 1), CPU top ' specific', gap 0.250 (CPU top logit 19.375)
+  agree 62/64, largest gap 0.875
+long_1k_ko: 1000 prompt tokens, 24 NPU tokens
+  pos 19: NPU ' 않습니다' (rank 1), CPU top ' 않으며', gap 1.500 (CPU top logit 23.875)
+  agree 23/24, largest gap 1.500
+long_1850: 1850 prompt tokens, 64 NPU tokens
+  pos 20: NPU ' M' (rank 1), CPU top ' Constraints', gap 0.125 (CPU top logit 21.750)
+  pos 53: NPU ').' (rank 1), CPU top ');', gap 0.500 (CPU top logit 21.375)
+  pos 57: NPU ' older' (rank 1), CPU top ' runtime', gap 0.125 (CPU top logit 22.500)
+  agree 61/64, largest gap 0.500

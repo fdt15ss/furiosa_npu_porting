@@ -1,0 +1,7 @@
+# Python 3.11, verified with RNGD firmware 2026.4.0
+# Install with: pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt
+furiosa-torch==2026.3.0
+torch==2.10.0
+torchvision==0.25.0
+ultralytics==8.4.202
+transformers==5.22.1

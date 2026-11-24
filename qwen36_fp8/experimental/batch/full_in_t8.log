@@ -1,0 +1,10 @@
+[1/13]  Compiling from tcl to dfg
+Done in 0.020415142s
+[2/13]  Compiling from dfg to primitive
+Done in 0.01413024s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.015079687s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.025660368s
+[5/13]  Compiling from prelower to postlower
+Compilation failed: while lowering full_in_broadcast_rope_val_il

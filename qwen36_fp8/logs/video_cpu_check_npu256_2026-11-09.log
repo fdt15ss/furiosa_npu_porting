@@ -1,0 +1,8 @@
+loaded
+
+/tmp/claude-0/-root-furiosa-study/54c9513e-9f49-4c28-a657-adcd19b461c2/scratchpad/p256/mm_new/mm_1794209569.pkl: 66 NPU tokens
+  pos 6: NPU ' 위에' (rank 1), CPU top '에', gap 0.125 (CPU top logit 21.500)
+  agree 65/66, largest gap 0.125
+
+/tmp/claude-0/-root-furiosa-study/54c9513e-9f49-4c28-a657-adcd19b461c2/scratchpad/p256/mm_new/mm_1794209575.pkl: 40 NPU tokens
+  agree 40/40, largest gap 0.000

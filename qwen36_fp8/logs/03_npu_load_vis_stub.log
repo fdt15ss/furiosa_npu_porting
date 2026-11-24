@@ -1,0 +1,29 @@
+2026-11-06T11:37:58.177935092Z  INFO furiosa_generator::entrypoint: Using FXB: /root/models/fxb/logics-swe-1card.fxb
+2026-11-06T11:37:58.198972385Z  WARN furiosa_generator::entrypoint: FXB manifest has no hub_repo_id; deriving the L3 cache namespace from the architecture fingerprint instead (model_id=Qwen3_5ForConditionalGeneration). L3 stays enabled.
+2026-11-06T11:37:58.199016226Z  INFO furiosa_generator::entrypoint: Device mesh: 1 DP group(s), TP=8, PP=1, devices=npu:6:0,npu:6:1,npu:6:2,npu:6:3,npu:6:4,npu:6:5,npu:6:6,npu:6:7
+2026-11-06T11:37:58.199061636Z  INFO pe_runtime::context::handle: opening TpGroup id=TpGroupId(npu6) topology=RingTopology { kind: Cluster, sqpoll_cpus: None }
+2026-11-06T11:37:58.258636848Z  INFO pe_runtime::context: Memory dump thread for TpGroupId(npu6) started
+2026-11-06T11:37:58.258722739Z  INFO furiosa_generator::entrypoint: Loading DP group 1/1: PP=1, devices=[TpGroupId(npu6)]
+2026-11-06T11:37:58.266513254Z  INFO pe_runtime::cpu_buffer::alloc: Support for huge page size of 2 MiB has been detected.
+2026-11-06T11:37:59.038287722Z  INFO furiosa_generator::entrypoint:   PP rank 1/1: device=TpGroupId(npu6), layers=0..64
+
+thread 'tokio-runtime-worker' (2772447) panicked at furiosa-generator/src/engine/runtime/npu_module.rs:88:9:
+assertion `left == right` failed: operand layout length (24) != EDF I/O count (3) for kernel 'vis_first_block', bucket VisionEncoder { batch_size: 1, num_patches: 256 }
+  left: 24
+ right: 3
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2026-11-06T11:37:59.686921034Z  INFO furiosa_generator::safetensors: Total size of parameters loaded: 2.4 GiB in 0.64863205 s
+Traceback (most recent call last):
+  File "/tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/npu_smoke.py", line 37, in <module>
+    main()
+  File "/tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/npu_smoke.py", line 18, in main
+    llm = LLM(model_dir, fxb=fxb, max_model_len=2048)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/furiosa02/lib/python3.11/site-packages/furiosa_llm/api.py", line 460, in __init__
+    self._init_from_v3_engine(
+  File "/root/miniconda3/envs/furiosa02/lib/python3.11/site-packages/furiosa_llm/api.py", line 566, in _init_from_v3_engine
+    self.engine = NativeLLMEngine(
+                  ^^^^^^^^^^^^^^^^
+pyo3_runtime.PanicException: assertion `left == right` failed: operand layout length (24) != EDF I/O count (3) for kernel 'vis_first_block', bucket VisionEncoder { batch_size: 1, num_patches: 256 }
+  left: 24
+ right: 3

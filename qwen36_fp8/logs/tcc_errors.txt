@@ -1,0 +1,54 @@
+===== txt_gdn_prefill/b1_s256 (cache 56126bb1577ba45c)
+insufficient sequencer entries: required 9
+verification of operator failed:
+DmaCommand
+inner: DmaCommand: dram -> sram
+-- assigned_pe: None --
+src0: [0_1=2:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_2=4:786432, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x0)
+dst0: [0_1=2:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_2=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=0, pe=0, dmn=0, slice=0, in_slice=0x0)
+src1: [0_1=2:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_2=4:786432, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x18000)
+dst1: [0_1=2:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_2=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=0, pe=1, dmn=0, slice=0, in_slice=0x0)
+src2: [0_1=2:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_2=4:786432, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x30000)
+dst2: [0_1=2:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_2=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=0, pe=2, dmn=0, slice=0, in_slice=0x0)
+src3: [0_1=2:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_2=4:786432, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x48000)
+dst3: [0_1=2:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_2=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=0, pe=3, dmn=0, slice=0, in_slice=0x0)
+src4: [0_1=2:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_2=4:786432, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x1000)
+dst4: [0_1=2:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_2=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=1, pe=0, dmn=0, slice=0, in_slice=0x0)
+src5: [0_1=2:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_2=4:786432, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x19000)
+dst5: [0_1=2:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_2=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=1, pe=1, dmn=0, slice=0, in_slice=0x0)
+src6: [0_1=2:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_2=4:786432, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x31000)
+dst6: [0_1=2:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_2=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=1, pe=2, dmn=0, slice=
+(cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc2/56126bb1577ba45c)
+===== txt_gdn_prefill/b1_s512 (cache f8a3c9d3580a6ce0)
+insufficient sequencer entries: required 9
+verification of operator failed:
+DmaCommand
+inner: DmaCommand: dram -> sram
+-- assigned_pe: None --
+src0: [0_1=4:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_4=4:1572864, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x0)
+dst0: [0_1=4:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_4=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=0, pe=0, dmn=0, slice=0, in_slice=0x0)
+src1: [0_1=4:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_4=4:1572864, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x18000)
+dst1: [0_1=4:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_4=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=0, pe=1, dmn=0, slice=0, in_slice=0x0)
+src2: [0_1=4:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_4=4:1572864, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x30000)
+dst2: [0_1=4:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_4=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=0, pe=2, dmn=0, slice=0, in_slice=0x0)
+src3: [0_1=4:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_4=4:1572864, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x48000)
+dst3: [0_1=4:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_4=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=0, pe=3, dmn=0, slice=0, in_slice=0x0)
+src4: [0_1=4:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_4=4:1572864, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x1000)
+dst4: [0_1=4:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_4=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=1, pe=0, dmn=0, slice=0, in_slice=0x0)
+src5: [0_1=4:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_4=4:1572864, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x19000)
+dst5: [0_1=4:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_4=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=1, pe=1, dmn=0, slice=0, in_slice=0x0)
+src6: [0_1=4:393216, 2_1=3:8192, 3_1=8:256, 2_3=2:24576, 4_64=2:128, 0_4=4:1572864, 3_8=2:2048, 2_6=2:49152, None=1:128], Dram(chip=0, in_chip=0x31000)
+dst6: [0_1=4:3072, 2_1=3:1024, 3_1=8:128, 2_3=2:67108864, 4_64=2:33554432, 0_4=4:8388608, 3_8=2:4194304, 2_6=2:134217728, None=1:128], Sram(chip=0, cluster=1, pe=2, dmn=0,
+(cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc2/f8a3c9d3580a6ce0)
+===== vis_*/b4_vis6400 (cache fc021a05e2649606)
+bridge tactic failure sentinel reached lowering: no bridge tactic candidate populated: cannot find appropriate LowerBridge tactic; Condition failed: `dram_sizes_in_bytes <= compiler_config().dma_bridge_threshold_in_bytes`; Condition failed: `dram_sizes_in_bytes <= compiler_config().dma_bridge_threshold_in_bytes`; Condition failed: `dram_sizes_in_bytes <= compiler_config().dma_bridge_threshold_in_bytes`
+O448 lowering failed: BridgeTacticFailure{(E) [3_256=25, 4_416=8]|[]|[4_3328=2]|[1_1=4, 2_1=16, 4_104=4]|[3_1=256]|[4_1=104](8) @ [0=1, 1=4, 2=16, 3=6400, 4=6400(+256)]
+->(E) [3_40=160]|[]|[1_2=2]|[3_20=2, 4_50=128]|[1_1=2, 2_1=16, 4_1=50]|[3_1=20](8) @ [0=1, 1=4, 2=16, 3=6400, 4=6400]
+reason: no bridge tactic candidate populated: cannot find appropriate LowerBridge tactic; Condition failed: `dram_sizes_in_bytes <= compiler_config().dma_bridge_threshold_in_bytes`; Condition failed: `dram_sizes_in_bytes <= compiler_config().dma_bridge_threshold_in_bytes`; Condition failed: `dram_sizes_in_bytes <= compiler_config().dma_bridge_threshold_in_bytes`}
+(cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc2/fc021a05e2649606)
+===== vis_*/b4_vis9216 (cache 601d92fca03bcdb6)
+bridge tactic failure sentinel reached lowering: no bridge tactic candidate populated: Condition failed: `dram_sizes_in_bytes <= compiler_config().dma_bridge_threshold_in_bytes`; Condition failed: `dram_sizes_in_bytes <= compiler_config().dma_bridge_threshold_in_bytes`; Condition failed: `dram_sizes_in_bytes <= compiler_config().dma_bridge_threshold_in_bytes`
+O429 lowering failed: BridgeTacticFailure{(E) [3_64=72, 1_2=2, 2_4=4]|[]|[3_4608=2]|[3_1=64, 2_1=4]|[1_1=2]|[4_1=9216](8) @ [0=1, 1=4, 2=16, 3=9216, 4=9216]
+->(E) [3_256=18, 4_512=18]|[]|[3_4608=2]|[2_1=16, 1_1=4, 4_128=4]|[3_1=256]|[4_1=128](8) @ [0=1, 1=4, 2=16, 3=9216, 4=9216]
+reason: no bridge tactic candidate populated: Condition failed: `dram_sizes_in_bytes <= compiler_config().dma_bridge_threshold_in_bytes`; Condition failed: `dram_sizes_in_bytes <= compiler_config().dma_bridge_threshold_in_bytes`; Condition failed: `dram_sizes_in_bytes <= compiler_config().dma_bridge_threshold_in_bytes`}
+(cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc2/601d92fca03bcdb6)

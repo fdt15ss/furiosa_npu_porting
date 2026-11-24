@@ -1,0 +1,5 @@
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+export ok 0.6s
+decompose ok 1.7s
+compile ok 3212.5s
+saved yolo26n-seg.edf

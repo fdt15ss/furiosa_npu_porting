@@ -1,0 +1,146 @@
+patched defaults 38
+2026-11-06T20:18:16.131405358Z  INFO furiosa_generator::fxb::metadata: Using architecture Qwen3_5ForConditionalGeneration from config.json
+2026-11-06T20:18:16.132233272Z  INFO furiosa_generator::engine::buckets: computed bucket limits: max_executable_len=2048
+2026-11-06T20:18:16.144747713Z  INFO furiosa_generator::fxb::build: 
+  ──────────────────────────────────────────────────────────────────────────
+  Furiosa Executable Bundle - Build Summary  v2026.4.0  2026-11-06 20:18:16
+  ──────────────────────────────────────────────────────────────────────────
+
+  ── Versions ─────────────────────────────────────────────────────────────
+    - furiosa-llm          2026.4.0 (b1baffa75)
+    - furiosa-compiler     2026.4.0 (ae27d44cd8)
+    - furiosa-kernels      2026.4.0
+    - furiosa-kernels-contrib 2026.4.0
+
+  ── Config ───────────────────────────────────────────────────────────────
+    - model                /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/models/fxbcfg
+    - output_dir           /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/build/logics-swe-1card-gdn.fxb
+    - output_format        fxb
+    - tcc                  /usr/local/bin/furiosa-tcc
+    - max_model_len        2048
+    - optim_level          O3
+    - concurrency          3
+    - enable_collective_dq false
+    - kernel_package       furiosa-kernels
+    - kernel_module        furiosa.kernels.qwen3_5
+
+  ── Model ────────────────────────────────────────────────────────────────
+    - model_type           qwen3_5
+    - architecture         Qwen3_5ForConditionalGeneration
+    - hidden_size          5120
+    - intermediate_size    17408
+    - num_attention_heads  24
+    - vocab_size           248320
+    - num_key_value_heads  4
+    - head_dim             256
+    - num_hidden_layers    64
+    - max_position_embeddings 262144
+    - quant_method         fp8
+
+  ── Parallelism ──────────────────────────────────────────────────────────
+    - tensor_parallel_size 8
+    - pipeline_parallel_size 1
+
+  ── Buckets (45 total, 103 kernels) ──────────────────────────────────────
+    - kv_cache_blocks      8192
+    - max_cache            1024
+    - mtp                  not included
+    - sampler              included
+    - tokenwise            [1, 1024]
+    - sampler              [1, 1024]
+    - vision_encoder (24):
+        - batch=1    num_patches=256
+        - batch=1    num_patches=400
+        - batch=1    num_patches=576
+        - batch=1    num_patches=784
+        - batch=1    num_patches=1024
+        - batch=1    num_patches=1600
+        - batch=1    num_patches=2304
+        - batch=1    num_patches=3136
+        - batch=1    num_patches=4096
+        - batch=1    num_patches=6400
+        - batch=1    num_patches=9216
+        - batch=1    num_patches=16384
+        - batch=1    num_patches=65536
+        - batch=4    num_patches=256
+        - batch=4    num_patches=400
+        - batch=4    num_patches=576
+        - batch=4    num_patches=784
+        - batch=4    num_patches=1024
+        - batch=4    num_patches=1600
+        - batch=4    num_patches=3136
+        - batch=4    num_patches=4096
+        - batch=4    num_patches=6400
+        - batch=4    num_patches=9216
+        - batch=4    num_patches=16384
+    - prefill (1):
+        - batch=1    attn=1024     input_ids=1024
+    - decode (1):
+        - batch=1    attn=2048     input_ids=1
+    - append (1):
+        - batch=1    attn=2048     input_ids=1024
+    - linear prefill (4):
+        - batch=1    seq_len=128
+        - batch=1    seq_len=256
+        - batch=1    seq_len=512
+        - batch=1    seq_len=1024
+    - linear decode (10):
+        - batch=1    seq_len=1
+        - batch=2    seq_len=1
+        - batch=4    seq_len=1
+        - batch=8    seq_len=1
+        - batch=16   seq_len=1
+        - batch=32   seq_len=1
+        - batch=64   seq_len=1
+        - batch=128  seq_len=1
+        - batch=256  seq_len=1
+        - batch=512  seq_len=1
+  ──────────────────────────────────────────────────────────────────────────
+
+2026-11-06T20:18:16.144998967Z  INFO furiosa_generator::fxb::build::pipeline: Generating 103 TCL kernels ...
+2026-11-06T20:18:21.079951915Z  INFO furiosa_generator::fxb::build::pipeline: Generated 103 TCL kernels successfully in 4.93s
+2026-11-06T20:18:21.079999436Z  INFO furiosa_generator::fxb::build::pipeline: Compiling 103 kernels ...
+2026-11-06T20:31:05.815527983Z ERROR furiosa_generator::fxb::build::pipeline: Kernel compilation failed: tcc subprocess failed (exit=Some(1)) for txt_gdn_prefill/b1_s256:
+--- info ---------------------------------------------------
+Kernel generator: qwen3_6_27b_w8fa8fdkv16_txt_gdn_prefill
+  batch_size: 1
+  seq_len: 256
+--- stdout -------------------------------------------------
+\x1b[2m2026-11-06T20:18:21.702189Z\x1b[0m \x1b[32m INFO\x1b[0m \x1b[1mcompile_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m\x1b[1mcompile_with_results_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_with_results_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m \x1b[2mnpu_utils::cache\x1b[0m\x1b[2m:\x1b[0m Using cache directory: /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc2/56126bb1577ba45c
+--- stderr -------------------------------------------------
+[1/13]  Compiling from tcl to dfg
+Done in 0.034893017s
+[2/13]  Compiling from dfg to primitive
+Done in 0.39447093s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.048154447s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.039704807s
+[5/13]  Compiling from prelower to postlower
+Done in 756.34406s
+[6/13]  Compiling from postlower to precommandgen
+Done in 1.2156031s
+[7/13]  Compiling from precommandgen to commandgraph
+Compilation failed: (cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc2/56126bb1577ba45c)
+2026-11-06T20:42:44.321392654Z ERROR furiosa_generator::fxb::build::pipeline: Kernel compilation failed: tcc subprocess failed (exit=Some(1)) for txt_gdn_prefill/b1_s512:
+--- info ---------------------------------------------------
+Kernel generator: qwen3_6_27b_w8fa8fdkv16_txt_gdn_prefill
+  batch_size: 1
+  seq_len: 512
+--- stdout -------------------------------------------------
+\x1b[2m2026-11-06T20:18:21.724454Z\x1b[0m \x1b[32m INFO\x1b[0m \x1b[1mcompile_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m\x1b[1mcompile_with_results_blocking\x1b[0m\x1b[1m{\x1b[0m\x1b[3mname\x1b[0m\x1b[2m=\x1b[0m"compiler::compile_with_results_blocking" \x1b[3mcat\x1b[0m\x1b[2m=\x1b[0m"compiler"\x1b[1m}\x1b[0m\x1b[2m:\x1b[0m \x1b[2mnpu_utils::cache\x1b[0m\x1b[2m:\x1b[0m Using cache directory: /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc2/f8a3c9d3580a6ce0
+--- stderr -------------------------------------------------
+[1/13]  Compiling from tcl to dfg
+Done in 0.029092392s
+[2/13]  Compiling from dfg to primitive
+Done in 0.3780159s
+[3/13]  Compiling from primitive to kernelized
+Done in 0.05486612s
+[4/13]  Compiling from kernelized to prelower
+Done in 0.055104s
+[5/13]  Compiling from prelower to postlower
+Done in 1450.3904s
+[6/13]  Compiling from postlower to precommandgen
+Done in 0.5098395s
+[7/13]  Compiling from precommandgen to commandgraph
+Compilation failed: (cache at /tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/cc2/f8a3c9d3580a6ce0)

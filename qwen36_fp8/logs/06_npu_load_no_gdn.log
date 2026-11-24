@@ -1,0 +1,25 @@
+2026-11-06T20:15:39.228662928Z  INFO furiosa_generator::entrypoint: Using FXB: /root/models/fxb/logics-swe-1card-text.fxb
+2026-11-06T20:15:39.252733589Z  WARN furiosa_generator::entrypoint: FXB manifest has no hub_repo_id; deriving the L3 cache namespace from the architecture fingerprint instead (model_id=Qwen3_5ForConditionalGeneration). L3 stays enabled.
+2026-11-06T20:15:39.25277903Z  INFO furiosa_generator::entrypoint: Device mesh: 1 DP group(s), TP=8, PP=1, devices=npu:6:0,npu:6:1,npu:6:2,npu:6:3,npu:6:4,npu:6:5,npu:6:6,npu:6:7
+2026-11-06T20:15:39.255118432Z  INFO pe_runtime::context::handle: opening TpGroup id=TpGroupId(npu6) topology=RingTopology { kind: Cluster, sqpoll_cpus: None }
+2026-11-06T20:15:39.325497355Z  INFO pe_runtime::context: Memory dump thread for TpGroupId(npu6) started
+2026-11-06T20:15:39.327785976Z  INFO furiosa_generator::entrypoint: Loading DP group 1/1: PP=1, devices=[TpGroupId(npu6)]
+2026-11-06T20:15:39.417357444Z  INFO pe_runtime::cpu_buffer::alloc: Support for huge page size of 2 MiB has been detected.
+2026-11-06T20:15:42.230042871Z  INFO furiosa_generator::entrypoint:   PP rank 1/1: device=TpGroupId(npu6), layers=0..64
+
+thread 'tokio-runtime-worker' (3408184) panicked at furiosa-generator/src/engine/runtime/edf_store.rs:167:32:
+kernel 'txt_gdn_prefill' not found in EdfStore
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2026-11-06T20:15:45.654926179Z  INFO furiosa_generator::safetensors: Total size of parameters loaded: 3.3 GiB in 3.424853 s
+Traceback (most recent call last):
+  File "/tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/npu_smoke.py", line 37, in <module>
+    main()
+  File "/tmp/claude-0/-root-furiosa-study/73b6e61b-7d28-43ac-bbcb-9c4c54e13f63/scratchpad/npu_smoke.py", line 18, in main
+    llm = LLM(model_dir, fxb=fxb, max_model_len=2048)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/furiosa02/lib/python3.11/site-packages/furiosa_llm/api.py", line 460, in __init__
+    self._init_from_v3_engine(
+  File "/root/miniconda3/envs/furiosa02/lib/python3.11/site-packages/furiosa_llm/api.py", line 566, in _init_from_v3_engine
+    self.engine = NativeLLMEngine(
+                  ^^^^^^^^^^^^^^^^
+pyo3_runtime.PanicException: kernel 'txt_gdn_prefill' not found in EdfStore

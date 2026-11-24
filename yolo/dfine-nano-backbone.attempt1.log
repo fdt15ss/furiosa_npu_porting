@@ -1,0 +1,34 @@
+enable_tactic_pruning True
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 11221.75it/s]
+export ok 1.0s
+
+thread '<unnamed>' (2638401) panicked at /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/683468f/crates/npu-compiler/crates/tactic-solver/src/find_tactics.rs:514:13:
+EdgeIndex(1091) has empty transition cost table
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/furiosa_yolo/lib/python3.11/site-packages/furiosa/torch/compiler/__init__.py", line 80, in compile
+    runnable = compiler.compile(
+               ^^^^^^^^^^^^^^^^^
+RuntimeError: EdgeIndex(1091) has empty transition cost table
+
+Location:
+    /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/683468f/crates/npu-utils/src/panic.rs:10:47
+
+Location:
+    /usr/local/cargo/git/checkouts/npu-tools-dec42ebd45bb55cf/683468f/crates/global-compiler/src/cache.rs:98:35
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/furiosa_study/yolo/compile_dfine.py", line 98, in <module>
+    t = time.time(); compiled = ft.CompileModule.from_exported(ep, config); print(f"compile ok {time.time() - t:.1f}s", flush=True)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/furiosa_yolo/lib/python3.11/site-packages/furiosa/torch/_module/runnable.py", line 215, in from_exported
+    runnable = Runnable(compiler.compile(exported, compiler_config))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/furiosa_yolo/lib/python3.11/site-packages/furiosa/torch/profiler/__init__.py", line 35, in wrapped
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/furiosa_yolo/lib/python3.11/site-packages/furiosa/torch/compiler/__init__.py", line 88, in compile
+    raise error.UnsupportedOpError("failed to compile the graph") from e
+furiosa.UnsupportedOpError: failed to compile the graph

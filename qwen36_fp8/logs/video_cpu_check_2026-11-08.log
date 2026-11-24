@@ -1,0 +1,13 @@
+loaded
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+
+/tmp/claude-0/-root-furiosa-study/29cbe4a8-d9e4-4dae-81f9-2e1691d1eab0/scratchpad/mm/mm_1794104848.pkl: 50 NPU tokens
+  pos 3: NPU ' 회' (rank 1), CPU top ' 흰', gap 0.375 (CPU top logit 17.375)
+  pos 43: NPU ' 화면' (rank 1), CPU top ' 위에서', gap 0.625 (CPU top logit 18.750)
+  pos 45: NPU ' 상' (rank 1), CPU top '에', gap 0.250 (CPU top logit 21.250)
+  agree 47/50, largest gap 0.625
+
+/tmp/claude-0/-root-furiosa-study/29cbe4a8-d9e4-4dae-81f9-2e1691d1eab0/scratchpad/mm/mm_1794104851.pkl: 41 NPU tokens
+  pos 7: NPU ' 루' (rank 1), CPU top ' 일', gap 0.125 (CPU top logit 18.500)
+  agree 40/41, largest gap 0.125
