@@ -1,0 +1,6 @@
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+bus.jpg ['bus', 'person', 'person', 'person', 'person'] [0.87, 0.86, 0.84, 0.82, 0.57]
+zidane.jpg ['person', 'person', 'tie'] [0.9, 0.86, 0.56]
+car-detection 768x432 frames=377 fps=51.2 objects mean=0.5 max=4 zero_frames=258
+  classes={'cell phone': 65, 'car': 54, 'dining table': 27, 'bus': 15, 'bottle': 12, 'suitcase': 5, 'boat': 3, 'sink': 3, 'parking meter': 3}
+  cpu check n=13 min_cos=0.99830 same_count=13/13

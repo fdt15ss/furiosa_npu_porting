@@ -1,0 +1,6 @@
+[KDownloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 100% ━━━━━━━━━━━━ 5.3MB 102.5MB/s 0.1s
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 5.5 GFLOPs
+export ok 1.0s
+decompose ok 1.8s
+compile ok 3907.2s
+saved yolo26n.edf

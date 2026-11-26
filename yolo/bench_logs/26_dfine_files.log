@@ -1,0 +1,6 @@
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 11496.04it/s]
+bus.jpg ['person', 'person', 'person', 'person', 'bus'] [0.94, 0.91, 0.91, 0.79, 0.9]
+zidane.jpg ['person', 'tie', 'person', 'tie', 'tie', 'tie'] [0.92, 0.85, 0.92, 0.45, 0.42, 0.51]
+car-detection 768x432 frames=377 fps=26.7 objects mean=0.9 max=4 zero_frames=82
+  classes={'clock': 168, 'cell phone': 112, 'bus': 23, 'car': 22, 'truck': 11, 'aeroplane': 3, 'diningtable': 2, 'toilet': 1}
+ms per frame {'npu': 5.73, 'decoder': 26.06}

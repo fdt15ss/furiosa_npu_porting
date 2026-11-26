@@ -1,0 +1,30 @@
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+npu raw  cores=1 total=  131.7 fps  per_core=131.7~131.7
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+npu raw  cores=2 total=  258.9 fps  per_core=129.2~129.7
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+npu raw  cores=4 total=  481.5 fps  per_core=119.7~121.1
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+npu raw  cores=8 total=  687.9 fps  per_core=85.2~86.9
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+npu full cores=1 total=   68.6 fps  per_core=68.6~68.6
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+npu full cores=8 total=  261.2 fps  per_core=28.3~36.4

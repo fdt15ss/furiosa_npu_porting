@@ -1,0 +1,69 @@
+[2026-11-25 23:41:02] START 01_compile_yolo26n: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u compile_model.py yolo26n
+[2026-11-26 00:46:23] DONE  01_compile_yolo26n: EXIT=0 elapsed=3920.6s peak_anon_delta=52.2GiB
+[2026-11-26 00:46:23] START 02_run_detect: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u run_detect.py
+[2026-11-26 00:46:38] DONE  02_run_detect: EXIT=0 elapsed=15.0s peak_anon_delta=0.5GiB
+[2026-11-26 00:46:38] START 03_detect_fps: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u detect_npu.py
+[2026-11-26 00:49:03] DONE  03_detect_fps: EXIT=0 elapsed=145.0s peak_anon_delta=4.1GiB
+[2026-11-26 00:49:03] START 04_compile_yolo26n_1pe_pad4: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u compile_fusion.py 1 pad4
+[2026-11-26 01:54:23] DONE  04_compile_yolo26n_1pe_pad4: EXIT=0 elapsed=3920.6s peak_anon_delta=53.7GiB
+[2026-11-26 01:54:23] START 05_compile_yolo26n_2pe: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u compile_fusion.py 2
+[2026-11-26 02:44:44] DONE  05_compile_yolo26n_2pe: EXIT=0 elapsed=3020.4s peak_anon_delta=39.6GiB
+[2026-11-26 02:44:44] START 06_compile_yolo26n_2pe_pad4: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u compile_fusion.py 2 pad4
+[2026-11-26 03:34:44] DONE  06_compile_yolo26n_2pe_pad4: EXIT=0 elapsed=3000.4s peak_anon_delta=39.6GiB
+[2026-11-26 03:34:44] START 07_bench_1pe_3ch: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u bench_fusion.py 1 yolo26n.edf
+[2026-11-26 03:35:14] DONE  07_bench_1pe_3ch: EXIT=0 elapsed=30.0s peak_anon_delta=0.5GiB
+[2026-11-26 03:35:14] START 08_bench_1pe_pad4: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u bench_fusion.py 1 yolo26n-1pe-pad4.edf
+[2026-11-26 03:35:44] DONE  08_bench_1pe_pad4: EXIT=0 elapsed=30.0s peak_anon_delta=0.5GiB
+[2026-11-26 03:35:44] START 09_bench_2pe_3ch: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u bench_fusion.py 2 yolo26n-2pe.edf
+[2026-11-26 03:36:14] DONE  09_bench_2pe_3ch: EXIT=0 elapsed=30.0s peak_anon_delta=0.5GiB
+[2026-11-26 03:36:14] START 10_bench_2pe_pad4: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u bench_fusion.py 2 yolo26n-2pe-pad4.edf
+[2026-11-26 03:36:44] DONE  10_bench_2pe_pad4: EXIT=0 elapsed=30.0s peak_anon_delta=0.5GiB
+[2026-11-26 03:36:44] START 11_bench_1pe_pad4_x2: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u bench_fusion.py 1 yolo26n-1pe-pad4.edf 2
+[2026-11-26 03:37:09] DONE  11_bench_1pe_pad4_x2: EXIT=0 elapsed=25.0s peak_anon_delta=1.3GiB
+[2026-11-26 03:37:09] START 12_bench_1pe_pad4_x8: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u bench_fusion.py 1 yolo26n-1pe-pad4.edf 8
+[2026-11-26 03:37:34] DONE  12_bench_1pe_pad4_x8: EXIT=0 elapsed=25.0s peak_anon_delta=4.1GiB
+[2026-11-26 03:37:34] START 13_bench_2pe_pad4_x2: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u bench_fusion.py 2 yolo26n-2pe-pad4.edf 2
+[2026-11-26 03:37:59] DONE  13_bench_2pe_pad4_x2: EXIT=0 elapsed=25.0s peak_anon_delta=1.3GiB
+[2026-11-26 03:37:59] START 14_bench_2pe_pad4_x4: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u bench_fusion.py 2 yolo26n-2pe-pad4.edf 4
+[2026-11-26 03:38:24] DONE  14_bench_2pe_pad4_x4: EXIT=0 elapsed=25.0s peak_anon_delta=2.3GiB
+[2026-11-26 03:38:24] START 15_compile_yolo26n_seg: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u compile_model.py yolo26n-seg
+[2026-11-26 04:47:50] DONE  15_compile_yolo26n_seg: EXIT=0 elapsed=4165.6s peak_anon_delta=55.3GiB
+[2026-11-26 04:47:50] START 16_compile_yolo26n_seg_protohead: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u compile_proto.py
+[2026-11-26 04:50:35] DONE  16_compile_yolo26n_seg_protohead: EXIT=0 elapsed=165.0s peak_anon_delta=3.7GiB
+[2026-11-26 04:50:35] START 17_seg_check: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u seg_npu.py check
+[2026-11-26 04:50:45] DONE  17_seg_check: EXIT=0 elapsed=10.0s peak_anon_delta=0.4GiB
+[2026-11-26 04:50:45] START 18_seg_files: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u seg_npu.py files
+[2026-11-26 04:51:05] DONE  18_seg_files: EXIT=0 elapsed=20.0s peak_anon_delta=0.6GiB
+[2026-11-26 04:51:05] START 19_seg_fps: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u seg_npu.py fps
+[2026-11-26 04:53:00] DONE  19_seg_fps: EXIT=0 elapsed=115.0s peak_anon_delta=4.4GiB
+[2026-11-26 04:53:00] START 20_compile_dfine_encoder: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u compile_dfine.py encoder
+[2026-11-26 05:27:30] DONE  20_compile_dfine_encoder: EXIT=0 elapsed=2070.3s peak_anon_delta=37.0GiB
+[2026-11-26 05:27:30] START 21_compile_dfine_parte: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u compile_dfine_parts.py e
+[2026-11-26 05:31:05] DONE  21_compile_dfine_parte: EXIT=0 elapsed=215.0s peak_anon_delta=9.3GiB
+[2026-11-26 05:31:05] START 22_compile_dfine_parta: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u compile_dfine_parts.py a
+[2026-11-26 05:42:40] DONE  22_compile_dfine_parta: EXIT=0 elapsed=695.1s peak_anon_delta=16.4GiB
+[2026-11-26 05:42:40] START 23_compile_dfine_partb: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u compile_dfine_parts.py b
+[2026-11-26 05:45:10] DONE  23_compile_dfine_partb: EXIT=0 elapsed=150.0s peak_anon_delta=3.1GiB
+[2026-11-26 05:45:10] START 24_compile_dfine_partc: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u compile_dfine_parts.py c
+[2026-11-26 05:57:40] DONE  24_compile_dfine_partc: EXIT=0 elapsed=750.1s peak_anon_delta=14.4GiB
+[2026-11-26 05:57:40] START 25_dfine_check: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u dfine_npu.py check
+[2026-11-26 05:57:50] DONE  25_dfine_check: EXIT=0 elapsed=10.0s peak_anon_delta=0.5GiB
+[2026-11-26 05:57:50] START 26_dfine_files: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u dfine_npu.py files
+[2026-11-26 05:58:15] DONE  26_dfine_files: EXIT=0 elapsed=25.0s peak_anon_delta=0.5GiB
+[2026-11-26 05:58:15] START 27_dfine_fps: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u dfine_npu.py fps
+[2026-11-26 06:00:45] DONE  27_dfine_fps: EXIT=0 elapsed=150.0s peak_anon_delta=4.4GiB
+[2026-11-26 06:00:45] START 28_compile_yolo11n_pose: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u compile_pose.py yolo11n-pose
+[2026-11-26 06:53:06] DONE  28_compile_yolo11n_pose: EXIT=1 elapsed=3140.5s peak_anon_delta=44.3GiB
+[2026-11-26 06:53:06] START 29_compile_yolo26n_pose: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u compile_pose.py yolo26n-pose
+[2026-11-26 07:58:36] DONE  29_compile_yolo26n_pose: EXIT=1 elapsed=3930.6s peak_anon_delta=55.3GiB
+[2026-11-26 07:58:36] START 30_infer_yolo11n_pose: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u infer_pose.py yolo11n-pose
+[2026-11-26 07:58:51] DONE  30_infer_yolo11n_pose: EXIT=0 elapsed=15.0s peak_anon_delta=0.5GiB
+[2026-11-26 07:58:51] START 31_infer_yolo26n_pose: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u infer_pose.py yolo26n-pose
+[2026-11-26 07:59:06] DONE  31_infer_yolo26n_pose: EXIT=0 elapsed=15.0s peak_anon_delta=0.5GiB
+[2026-11-26 07:59:06] START 32_fps_pose: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u fps_pose.py
+[2026-11-26 08:03:31] DONE  32_fps_pose: EXIT=0 elapsed=265.0s peak_anon_delta=4.2GiB
+[2026-11-26 08:03:31] START 33_video_yolo26n_pose: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u video_pose.py yolo26n-pose /root/programming/npu/media/people-detection.mp4
+[2026-11-26 08:03:51] DONE  33_video_yolo26n_pose: EXIT=0 elapsed=20.0s peak_anon_delta=0.5GiB
+[2026-11-26 08:03:51] START 34_video_yolo11n_pose: /root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python -u video_pose.py yolo11n-pose /root/programming/npu/media/people-detection.mp4
+[2026-11-26 08:04:11] DONE  34_video_yolo11n_pose: EXIT=0 elapsed=20.0s peak_anon_delta=0.5GiB
+[2026-11-26 08:04:11] ALL DONE -> RESULTS.md written

@@ -1,0 +1,3 @@
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 5.5 GFLOPs
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 5.5 GFLOPs
+fusion=2 devices=2 (4 PE) total=643.6 fps per_device=315.3~328.3

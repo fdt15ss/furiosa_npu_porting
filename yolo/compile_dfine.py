@@ -28,7 +28,7 @@ from transformers import DFineForObjectDetection
 import furiosa.torch as ft
 
 MODEL = "ustc-community/dfine-nano-coco"
-IMAGE = "/root/furiosa_study/media/bus.jpg"
+IMAGE = "/root/programming/npu/media/bus.jpg"
 
 
 class BackbonePart(nn.Module):

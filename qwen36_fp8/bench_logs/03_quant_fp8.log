@@ -1,0 +1,14 @@
+keys not in official 0 []
+model-00001-of-00012.safetensors done 2 s total 2.5 GB
+model-00002-of-00012.safetensors done 11 s total 6.2 GB
+model-00003-of-00012.safetensors done 27 s total 8.7 GB
+model-00004-of-00012.safetensors done 42 s total 11.2 GB
+model-00005-of-00012.safetensors done 58 s total 13.7 GB
+model-00006-of-00012.safetensors done 74 s total 16.1 GB
+model-00007-of-00012.safetensors done 88 s total 18.6 GB
+model-00008-of-00012.safetensors done 103 s total 21.1 GB
+model-00009-of-00012.safetensors done 118 s total 23.6 GB
+model-00010-of-00012.safetensors done 132 s total 26.0 GB
+model-00011-of-00012.safetensors done 146 s total 28.5 GB
+model-00012-of-00012.safetensors done 152 s total 30.4 GB
+quantized 400 expected in checkpoint 400

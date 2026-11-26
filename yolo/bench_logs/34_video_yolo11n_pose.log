@@ -1,0 +1,5 @@
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+yolo11n-pose frames=596 total=10.56s fps=56.4 (source 12.00) people mean=0.7 max=4 zero_frames=348
+ms per frame: {'read': 0.23, 'pre': 2.54, 'npu': 7.81, 'post': 1.53, 'draw': 2.02}
+cpu check (frame, cpu, npu, max box dist px@640): [(0, 0, 0, None), (30, 1, 1, 0.08358516544103622), (60, 1, 1, 0.11146154254674911), (90, 0, 0, None), (120, 0, 0, None), (150, 0, 0, None), (180, 2, 2, 0.2268066555261612), (210, 2, 2, 0.10222428292036057), (240, 2, 2, 0.06568560749292374), (270, 0, 0, None), (300, 0, 0, None), (330, 0, 0, None), (360, 3, 3, 0.11018819361925125), (390, 3, 3, 0.6276803016662598), (420, 0, 0, None), (450, 0, 0, None), (480, 0, 0, None), (510, 0, 0, None), (540, 1, 1, 0.4310319423675537), (570, 0, 0, None)]
+saved /root/programming/npu/media/people-detection_yolo11n-pose_npu.mp4

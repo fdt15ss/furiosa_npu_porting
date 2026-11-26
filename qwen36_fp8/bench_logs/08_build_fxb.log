@@ -1,0 +1,971 @@
+patched defaults 38
+[2m2026-11-26T08:18:55.184792967+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::metadata[0m[2m:[0m Using architecture Qwen3_5ForConditionalGeneration from config.json
+[2m2026-11-26T08:18:55.189562521+09:00[0m [32m INFO[0m [2mfuriosa_generator::engine::buckets[0m[2m:[0m computed bucket limits: max_executable_len=2048
+[2m2026-11-26T08:18:55.19024694+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build[0m[2m:[0m 
+  ──────────────────────────────────────────────────────────────────────────
+  Furiosa Executable Bundle - Build Summary  v2026.5.0-beta.3  2026-11-26 08:18:55
+  ──────────────────────────────────────────────────────────────────────────
+
+  ── Versions ─────────────────────────────────────────────────────────────
+    - furiosa-llm          2026.5.0-beta.3 (71bbd1333)
+    - furiosa-compiler     0.11.0-dev (5c8d4d6df9)
+
+  ── Config ───────────────────────────────────────────────────────────────
+    - model                fxb_config
+    - output_dir           /root/.cache/qwen36_work/logics-swe-1card-sdk5-p256.fxb
+    - output_format        fxb
+    - tcc                  /root/.cache/qwen36_npu_venv/bin/furiosa-tcc
+    - max_model_len        2048
+    - optim_level          O3
+    - concurrency          3
+    - enable_collective_dq false
+    - kernel_module        furiosa.megakernels.qwen3_5
+    - component_modules    furiosa.kernels.qwen3_5
+
+  ── Model ────────────────────────────────────────────────────────────────
+    - model_type           qwen3_5
+    - architecture         Qwen3_5ForConditionalGeneration
+    - hidden_size          5120
+    - num_attention_heads  24
+    - vocab_size           248320
+    - intermediate_size    17408
+    - num_key_value_heads  4
+    - head_dim             256
+    - num_hidden_layers    64
+    - max_position_embeddings 262144
+    - quant_method         fp8
+
+  ── Parallelism ──────────────────────────────────────────────────────────
+    - tensor_parallel_size 8
+    - pipeline_parallel_size 1
+
+  ── Buckets (48 total, 109 kernels) ──────────────────────────────────────
+    - kv_cache_blocks      8192
+    - max_cache            1024
+    - mtp                  not included
+    - sampler              included
+    - tokenwise            [1, 128, 256]
+    - sampler              [1, 128, 256]
+    - vision_encoder (23):
+        - batch=1    num_patches=256
+        - batch=1    num_patches=400
+        - batch=1    num_patches=576
+        - batch=1    num_patches=784
+        - batch=1    num_patches=1024
+        - batch=1    num_patches=1600
+        - batch=1    num_patches=2304
+        - batch=1    num_patches=3136
+        - batch=1    num_patches=4096
+        - batch=1    num_patches=6400
+        - batch=1    num_patches=9216
+        - batch=1    num_patches=16384
+        - batch=2    num_patches=256
+        - batch=2    num_patches=400
+        - batch=2    num_patches=576
+        - batch=2    num_patches=784
+        - batch=2    num_patches=1024
+        - batch=2    num_patches=1600
+        - batch=2    num_patches=3136
+        - batch=2    num_patches=4096
+        - batch=2    num_patches=6400
+        - batch=2    num_patches=9216
+        - batch=2    num_patches=16384
+    - prefill (2):
+        - batch=1    attn=128      input_ids=128
+        - batch=1    attn=256      input_ids=256
+    - decode (1):
+        - batch=1    attn=2048     input_ids=1
+    - append (2):
+        - batch=1    attn=2048     input_ids=128
+        - batch=1    attn=2048     input_ids=256
+    - linear prefill (4):
+        - batch=1    seq_len=128
+        - batch=1    seq_len=256
+        - batch=1    seq_len=512
+        - batch=1    seq_len=1024
+    - linear decode (10):
+        - batch=1    seq_len=1
+        - batch=2    seq_len=1
+        - batch=4    seq_len=1
+        - batch=8    seq_len=1
+        - batch=16   seq_len=1
+        - batch=32   seq_len=1
+        - batch=64   seq_len=1
+        - batch=128  seq_len=1
+        - batch=256  seq_len=1
+        - batch=512  seq_len=1
+  ──────────────────────────────────────────────────────────────────────────
+
+[2m2026-11-26T08:18:55.191235183+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m Generating 109 TCL kernels ...
+[2m2026-11-26T08:19:00.645264324+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m Generated 109 TCL kernels successfully in 5.45s
+[2m2026-11-26T08:19:00.647076698+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m stage1 dependencies: 35 unique over 109 kernels (109 bypassed, 0 linked)
+[2m2026-11-26T08:19:00.650374462+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m Compiling 35 stage1 dependencies ...
+[2m2026-11-26T08:19:05.655391338+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 0/35 (0%) | Running: 3 | CPU: 7% | Mem: 164.2/1007.4GB (16%)
+[2m2026-11-26T08:19:10.655927628+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 0/35 (0%) | Running: 3 | CPU: 10% | Mem: 164.2/1007.4GB (16%)
+[2m2026-11-26T08:19:15.657030689+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 0/35 (0%) | Running: 3 | CPU: 10% | Mem: 164.6/1007.4GB (16%)
+[2m2026-11-26T08:19:20.654989174+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 0/35 (0%) | Running: 3 | CPU: 10% | Mem: 164.7/1007.4GB (16%)
+[2m2026-11-26T08:19:25.655122483+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 0/35 (0%) | Running: 3 | CPU: 10% | Mem: 164.8/1007.4GB (16%)
+[2m2026-11-26T08:19:30.655513115+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 1/35 (2%) | Running: 3 | CPU: 6% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T08:19:35.655136356+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 1/35 (2%) | Running: 3 | CPU: 7% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T08:19:40.655547727+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 1/35 (2%) | Running: 3 | CPU: 11% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T08:19:45.655123451+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 1/35 (2%) | Running: 3 | CPU: 10% | Mem: 164.7/1007.4GB (16%)
+[2m2026-11-26T08:19:50.655111153+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 1/35 (2%) | Running: 3 | CPU: 11% | Mem: 164.9/1007.4GB (16%)
+[2m2026-11-26T08:19:55.65514114+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 1/35 (2%) | Running: 3 | CPU: 10% | Mem: 164.9/1007.4GB (16%)
+[2m2026-11-26T08:20:00.655785361+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 1/35 (2%) | Running: 3 | CPU: 11% | Mem: 164.9/1007.4GB (16%)
+[2m2026-11-26T08:20:05.655099152+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 1/35 (2%) | Running: 3 | CPU: 10% | Mem: 165.1/1007.4GB (16%)
+[2m2026-11-26T08:20:10.655123402+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 1/35 (2%) | Running: 3 | CPU: 11% | Mem: 165.3/1007.4GB (16%)
+[2m2026-11-26T08:20:15.655107231+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 1/35 (2%) | Running: 3 | CPU: 10% | Mem: 165.5/1007.4GB (16%)
+[2m2026-11-26T08:20:20.659059212+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 1/35 (2%) | Running: 3 | CPU: 11% | Mem: 165.7/1007.4GB (16%)
+[2m2026-11-26T08:20:25.655496269+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 1/35 (2%) | Running: 3 | CPU: 10% | Mem: 165.9/1007.4GB (16%)
+[2m2026-11-26T08:20:30.655130591+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 11% | Mem: 165.1/1007.4GB (16%)
+[2m2026-11-26T08:20:35.655110692+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 10% | Mem: 165.6/1007.4GB (16%)
+[2m2026-11-26T08:20:40.657562111+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 11% | Mem: 166.0/1007.4GB (16%)
+[2m2026-11-26T08:20:45.655183166+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 10% | Mem: 166.1/1007.4GB (16%)
+[2m2026-11-26T08:20:50.654923416+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 11% | Mem: 166.2/1007.4GB (16%)
+[2m2026-11-26T08:20:55.655626068+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 10% | Mem: 166.3/1007.4GB (17%)
+[2m2026-11-26T08:21:00.655770735+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 11% | Mem: 166.5/1007.4GB (17%)
+[2m2026-11-26T08:21:05.655121693+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 10% | Mem: 166.6/1007.4GB (17%)
+[2m2026-11-26T08:21:10.655425156+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 11% | Mem: 166.8/1007.4GB (17%)
+[2m2026-11-26T08:21:15.655044766+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 10% | Mem: 166.9/1007.4GB (17%)
+[2m2026-11-26T08:21:20.656797377+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 11% | Mem: 166.9/1007.4GB (17%)
+[2m2026-11-26T08:21:25.658014618+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 10% | Mem: 167.1/1007.4GB (17%)
+[2m2026-11-26T08:21:30.655103656+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 11% | Mem: 167.2/1007.4GB (17%)
+[2m2026-11-26T08:21:35.655135739+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 10% | Mem: 167.3/1007.4GB (17%)
+[2m2026-11-26T08:21:40.655116861+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 11% | Mem: 167.6/1007.4GB (17%)
+[2m2026-11-26T08:21:45.655124465+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 10% | Mem: 167.5/1007.4GB (17%)
+[2m2026-11-26T08:21:50.6590595+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 11% | Mem: 167.6/1007.4GB (17%)
+[2m2026-11-26T08:21:55.655804568+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 10% | Mem: 167.7/1007.4GB (17%)
+[2m2026-11-26T08:22:00.658968959+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 11% | Mem: 167.7/1007.4GB (17%)
+[2m2026-11-26T08:22:05.65514463+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 10% | Mem: 167.8/1007.4GB (17%)
+[2m2026-11-26T08:22:10.655097374+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 11% | Mem: 168.0/1007.4GB (17%)
+[2m2026-11-26T08:22:15.655123355+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 10% | Mem: 168.1/1007.4GB (17%)
+[2m2026-11-26T08:22:20.658051151+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 11% | Mem: 168.2/1007.4GB (17%)
+[2m2026-11-26T08:22:25.657142798+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 10% | Mem: 168.3/1007.4GB (17%)
+[2m2026-11-26T08:22:30.663052879+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 2/35 (5%) | Running: 3 | CPU: 11% | Mem: 168.6/1007.4GB (17%)
+[2m2026-11-26T08:22:35.655101641+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 3/35 (8%) | Running: 3 | CPU: 10% | Mem: 166.4/1007.4GB (17%)
+[2m2026-11-26T08:22:40.655859103+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 3/35 (8%) | Running: 3 | CPU: 11% | Mem: 166.9/1007.4GB (17%)
+[2m2026-11-26T08:22:45.657253705+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 3/35 (8%) | Running: 3 | CPU: 10% | Mem: 167.3/1007.4GB (17%)
+[2m2026-11-26T08:22:50.655116248+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 3/35 (8%) | Running: 3 | CPU: 11% | Mem: 167.5/1007.4GB (17%)
+[2m2026-11-26T08:22:55.655131611+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 3/35 (8%) | Running: 3 | CPU: 10% | Mem: 167.6/1007.4GB (17%)
+[2m2026-11-26T08:23:00.657054114+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 3/35 (8%) | Running: 3 | CPU: 11% | Mem: 167.8/1007.4GB (17%)
+[2m2026-11-26T08:23:05.654748312+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 3/35 (8%) | Running: 3 | CPU: 10% | Mem: 168.1/1007.4GB (17%)
+[2m2026-11-26T08:23:10.655143031+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=···················] 3/35 (8%) | Running: 3 | CPU: 11% | Mem: 168.4/1007.4GB (17%)
+[2m2026-11-26T08:23:15.654932761+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 4/35 (11%) | Running: 3 | CPU: 10% | Mem: 167.4/1007.4GB (17%)
+[2m2026-11-26T08:23:20.655140886+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 6% | Mem: 164.8/1007.4GB (16%)
+[2m2026-11-26T08:23:25.654867015+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 3% | Mem: 165.2/1007.4GB (16%)
+[2m2026-11-26T08:23:30.655115482+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 5% | Mem: 165.0/1007.4GB (16%)
+[2m2026-11-26T08:23:35.655053007+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 164.9/1007.4GB (16%)
+[2m2026-11-26T08:23:40.655102656+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 9% | Mem: 165.1/1007.4GB (16%)
+[2m2026-11-26T08:23:45.655348901+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 165.2/1007.4GB (16%)
+[2m2026-11-26T08:23:50.657574124+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 165.7/1007.4GB (16%)
+[2m2026-11-26T08:23:55.65530879+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 165.7/1007.4GB (16%)
+[2m2026-11-26T08:24:00.655128186+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 11% | Mem: 165.9/1007.4GB (16%)
+[2m2026-11-26T08:24:05.657048955+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 166.0/1007.4GB (16%)
+[2m2026-11-26T08:24:10.655188726+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 11% | Mem: 166.2/1007.4GB (16%)
+[2m2026-11-26T08:24:15.655043136+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 166.2/1007.4GB (16%)
+[2m2026-11-26T08:24:20.655132949+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 11% | Mem: 166.1/1007.4GB (16%)
+[2m2026-11-26T08:24:25.655118221+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 166.1/1007.4GB (16%)
+[2m2026-11-26T08:24:30.655131174+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 11% | Mem: 166.2/1007.4GB (16%)
+[2m2026-11-26T08:24:35.654623883+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 166.2/1007.4GB (16%)
+[2m2026-11-26T08:24:40.657692736+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 166.2/1007.4GB (17%)
+[2m2026-11-26T08:24:45.655128416+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 166.3/1007.4GB (17%)
+[2m2026-11-26T08:24:50.657052903+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 166.4/1007.4GB (17%)
+[2m2026-11-26T08:24:55.656024291+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 166.6/1007.4GB (17%)
+[2m2026-11-26T08:25:00.658606636+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 11% | Mem: 166.7/1007.4GB (17%)
+[2m2026-11-26T08:25:05.655126356+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 166.8/1007.4GB (17%)
+[2m2026-11-26T08:25:10.655119014+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 11% | Mem: 166.9/1007.4GB (17%)
+[2m2026-11-26T08:25:15.659064646+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 167.1/1007.4GB (17%)
+[2m2026-11-26T08:25:20.654876042+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 11% | Mem: 167.1/1007.4GB (17%)
+[2m2026-11-26T08:25:25.655139828+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 167.1/1007.4GB (17%)
+[2m2026-11-26T08:25:30.658053005+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 11% | Mem: 167.2/1007.4GB (17%)
+[2m2026-11-26T08:25:35.655116514+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 5/35 (14%) | Running: 3 | CPU: 10% | Mem: 167.2/1007.4GB (17%)
+[2m2026-11-26T08:25:40.655127359+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 11% | Mem: 165.8/1007.4GB (16%)
+[2m2026-11-26T08:25:45.655001984+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 165.8/1007.4GB (16%)
+[2m2026-11-26T08:25:50.657059516+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 11% | Mem: 166.0/1007.4GB (16%)
+[2m2026-11-26T08:25:55.655130466+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 166.2/1007.4GB (17%)
+[2m2026-11-26T08:26:00.655109091+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 166.6/1007.4GB (17%)
+[2m2026-11-26T08:26:05.655327234+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 166.7/1007.4GB (17%)
+[2m2026-11-26T08:26:10.655105517+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 11% | Mem: 166.7/1007.4GB (17%)
+[2m2026-11-26T08:26:15.655123278+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 166.8/1007.4GB (17%)
+[2m2026-11-26T08:26:20.655111165+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 11% | Mem: 166.9/1007.4GB (17%)
+[2m2026-11-26T08:26:25.654761205+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 167.0/1007.4GB (17%)
+[2m2026-11-26T08:26:30.656065272+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 11% | Mem: 167.1/1007.4GB (17%)
+[2m2026-11-26T08:26:35.655117631+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 167.2/1007.4GB (17%)
+[2m2026-11-26T08:26:40.65514934+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 11% | Mem: 167.3/1007.4GB (17%)
+[2m2026-11-26T08:26:45.655141127+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 167.2/1007.4GB (17%)
+[2m2026-11-26T08:26:50.655257946+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 11% | Mem: 167.3/1007.4GB (17%)
+[2m2026-11-26T08:26:55.657042635+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 167.5/1007.4GB (17%)
+[2m2026-11-26T08:27:00.658040336+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 11% | Mem: 167.8/1007.4GB (17%)
+[2m2026-11-26T08:27:05.655100733+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 168.0/1007.4GB (17%)
+[2m2026-11-26T08:27:10.65535803+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 11% | Mem: 168.2/1007.4GB (17%)
+[2m2026-11-26T08:27:15.65488471+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 168.2/1007.4GB (17%)
+[2m2026-11-26T08:27:20.655124042+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 11% | Mem: 168.2/1007.4GB (17%)
+[2m2026-11-26T08:27:25.655117626+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 168.4/1007.4GB (17%)
+[2m2026-11-26T08:27:30.655045863+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 11% | Mem: 168.6/1007.4GB (17%)
+[2m2026-11-26T08:27:35.6554236+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 168.6/1007.4GB (17%)
+[2m2026-11-26T08:27:40.658050948+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 11% | Mem: 168.8/1007.4GB (17%)
+[2m2026-11-26T08:27:45.65512586+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 168.8/1007.4GB (17%)
+[2m2026-11-26T08:27:50.65511126+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 11% | Mem: 168.9/1007.4GB (17%)
+[2m2026-11-26T08:27:55.655117878+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 6/35 (17%) | Running: 3 | CPU: 10% | Mem: 168.9/1007.4GB (17%)
+[2m2026-11-26T08:28:00.655149194+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 7/35 (20%) | Running: 3 | CPU: 10% | Mem: 166.6/1007.4GB (17%)
+[2m2026-11-26T08:28:05.65616976+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 7/35 (20%) | Running: 3 | CPU: 10% | Mem: 166.7/1007.4GB (17%)
+[2m2026-11-26T08:28:10.658049183+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 7/35 (20%) | Running: 3 | CPU: 11% | Mem: 166.8/1007.4GB (17%)
+[2m2026-11-26T08:28:15.655103342+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 7/35 (20%) | Running: 3 | CPU: 10% | Mem: 166.9/1007.4GB (17%)
+[2m2026-11-26T08:28:20.655321675+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 7/35 (20%) | Running: 3 | CPU: 11% | Mem: 167.0/1007.4GB (17%)
+[2m2026-11-26T08:28:25.655172735+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 7/35 (20%) | Running: 3 | CPU: 10% | Mem: 167.2/1007.4GB (17%)
+[2m2026-11-26T08:28:30.655144537+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 7/35 (20%) | Running: 3 | CPU: 11% | Mem: 167.1/1007.4GB (17%)
+[2m2026-11-26T08:28:35.65514662+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 7/35 (20%) | Running: 3 | CPU: 10% | Mem: 167.1/1007.4GB (17%)
+[2m2026-11-26T08:28:40.655139895+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 7/35 (20%) | Running: 3 | CPU: 11% | Mem: 167.1/1007.4GB (17%)
+[2m2026-11-26T08:28:45.658028093+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 7/35 (20%) | Running: 3 | CPU: 10% | Mem: 167.2/1007.4GB (17%)
+[2m2026-11-26T08:28:50.65512861+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 7/35 (20%) | Running: 3 | CPU: 11% | Mem: 167.3/1007.4GB (17%)
+[2m2026-11-26T08:28:55.655247383+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 166.5/1007.4GB (17%)
+[2m2026-11-26T08:29:00.655134798+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 166.7/1007.4GB (17%)
+[2m2026-11-26T08:29:05.655305889+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 166.8/1007.4GB (17%)
+[2m2026-11-26T08:29:10.655114391+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 167.0/1007.4GB (17%)
+[2m2026-11-26T08:29:15.655121709+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 167.4/1007.4GB (17%)
+[2m2026-11-26T08:29:20.655119253+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 167.5/1007.4GB (17%)
+[2m2026-11-26T08:29:25.657052583+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 167.5/1007.4GB (17%)
+[2m2026-11-26T08:29:30.655133917+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 167.6/1007.4GB (17%)
+[2m2026-11-26T08:29:35.657094941+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 167.7/1007.4GB (17%)
+[2m2026-11-26T08:29:40.656573214+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 167.8/1007.4GB (17%)
+[2m2026-11-26T08:29:45.655100984+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 167.9/1007.4GB (17%)
+[2m2026-11-26T08:29:50.655689134+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 168.1/1007.4GB (17%)
+[2m2026-11-26T08:29:55.658034122+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 168.2/1007.4GB (17%)
+[2m2026-11-26T08:30:00.655120531+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 168.2/1007.4GB (17%)
+[2m2026-11-26T08:30:05.65512081+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 168.4/1007.4GB (17%)
+[2m2026-11-26T08:30:10.656907059+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 168.4/1007.4GB (17%)
+[2m2026-11-26T08:30:15.654680553+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 168.5/1007.4GB (17%)
+[2m2026-11-26T08:30:20.654797663+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 168.7/1007.4GB (17%)
+[2m2026-11-26T08:30:25.655131016+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 168.6/1007.4GB (17%)
+[2m2026-11-26T08:30:30.655102816+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 168.6/1007.4GB (17%)
+[2m2026-11-26T08:30:35.655125968+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 168.6/1007.4GB (17%)
+[2m2026-11-26T08:30:40.654848678+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 168.7/1007.4GB (17%)
+[2m2026-11-26T08:30:45.655133257+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 168.7/1007.4GB (17%)
+[2m2026-11-26T08:30:50.658032397+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 168.8/1007.4GB (17%)
+[2m2026-11-26T08:30:55.655127095+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 168.8/1007.4GB (17%)
+[2m2026-11-26T08:31:00.654939837+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 168.9/1007.4GB (17%)
+[2m2026-11-26T08:31:05.655113086+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 169.0/1007.4GB (17%)
+[2m2026-11-26T08:31:10.655106097+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 169.1/1007.4GB (17%)
+[2m2026-11-26T08:31:15.655118223+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 10% | Mem: 169.2/1007.4GB (17%)
+[2m2026-11-26T08:31:20.655351435+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 8/35 (22%) | Running: 3 | CPU: 11% | Mem: 169.3/1007.4GB (17%)
+[2m2026-11-26T08:31:25.655001286+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 9/35 (25%) | Running: 3 | CPU: 10% | Mem: 166.6/1007.4GB (17%)
+[2m2026-11-26T08:31:30.658589165+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 9/35 (25%) | Running: 3 | CPU: 11% | Mem: 166.9/1007.4GB (17%)
+[2m2026-11-26T08:31:35.655112763+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 9/35 (25%) | Running: 3 | CPU: 10% | Mem: 167.3/1007.4GB (17%)
+[2m2026-11-26T08:31:40.655110255+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 9/35 (25%) | Running: 3 | CPU: 11% | Mem: 167.7/1007.4GB (17%)
+[2m2026-11-26T08:31:45.655558018+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 9/35 (25%) | Running: 3 | CPU: 10% | Mem: 167.6/1007.4GB (17%)
+[2m2026-11-26T08:31:50.655203318+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 9/35 (25%) | Running: 3 | CPU: 10% | Mem: 167.7/1007.4GB (17%)
+[2m2026-11-26T08:31:55.65518045+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 9/35 (25%) | Running: 3 | CPU: 10% | Mem: 167.7/1007.4GB (17%)
+[2m2026-11-26T08:32:00.655120137+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 9/35 (25%) | Running: 3 | CPU: 11% | Mem: 167.9/1007.4GB (17%)
+[2m2026-11-26T08:32:05.655811521+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 167.4/1007.4GB (17%)
+[2m2026-11-26T08:32:10.654999016+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 167.7/1007.4GB (17%)
+[2m2026-11-26T08:32:15.65511771+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 167.9/1007.4GB (17%)
+[2m2026-11-26T08:32:20.655833179+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 168.2/1007.4GB (17%)
+[2m2026-11-26T08:32:25.65511423+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 168.4/1007.4GB (17%)
+[2m2026-11-26T08:32:30.657706927+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 168.3/1007.4GB (17%)
+[2m2026-11-26T08:32:35.655194888+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 168.4/1007.4GB (17%)
+[2m2026-11-26T08:32:40.655097525+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 168.5/1007.4GB (17%)
+[2m2026-11-26T08:32:45.655717789+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 168.8/1007.4GB (17%)
+[2m2026-11-26T08:32:50.655136871+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 168.7/1007.4GB (17%)
+[2m2026-11-26T08:32:55.654922177+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 168.6/1007.4GB (17%)
+[2m2026-11-26T08:33:00.655134509+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 168.5/1007.4GB (17%)
+[2m2026-11-26T08:33:05.655121629+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 168.4/1007.4GB (17%)
+[2m2026-11-26T08:33:10.655139791+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 168.4/1007.4GB (17%)
+[2m2026-11-26T08:33:15.658850585+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 168.4/1007.4GB (17%)
+[2m2026-11-26T08:33:20.65511167+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 168.5/1007.4GB (17%)
+[2m2026-11-26T08:33:25.655147069+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 168.6/1007.4GB (17%)
+[2m2026-11-26T08:33:30.656042879+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 168.6/1007.4GB (17%)
+[2m2026-11-26T08:33:35.655122132+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 168.9/1007.4GB (17%)
+[2m2026-11-26T08:33:40.654892686+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 168.9/1007.4GB (17%)
+[2m2026-11-26T08:33:45.65805522+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 168.9/1007.4GB (17%)
+[2m2026-11-26T08:33:50.658069523+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 169.0/1007.4GB (17%)
+[2m2026-11-26T08:33:55.656066689+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 169.0/1007.4GB (17%)
+[2m2026-11-26T08:34:00.655375842+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 169.1/1007.4GB (17%)
+[2m2026-11-26T08:34:05.655135265+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 169.1/1007.4GB (17%)
+[2m2026-11-26T08:34:10.655111705+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 169.1/1007.4GB (17%)
+[2m2026-11-26T08:34:15.65513175+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 169.2/1007.4GB (17%)
+[2m2026-11-26T08:34:20.655137561+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 169.3/1007.4GB (17%)
+[2m2026-11-26T08:34:25.654812783+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 169.4/1007.4GB (17%)
+[2m2026-11-26T08:34:30.655361959+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 169.4/1007.4GB (17%)
+[2m2026-11-26T08:34:35.655112653+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 169.6/1007.4GB (17%)
+[2m2026-11-26T08:34:40.657047097+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 169.8/1007.4GB (17%)
+[2m2026-11-26T08:34:45.655302857+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 169.9/1007.4GB (17%)
+[2m2026-11-26T08:34:50.658050392+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 170.0/1007.4GB (17%)
+[2m2026-11-26T08:34:55.656823351+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 170.1/1007.4GB (17%)
+[2m2026-11-26T08:35:00.655118972+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 170.2/1007.4GB (17%)
+[2m2026-11-26T08:35:05.657268431+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 170.3/1007.4GB (17%)
+[2m2026-11-26T08:35:10.655124942+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 170.4/1007.4GB (17%)
+[2m2026-11-26T08:35:15.655563448+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 170.5/1007.4GB (17%)
+[2m2026-11-26T08:35:20.655133903+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 170.6/1007.4GB (17%)
+[2m2026-11-26T08:35:25.659051112+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 10% | Mem: 170.8/1007.4GB (17%)
+[2m2026-11-26T08:35:30.654957294+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 10/35 (28%) | Running: 3 | CPU: 11% | Mem: 170.9/1007.4GB (17%)
+[2m2026-11-26T08:35:35.655119599+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 11/35 (31%) | Running: 3 | CPU: 10% | Mem: 169.7/1007.4GB (17%)
+[2m2026-11-26T08:35:40.658599709+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 11/35 (31%) | Running: 3 | CPU: 11% | Mem: 170.1/1007.4GB (17%)
+[2m2026-11-26T08:35:45.655108493+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 11/35 (31%) | Running: 3 | CPU: 10% | Mem: 170.7/1007.4GB (17%)
+[2m2026-11-26T08:35:50.655135494+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 11/35 (31%) | Running: 3 | CPU: 11% | Mem: 171.3/1007.4GB (17%)
+[2m2026-11-26T08:35:55.655128754+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 11/35 (31%) | Running: 3 | CPU: 10% | Mem: 172.1/1007.4GB (17%)
+[2m2026-11-26T08:36:00.655137894+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 11/35 (31%) | Running: 3 | CPU: 11% | Mem: 172.3/1007.4GB (17%)
+[2m2026-11-26T08:36:05.655135293+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 11/35 (31%) | Running: 3 | CPU: 10% | Mem: 172.5/1007.4GB (17%)
+[2m2026-11-26T08:36:10.655128402+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 11/35 (31%) | Running: 3 | CPU: 11% | Mem: 172.6/1007.4GB (17%)
+[2m2026-11-26T08:36:15.65781387+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 11/35 (31%) | Running: 3 | CPU: 10% | Mem: 172.6/1007.4GB (17%)
+[2m2026-11-26T08:36:20.658052722+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 11/35 (31%) | Running: 3 | CPU: 11% | Mem: 172.7/1007.4GB (17%)
+[2m2026-11-26T08:36:25.658041782+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 11/35 (31%) | Running: 3 | CPU: 10% | Mem: 173.1/1007.4GB (17%)
+[2m2026-11-26T08:36:30.659053833+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 12/35 (34%) | Running: 3 | CPU: 10% | Mem: 169.5/1007.4GB (17%)
+[2m2026-11-26T08:36:35.654675178+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 12/35 (34%) | Running: 3 | CPU: 10% | Mem: 170.3/1007.4GB (17%)
+[2m2026-11-26T08:36:40.65464338+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=======·············] 13/35 (37%) | Running: 3 | CPU: 9% | Mem: 167.6/1007.4GB (17%)
+[2m2026-11-26T08:36:45.655146639+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=======·············] 13/35 (37%) | Running: 3 | CPU: 9% | Mem: 168.7/1007.4GB (17%)
+[2m2026-11-26T08:36:50.655089894+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=======·············] 13/35 (37%) | Running: 3 | CPU: 11% | Mem: 169.4/1007.4GB (17%)
+[2m2026-11-26T08:36:55.655115471+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=======·············] 13/35 (37%) | Running: 3 | CPU: 10% | Mem: 169.8/1007.4GB (17%)
+[2m2026-11-26T08:37:00.654738786+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 8% | Mem: 170.3/1007.4GB (17%)
+[2m2026-11-26T08:37:05.65513256+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 6% | Mem: 170.8/1007.4GB (17%)
+[2m2026-11-26T08:37:10.655112322+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 7% | Mem: 170.8/1007.4GB (17%)
+[2m2026-11-26T08:37:15.655010636+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 6% | Mem: 171.3/1007.4GB (17%)
+[2m2026-11-26T08:37:20.655131045+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 171.4/1007.4GB (17%)
+[2m2026-11-26T08:37:25.65557564+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 171.4/1007.4GB (17%)
+[2m2026-11-26T08:37:30.655132278+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 171.4/1007.4GB (17%)
+[2m2026-11-26T08:37:35.655119694+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 171.4/1007.4GB (17%)
+[2m2026-11-26T08:37:40.657051182+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 171.5/1007.4GB (17%)
+[2m2026-11-26T08:37:45.655132844+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 171.3/1007.4GB (17%)
+[2m2026-11-26T08:37:50.655034229+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 171.3/1007.4GB (17%)
+[2m2026-11-26T08:37:55.65514518+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 171.9/1007.4GB (17%)
+[2m2026-11-26T08:38:00.658050593+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 171.6/1007.4GB (17%)
+[2m2026-11-26T08:38:05.65515063+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 171.4/1007.4GB (17%)
+[2m2026-11-26T08:38:10.658060952+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 171.4/1007.4GB (17%)
+[2m2026-11-26T08:38:15.655136057+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 171.4/1007.4GB (17%)
+[2m2026-11-26T08:38:20.655125616+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 171.5/1007.4GB (17%)
+[2m2026-11-26T08:38:25.655136671+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 171.6/1007.4GB (17%)
+[2m2026-11-26T08:38:30.6551396+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 171.7/1007.4GB (17%)
+[2m2026-11-26T08:38:35.654956472+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 171.7/1007.4GB (17%)
+[2m2026-11-26T08:38:40.658068194+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 171.9/1007.4GB (17%)
+[2m2026-11-26T08:38:45.655150638+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 172.0/1007.4GB (17%)
+[2m2026-11-26T08:38:50.655131627+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 172.0/1007.4GB (17%)
+[2m2026-11-26T08:38:55.656054612+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 172.0/1007.4GB (17%)
+[2m2026-11-26T08:39:00.655071462+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 172.1/1007.4GB (17%)
+[2m2026-11-26T08:39:05.655138669+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 172.0/1007.4GB (17%)
+[2m2026-11-26T08:39:10.655123761+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 172.1/1007.4GB (17%)
+[2m2026-11-26T08:39:15.655124179+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 172.1/1007.4GB (17%)
+[2m2026-11-26T08:39:20.65487342+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 172.2/1007.4GB (17%)
+[2m2026-11-26T08:39:25.655138094+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 172.1/1007.4GB (17%)
+[2m2026-11-26T08:39:30.658044701+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 172.1/1007.4GB (17%)
+[2m2026-11-26T08:39:35.655120764+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 172.1/1007.4GB (17%)
+[2m2026-11-26T08:39:40.658047715+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 172.1/1007.4GB (17%)
+[2m2026-11-26T08:39:45.655119651+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 172.2/1007.4GB (17%)
+[2m2026-11-26T08:39:50.655198376+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 172.2/1007.4GB (17%)
+[2m2026-11-26T08:39:55.655133756+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 172.1/1007.4GB (17%)
+[2m2026-11-26T08:40:00.655141084+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 172.2/1007.4GB (17%)
+[2m2026-11-26T08:40:05.654854297+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 172.2/1007.4GB (17%)
+[2m2026-11-26T08:40:10.655136262+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 172.2/1007.4GB (17%)
+[2m2026-11-26T08:40:15.657050383+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 172.3/1007.4GB (17%)
+[2m2026-11-26T08:40:20.655140611+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 172.3/1007.4GB (17%)
+[2m2026-11-26T08:40:25.654899904+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 172.3/1007.4GB (17%)
+[2m2026-11-26T08:40:30.65515359+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 172.3/1007.4GB (17%)
+[2m2026-11-26T08:40:35.655146602+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 10% | Mem: 172.4/1007.4GB (17%)
+[2m2026-11-26T08:40:40.655138322+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 14/35 (40%) | Running: 3 | CPU: 11% | Mem: 172.4/1007.4GB (17%)
+[2m2026-11-26T08:40:45.654915548+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 171.3/1007.4GB (17%)
+[2m2026-11-26T08:40:50.654817834+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 171.4/1007.4GB (17%)
+[2m2026-11-26T08:40:55.655108212+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 171.6/1007.4GB (17%)
+[2m2026-11-26T08:41:00.657045866+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 171.8/1007.4GB (17%)
+[2m2026-11-26T08:41:05.655121128+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 172.0/1007.4GB (17%)
+[2m2026-11-26T08:41:10.655122499+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 172.1/1007.4GB (17%)
+[2m2026-11-26T08:41:15.655137709+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 172.1/1007.4GB (17%)
+[2m2026-11-26T08:41:20.655153388+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 172.2/1007.4GB (17%)
+[2m2026-11-26T08:41:25.655142687+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 172.3/1007.4GB (17%)
+[2m2026-11-26T08:41:30.656042074+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 172.3/1007.4GB (17%)
+[2m2026-11-26T08:41:35.655858969+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 172.3/1007.4GB (17%)
+[2m2026-11-26T08:41:40.655123617+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 172.6/1007.4GB (17%)
+[2m2026-11-26T08:41:45.658036884+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 173.0/1007.4GB (17%)
+[2m2026-11-26T08:41:50.655139019+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 173.1/1007.4GB (17%)
+[2m2026-11-26T08:41:55.656024304+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 173.2/1007.4GB (17%)
+[2m2026-11-26T08:42:00.65513134+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 173.3/1007.4GB (17%)
+[2m2026-11-26T08:42:05.657007994+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 173.1/1007.4GB (17%)
+[2m2026-11-26T08:42:10.6551051+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 173.2/1007.4GB (17%)
+[2m2026-11-26T08:42:15.655141635+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 172.6/1007.4GB (17%)
+[2m2026-11-26T08:42:20.655128501+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 172.5/1007.4GB (17%)
+[2m2026-11-26T08:42:25.655131657+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 172.5/1007.4GB (17%)
+[2m2026-11-26T08:42:30.657064323+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 172.6/1007.4GB (17%)
+[2m2026-11-26T08:42:35.65513266+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 172.9/1007.4GB (17%)
+[2m2026-11-26T08:42:40.658068528+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 172.5/1007.4GB (17%)
+[2m2026-11-26T08:42:45.655041125+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 172.4/1007.4GB (17%)
+[2m2026-11-26T08:42:50.657047945+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 172.4/1007.4GB (17%)
+[2m2026-11-26T08:42:55.655376648+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 172.4/1007.4GB (17%)
+[2m2026-11-26T08:43:00.655139226+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 172.4/1007.4GB (17%)
+[2m2026-11-26T08:43:05.654626293+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 172.5/1007.4GB (17%)
+[2m2026-11-26T08:43:10.655096421+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 172.5/1007.4GB (17%)
+[2m2026-11-26T08:43:15.655135476+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 172.5/1007.4GB (17%)
+[2m2026-11-26T08:43:20.655143322+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 172.6/1007.4GB (17%)
+[2m2026-11-26T08:43:25.655136259+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 172.9/1007.4GB (17%)
+[2m2026-11-26T08:43:30.655046697+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 173.0/1007.4GB (17%)
+[2m2026-11-26T08:43:35.655137058+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 173.0/1007.4GB (17%)
+[2m2026-11-26T08:43:40.65512758+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 173.1/1007.4GB (17%)
+[2m2026-11-26T08:43:45.655139253+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 173.1/1007.4GB (17%)
+[2m2026-11-26T08:43:50.655554023+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 173.1/1007.4GB (17%)
+[2m2026-11-26T08:43:55.658057677+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 173.2/1007.4GB (17%)
+[2m2026-11-26T08:44:00.655138316+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 11% | Mem: 173.3/1007.4GB (17%)
+[2m2026-11-26T08:44:05.655138987+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 15/35 (42%) | Running: 3 | CPU: 10% | Mem: 173.4/1007.4GB (17%)
+[2m2026-11-26T08:44:10.655134751+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=========···········] 16/35 (45%) | Running: 3 | CPU: 11% | Mem: 168.5/1007.4GB (17%)
+[2m2026-11-26T08:44:15.655006445+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=========···········] 16/35 (45%) | Running: 3 | CPU: 10% | Mem: 168.6/1007.4GB (17%)
+[2m2026-11-26T08:44:20.655131625+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=========···········] 17/35 (48%) | Running: 3 | CPU: 11% | Mem: 168.5/1007.4GB (17%)
+[2m2026-11-26T08:44:25.655124525+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=========···········] 17/35 (48%) | Running: 3 | CPU: 10% | Mem: 168.6/1007.4GB (17%)
+[2m2026-11-26T08:44:30.657050887+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=========···········] 17/35 (48%) | Running: 3 | CPU: 11% | Mem: 168.7/1007.4GB (17%)
+[2m2026-11-26T08:44:35.655124063+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=========···········] 17/35 (48%) | Running: 3 | CPU: 10% | Mem: 168.9/1007.4GB (17%)
+[2m2026-11-26T08:44:40.656245082+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=========···········] 17/35 (48%) | Running: 3 | CPU: 11% | Mem: 168.9/1007.4GB (17%)
+[2m2026-11-26T08:44:45.655149732+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 10% | Mem: 168.9/1007.4GB (17%)
+[2m2026-11-26T08:44:50.655147875+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 11% | Mem: 169.1/1007.4GB (17%)
+[2m2026-11-26T08:44:55.655138411+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 10% | Mem: 169.2/1007.4GB (17%)
+[2m2026-11-26T08:45:00.654672105+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 11% | Mem: 169.3/1007.4GB (17%)
+[2m2026-11-26T08:45:05.658052242+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 10% | Mem: 169.3/1007.4GB (17%)
+[2m2026-11-26T08:45:10.657656833+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 11% | Mem: 169.2/1007.4GB (17%)
+[2m2026-11-26T08:45:15.655124395+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 10% | Mem: 169.3/1007.4GB (17%)
+[2m2026-11-26T08:45:20.655443529+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 11% | Mem: 169.5/1007.4GB (17%)
+[2m2026-11-26T08:45:25.658062391+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 10% | Mem: 169.5/1007.4GB (17%)
+[2m2026-11-26T08:45:30.658036148+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 11% | Mem: 169.5/1007.4GB (17%)
+[2m2026-11-26T08:45:35.657061669+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 10% | Mem: 169.5/1007.4GB (17%)
+[2m2026-11-26T08:45:40.658050334+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 11% | Mem: 169.5/1007.4GB (17%)
+[2m2026-11-26T08:45:45.657056132+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 10% | Mem: 169.5/1007.4GB (17%)
+[2m2026-11-26T08:45:50.657057963+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 11% | Mem: 169.6/1007.4GB (17%)
+[2m2026-11-26T08:45:55.655134178+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 10% | Mem: 169.7/1007.4GB (17%)
+[2m2026-11-26T08:46:00.655204018+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 11% | Mem: 169.8/1007.4GB (17%)
+[2m2026-11-26T08:46:05.655392652+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 10% | Mem: 169.9/1007.4GB (17%)
+[2m2026-11-26T08:46:10.655125134+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 11% | Mem: 170.0/1007.4GB (17%)
+[2m2026-11-26T08:46:15.655128795+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 10% | Mem: 170.1/1007.4GB (17%)
+[2m2026-11-26T08:46:20.655145079+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 11% | Mem: 170.2/1007.4GB (17%)
+[2m2026-11-26T08:46:25.658051587+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 10% | Mem: 170.3/1007.4GB (17%)
+[2m2026-11-26T08:46:30.654841635+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 11% | Mem: 170.3/1007.4GB (17%)
+[2m2026-11-26T08:46:35.654655449+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 10% | Mem: 170.3/1007.4GB (17%)
+[2m2026-11-26T08:46:40.655135335+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 18/35 (51%) | Running: 3 | CPU: 11% | Mem: 170.4/1007.4GB (17%)
+[2m2026-11-26T08:46:45.655146889+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 19/35 (54%) | Running: 3 | CPU: 10% | Mem: 169.1/1007.4GB (17%)
+[2m2026-11-26T08:46:50.65535243+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 19/35 (54%) | Running: 3 | CPU: 11% | Mem: 169.3/1007.4GB (17%)
+[2m2026-11-26T08:46:55.654741816+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 19/35 (54%) | Running: 3 | CPU: 10% | Mem: 169.4/1007.4GB (17%)
+[2m2026-11-26T08:47:00.656065847+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 19/35 (54%) | Running: 3 | CPU: 11% | Mem: 169.4/1007.4GB (17%)
+[2m2026-11-26T08:47:05.658042489+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 19/35 (54%) | Running: 3 | CPU: 10% | Mem: 169.7/1007.4GB (17%)
+[2m2026-11-26T08:47:10.655134965+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 19/35 (54%) | Running: 3 | CPU: 11% | Mem: 170.1/1007.4GB (17%)
+[2m2026-11-26T08:47:15.655112386+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 19/35 (54%) | Running: 3 | CPU: 10% | Mem: 170.2/1007.4GB (17%)
+[2m2026-11-26T08:47:20.655145041+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 19/35 (54%) | Running: 3 | CPU: 11% | Mem: 170.2/1007.4GB (17%)
+[2m2026-11-26T08:47:25.658059121+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 19/35 (54%) | Running: 3 | CPU: 10% | Mem: 170.3/1007.4GB (17%)
+[2m2026-11-26T08:47:30.655128995+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 19/35 (54%) | Running: 3 | CPU: 11% | Mem: 170.4/1007.4GB (17%)
+[2m2026-11-26T08:47:35.655300386+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===========·········] 20/35 (57%) | Running: 3 | CPU: 10% | Mem: 170.0/1007.4GB (17%)
+[2m2026-11-26T08:47:40.656037058+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===========·········] 20/35 (57%) | Running: 3 | CPU: 10% | Mem: 170.3/1007.4GB (17%)
+[2m2026-11-26T08:47:45.658048068+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===========·········] 20/35 (57%) | Running: 3 | CPU: 11% | Mem: 170.5/1007.4GB (17%)
+[2m2026-11-26T08:47:50.655130301+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===========·········] 20/35 (57%) | Running: 3 | CPU: 11% | Mem: 170.7/1007.4GB (17%)
+[2m2026-11-26T08:47:55.655534653+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 21/35 (60%) | Running: 3 | CPU: 10% | Mem: 164.9/1007.4GB (16%)
+[2m2026-11-26T08:48:00.654701219+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 21/35 (60%) | Running: 3 | CPU: 11% | Mem: 165.1/1007.4GB (16%)
+[2m2026-11-26T08:48:05.655123551+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 21/35 (60%) | Running: 3 | CPU: 10% | Mem: 165.3/1007.4GB (16%)
+[2m2026-11-26T08:48:10.662050927+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 21/35 (60%) | Running: 3 | CPU: 10% | Mem: 165.6/1007.4GB (16%)
+[2m2026-11-26T08:48:15.655119526+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 21/35 (60%) | Running: 3 | CPU: 10% | Mem: 165.8/1007.4GB (16%)
+[2m2026-11-26T08:48:20.655243578+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 21/35 (60%) | Running: 3 | CPU: 11% | Mem: 165.9/1007.4GB (16%)
+[2m2026-11-26T08:48:25.655129865+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 21/35 (60%) | Running: 3 | CPU: 10% | Mem: 166.1/1007.4GB (16%)
+[2m2026-11-26T08:48:30.655623109+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 21/35 (60%) | Running: 3 | CPU: 11% | Mem: 166.2/1007.4GB (16%)
+[2m2026-11-26T08:48:35.655132598+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 21/35 (60%) | Running: 3 | CPU: 10% | Mem: 166.3/1007.4GB (17%)
+[2m2026-11-26T08:48:40.65603048+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 21/35 (60%) | Running: 3 | CPU: 11% | Mem: 166.5/1007.4GB (17%)
+[2m2026-11-26T08:48:45.655352019+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 165.9/1007.4GB (16%)
+[2m2026-11-26T08:48:50.654800572+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 11% | Mem: 166.1/1007.4GB (16%)
+[2m2026-11-26T08:48:55.654807073+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 166.4/1007.4GB (17%)
+[2m2026-11-26T08:49:00.655112338+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 11% | Mem: 166.6/1007.4GB (17%)
+[2m2026-11-26T08:49:05.655304403+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 166.8/1007.4GB (17%)
+[2m2026-11-26T08:49:10.656067279+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 11% | Mem: 167.1/1007.4GB (17%)
+[2m2026-11-26T08:49:15.660393535+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 167.3/1007.4GB (17%)
+[2m2026-11-26T08:49:20.656477914+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 11% | Mem: 167.5/1007.4GB (17%)
+[2m2026-11-26T08:49:25.655145733+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 167.6/1007.4GB (17%)
+[2m2026-11-26T08:49:30.657183897+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 11% | Mem: 167.8/1007.4GB (17%)
+[2m2026-11-26T08:49:35.655065847+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 168.1/1007.4GB (17%)
+[2m2026-11-26T08:49:40.656733961+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 11% | Mem: 168.3/1007.4GB (17%)
+[2m2026-11-26T08:49:45.655798607+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 168.5/1007.4GB (17%)
+[2m2026-11-26T08:49:50.655127915+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 11% | Mem: 168.8/1007.4GB (17%)
+[2m2026-11-26T08:49:55.656749445+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 168.8/1007.4GB (17%)
+[2m2026-11-26T08:50:00.655119223+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 11% | Mem: 169.1/1007.4GB (17%)
+[2m2026-11-26T08:50:05.655129674+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 169.3/1007.4GB (17%)
+[2m2026-11-26T08:50:10.658047924+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 11% | Mem: 169.8/1007.4GB (17%)
+[2m2026-11-26T08:50:15.65510852+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 170.1/1007.4GB (17%)
+[2m2026-11-26T08:50:20.655113014+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 170.3/1007.4GB (17%)
+[2m2026-11-26T08:50:25.655121875+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 170.4/1007.4GB (17%)
+[2m2026-11-26T08:50:30.655038001+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 11% | Mem: 170.5/1007.4GB (17%)
+[2m2026-11-26T08:50:35.659032431+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 170.7/1007.4GB (17%)
+[2m2026-11-26T08:50:40.654927022+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 170.8/1007.4GB (17%)
+[2m2026-11-26T08:50:45.655121+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 171.1/1007.4GB (17%)
+[2m2026-11-26T08:50:50.655107353+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 11% | Mem: 171.3/1007.4GB (17%)
+[2m2026-11-26T08:50:55.655125886+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 171.4/1007.4GB (17%)
+[2m2026-11-26T08:51:00.655121996+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 11% | Mem: 171.6/1007.4GB (17%)
+[2m2026-11-26T08:51:05.655111498+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 22/35 (62%) | Running: 3 | CPU: 10% | Mem: 171.8/1007.4GB (17%)
+[2m2026-11-26T08:51:10.659073856+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 169.9/1007.4GB (17%)
+[2m2026-11-26T08:51:15.65512836+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 170.1/1007.4GB (17%)
+[2m2026-11-26T08:51:20.656162992+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 170.4/1007.4GB (17%)
+[2m2026-11-26T08:51:25.657048489+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 170.8/1007.4GB (17%)
+[2m2026-11-26T08:51:30.655942307+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 171.1/1007.4GB (17%)
+[2m2026-11-26T08:51:35.655108942+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 171.3/1007.4GB (17%)
+[2m2026-11-26T08:51:40.65510433+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 171.4/1007.4GB (17%)
+[2m2026-11-26T08:51:45.655429066+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 171.5/1007.4GB (17%)
+[2m2026-11-26T08:51:50.655135777+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 171.6/1007.4GB (17%)
+[2m2026-11-26T08:51:55.655124349+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 171.7/1007.4GB (17%)
+[2m2026-11-26T08:52:00.655125218+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 171.8/1007.4GB (17%)
+[2m2026-11-26T08:52:05.65513772+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 171.9/1007.4GB (17%)
+[2m2026-11-26T08:52:10.654861402+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 171.9/1007.4GB (17%)
+[2m2026-11-26T08:52:15.655316328+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 172.1/1007.4GB (17%)
+[2m2026-11-26T08:52:20.657041088+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 172.2/1007.4GB (17%)
+[2m2026-11-26T08:52:25.655113103+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 172.3/1007.4GB (17%)
+[2m2026-11-26T08:52:30.655367194+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 172.5/1007.4GB (17%)
+[2m2026-11-26T08:52:35.655110535+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 172.6/1007.4GB (17%)
+[2m2026-11-26T08:52:40.659045948+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 172.7/1007.4GB (17%)
+[2m2026-11-26T08:52:45.655119256+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 172.8/1007.4GB (17%)
+[2m2026-11-26T08:52:50.655260808+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 172.9/1007.4GB (17%)
+[2m2026-11-26T08:52:55.657038689+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 173.0/1007.4GB (17%)
+[2m2026-11-26T08:53:00.655121598+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 173.2/1007.4GB (17%)
+[2m2026-11-26T08:53:05.655122619+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 173.4/1007.4GB (17%)
+[2m2026-11-26T08:53:10.655122286+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 173.5/1007.4GB (17%)
+[2m2026-11-26T08:53:15.654912296+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 173.7/1007.4GB (17%)
+[2m2026-11-26T08:53:20.655992877+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 173.8/1007.4GB (17%)
+[2m2026-11-26T08:53:25.655124341+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 174.0/1007.4GB (17%)
+[2m2026-11-26T08:53:30.655112189+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 174.1/1007.4GB (17%)
+[2m2026-11-26T08:53:35.657038671+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 174.5/1007.4GB (17%)
+[2m2026-11-26T08:53:40.654734661+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 175.0/1007.4GB (17%)
+[2m2026-11-26T08:53:45.657018104+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 10% | Mem: 175.4/1007.4GB (17%)
+[2m2026-11-26T08:53:50.655271748+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 23/35 (65%) | Running: 3 | CPU: 11% | Mem: 176.1/1007.4GB (17%)
+[2m2026-11-26T08:53:55.659049422+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 24/35 (68%) | Running: 3 | CPU: 10% | Mem: 174.3/1007.4GB (17%)
+[2m2026-11-26T08:54:00.658044359+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==============······] 25/35 (71%) | Running: 3 | CPU: 11% | Mem: 174.8/1007.4GB (17%)
+[2m2026-11-26T08:54:05.655132102+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==============······] 25/35 (71%) | Running: 3 | CPU: 10% | Mem: 174.9/1007.4GB (17%)
+[2m2026-11-26T08:54:10.65511981+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==============······] 25/35 (71%) | Running: 3 | CPU: 11% | Mem: 175.1/1007.4GB (17%)
+[2m2026-11-26T08:54:15.655117972+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==============······] 25/35 (71%) | Running: 3 | CPU: 10% | Mem: 175.2/1007.4GB (17%)
+[2m2026-11-26T08:54:20.65637319+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==============······] 25/35 (71%) | Running: 3 | CPU: 11% | Mem: 175.3/1007.4GB (17%)
+[2m2026-11-26T08:54:25.654592079+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==============······] 26/35 (74%) | Running: 3 | CPU: 10% | Mem: 175.0/1007.4GB (17%)
+[2m2026-11-26T08:54:30.655124229+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==============······] 26/35 (74%) | Running: 3 | CPU: 11% | Mem: 175.2/1007.4GB (17%)
+[2m2026-11-26T08:54:35.655308853+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==============······] 26/35 (74%) | Running: 3 | CPU: 10% | Mem: 175.4/1007.4GB (17%)
+[2m2026-11-26T08:54:40.661043171+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==============······] 26/35 (74%) | Running: 3 | CPU: 11% | Mem: 175.5/1007.4GB (17%)
+[2m2026-11-26T08:54:45.655158715+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 10% | Mem: 175.3/1007.4GB (17%)
+[2m2026-11-26T08:54:50.658068789+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 11% | Mem: 175.4/1007.4GB (17%)
+[2m2026-11-26T08:54:55.655132407+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 10% | Mem: 175.5/1007.4GB (17%)
+[2m2026-11-26T08:55:00.655115514+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 11% | Mem: 175.6/1007.4GB (17%)
+[2m2026-11-26T08:55:05.655127556+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 10% | Mem: 175.7/1007.4GB (17%)
+[2m2026-11-26T08:55:10.655395763+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 11% | Mem: 175.8/1007.4GB (17%)
+[2m2026-11-26T08:55:15.659042752+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 10% | Mem: 175.9/1007.4GB (17%)
+[2m2026-11-26T08:55:20.658047726+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 11% | Mem: 175.9/1007.4GB (17%)
+[2m2026-11-26T08:55:25.658267498+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 10% | Mem: 176.0/1007.4GB (17%)
+[2m2026-11-26T08:55:30.65736896+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 11% | Mem: 176.1/1007.4GB (17%)
+[2m2026-11-26T08:55:35.657056425+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 10% | Mem: 176.2/1007.4GB (17%)
+[2m2026-11-26T08:55:40.655122893+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 11% | Mem: 176.2/1007.4GB (17%)
+[2m2026-11-26T08:55:45.655121172+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 10% | Mem: 176.3/1007.4GB (17%)
+[2m2026-11-26T08:55:50.658058525+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 11% | Mem: 176.4/1007.4GB (18%)
+[2m2026-11-26T08:55:55.65556083+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 10% | Mem: 176.4/1007.4GB (18%)
+[2m2026-11-26T08:56:00.654593719+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 11% | Mem: 176.5/1007.4GB (18%)
+[2m2026-11-26T08:56:05.656359073+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 10% | Mem: 176.8/1007.4GB (18%)
+[2m2026-11-26T08:56:10.657059696+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 11% | Mem: 177.2/1007.4GB (18%)
+[2m2026-11-26T08:56:15.655129072+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 10% | Mem: 177.7/1007.4GB (18%)
+[2m2026-11-26T08:56:20.655001092+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 11% | Mem: 178.2/1007.4GB (18%)
+[2m2026-11-26T08:56:25.6551015+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 27/35 (77%) | Running: 3 | CPU: 10% | Mem: 178.7/1007.4GB (18%)
+[2m2026-11-26T08:56:30.658058933+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 178.5/1007.4GB (18%)
+[2m2026-11-26T08:56:35.655118065+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 179.2/1007.4GB (18%)
+[2m2026-11-26T08:56:40.65549899+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 179.8/1007.4GB (18%)
+[2m2026-11-26T08:56:45.658038921+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 180.2/1007.4GB (18%)
+[2m2026-11-26T08:56:50.655141235+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 180.7/1007.4GB (18%)
+[2m2026-11-26T08:56:55.655074613+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 181.2/1007.4GB (18%)
+[2m2026-11-26T08:57:00.655137692+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 181.9/1007.4GB (18%)
+[2m2026-11-26T08:57:05.65491791+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 182.6/1007.4GB (18%)
+[2m2026-11-26T08:57:10.655099705+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 183.6/1007.4GB (18%)
+[2m2026-11-26T08:57:15.655132504+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 184.2/1007.4GB (18%)
+[2m2026-11-26T08:57:20.655734998+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 184.9/1007.4GB (18%)
+[2m2026-11-26T08:57:25.65804258+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 185.3/1007.4GB (18%)
+[2m2026-11-26T08:57:30.655094776+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 185.7/1007.4GB (18%)
+[2m2026-11-26T08:57:35.658046575+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 186.0/1007.4GB (18%)
+[2m2026-11-26T08:57:40.657036551+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 186.3/1007.4GB (18%)
+[2m2026-11-26T08:57:45.655100295+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 186.7/1007.4GB (19%)
+[2m2026-11-26T08:57:50.655003047+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 186.8/1007.4GB (19%)
+[2m2026-11-26T08:57:55.659054977+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 186.9/1007.4GB (19%)
+[2m2026-11-26T08:58:00.655111936+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 186.9/1007.4GB (19%)
+[2m2026-11-26T08:58:05.658044831+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 187.0/1007.4GB (19%)
+[2m2026-11-26T08:58:10.658045896+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 187.0/1007.4GB (19%)
+[2m2026-11-26T08:58:15.655108397+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 187.1/1007.4GB (19%)
+[2m2026-11-26T08:58:20.658038495+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 187.3/1007.4GB (19%)
+[2m2026-11-26T08:58:25.655113391+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 187.4/1007.4GB (19%)
+[2m2026-11-26T08:58:30.655138417+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 187.4/1007.4GB (19%)
+[2m2026-11-26T08:58:35.654858485+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 187.6/1007.4GB (19%)
+[2m2026-11-26T08:58:40.655296448+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 187.7/1007.4GB (19%)
+[2m2026-11-26T08:58:45.655141578+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 188.0/1007.4GB (19%)
+[2m2026-11-26T08:58:50.658044332+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 11% | Mem: 188.3/1007.4GB (19%)
+[2m2026-11-26T08:58:55.655122642+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 28/35 (80%) | Running: 3 | CPU: 10% | Mem: 188.2/1007.4GB (19%)
+[2m2026-11-26T08:59:00.658044977+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 29/35 (82%) | Running: 3 | CPU: 11% | Mem: 176.9/1007.4GB (18%)
+[2m2026-11-26T08:59:05.657053984+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 29/35 (82%) | Running: 3 | CPU: 10% | Mem: 177.0/1007.4GB (18%)
+[2m2026-11-26T08:59:10.655112028+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 29/35 (82%) | Running: 3 | CPU: 11% | Mem: 177.1/1007.4GB (18%)
+[2m2026-11-26T08:59:15.655113672+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 30/35 (85%) | Running: 3 | CPU: 10% | Mem: 175.5/1007.4GB (17%)
+[2m2026-11-26T08:59:20.65628129+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 30/35 (85%) | Running: 3 | CPU: 11% | Mem: 175.8/1007.4GB (17%)
+[2m2026-11-26T08:59:25.655136652+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 30/35 (85%) | Running: 3 | CPU: 10% | Mem: 175.9/1007.4GB (17%)
+[2m2026-11-26T08:59:30.655249185+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 30/35 (85%) | Running: 3 | CPU: 11% | Mem: 176.0/1007.4GB (17%)
+[2m2026-11-26T08:59:35.655126969+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 30/35 (85%) | Running: 3 | CPU: 10% | Mem: 176.0/1007.4GB (17%)
+[2m2026-11-26T08:59:40.658337434+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 30/35 (85%) | Running: 3 | CPU: 10% | Mem: 176.1/1007.4GB (17%)
+[2m2026-11-26T08:59:45.655118713+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 30/35 (85%) | Running: 3 | CPU: 10% | Mem: 176.2/1007.4GB (17%)
+[2m2026-11-26T08:59:50.658076956+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 30/35 (85%) | Running: 3 | CPU: 11% | Mem: 176.3/1007.4GB (17%)
+[2m2026-11-26T08:59:55.654886751+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 30/35 (85%) | Running: 3 | CPU: 10% | Mem: 176.4/1007.4GB (18%)
+[2m2026-11-26T09:00:00.655133959+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 30/35 (85%) | Running: 3 | CPU: 11% | Mem: 176.5/1007.4GB (18%)
+[2m2026-11-26T09:00:05.657242882+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 30/35 (85%) | Running: 3 | CPU: 10% | Mem: 176.6/1007.4GB (18%)
+[2m2026-11-26T09:00:10.657955329+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 30/35 (85%) | Running: 3 | CPU: 11% | Mem: 176.7/1007.4GB (18%)
+[2m2026-11-26T09:00:15.655120478+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 30/35 (85%) | Running: 3 | CPU: 10% | Mem: 176.8/1007.4GB (18%)
+[2m2026-11-26T09:00:20.656359509+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 11% | Mem: 176.1/1007.4GB (17%)
+[2m2026-11-26T09:00:25.657055114+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 10% | Mem: 176.5/1007.4GB (18%)
+[2m2026-11-26T09:00:30.655133241+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 11% | Mem: 176.6/1007.4GB (18%)
+[2m2026-11-26T09:00:35.655146164+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 10% | Mem: 176.8/1007.4GB (18%)
+[2m2026-11-26T09:00:40.655143531+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 11% | Mem: 176.8/1007.4GB (18%)
+[2m2026-11-26T09:00:45.658058987+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 10% | Mem: 176.8/1007.4GB (18%)
+[2m2026-11-26T09:00:50.655449151+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 11% | Mem: 176.9/1007.4GB (18%)
+[2m2026-11-26T09:00:55.656007544+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 10% | Mem: 177.2/1007.4GB (18%)
+[2m2026-11-26T09:01:00.655125266+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 11% | Mem: 177.6/1007.4GB (18%)
+[2m2026-11-26T09:01:05.65510531+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 10% | Mem: 178.2/1007.4GB (18%)
+[2m2026-11-26T09:01:10.655604102+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 11% | Mem: 178.8/1007.4GB (18%)
+[2m2026-11-26T09:01:15.655959088+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 10% | Mem: 179.4/1007.4GB (18%)
+[2m2026-11-26T09:01:20.657048171+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 11% | Mem: 179.9/1007.4GB (18%)
+[2m2026-11-26T09:01:25.655135957+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 10% | Mem: 180.5/1007.4GB (18%)
+[2m2026-11-26T09:01:30.655113015+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 31/35 (88%) | Running: 3 | CPU: 11% | Mem: 181.1/1007.4GB (18%)
+[2m2026-11-26T09:01:35.657556397+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 180.6/1007.4GB (18%)
+[2m2026-11-26T09:01:40.655123707+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 11% | Mem: 181.2/1007.4GB (18%)
+[2m2026-11-26T09:01:45.655130008+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 181.7/1007.4GB (18%)
+[2m2026-11-26T09:01:50.658045433+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 11% | Mem: 182.2/1007.4GB (18%)
+[2m2026-11-26T09:01:55.657049707+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 182.5/1007.4GB (18%)
+[2m2026-11-26T09:02:00.655014748+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 11% | Mem: 182.9/1007.4GB (18%)
+[2m2026-11-26T09:02:05.655145284+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 183.3/1007.4GB (18%)
+[2m2026-11-26T09:02:10.65684193+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 11% | Mem: 183.6/1007.4GB (18%)
+[2m2026-11-26T09:02:15.655135914+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 183.7/1007.4GB (18%)
+[2m2026-11-26T09:02:20.655130127+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 11% | Mem: 183.9/1007.4GB (18%)
+[2m2026-11-26T09:02:25.655139597+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 184.0/1007.4GB (18%)
+[2m2026-11-26T09:02:30.658048791+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 11% | Mem: 184.2/1007.4GB (18%)
+[2m2026-11-26T09:02:35.655128762+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 184.4/1007.4GB (18%)
+[2m2026-11-26T09:02:40.655249917+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 11% | Mem: 184.6/1007.4GB (18%)
+[2m2026-11-26T09:02:45.656395631+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 184.7/1007.4GB (18%)
+[2m2026-11-26T09:02:50.655603124+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 11% | Mem: 184.8/1007.4GB (18%)
+[2m2026-11-26T09:02:55.655053411+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 185.1/1007.4GB (18%)
+[2m2026-11-26T09:03:00.655113628+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 11% | Mem: 186.0/1007.4GB (18%)
+[2m2026-11-26T09:03:05.655145714+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 186.5/1007.4GB (19%)
+[2m2026-11-26T09:03:10.658307977+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 11% | Mem: 186.6/1007.4GB (19%)
+[2m2026-11-26T09:03:15.657050697+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 186.4/1007.4GB (19%)
+[2m2026-11-26T09:03:20.658050218+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 11% | Mem: 186.5/1007.4GB (19%)
+[2m2026-11-26T09:03:25.655127117+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 186.7/1007.4GB (19%)
+[2m2026-11-26T09:03:30.656167024+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 11% | Mem: 186.8/1007.4GB (19%)
+[2m2026-11-26T09:03:35.65511393+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 186.8/1007.4GB (19%)
+[2m2026-11-26T09:03:40.655086004+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 11% | Mem: 187.1/1007.4GB (19%)
+[2m2026-11-26T09:03:45.655121227+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 32/35 (91%) | Running: 3 | CPU: 10% | Mem: 187.3/1007.4GB (19%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+      15m 0s  gated_delta_prefill
+
+[2m2026-11-26T09:03:50.65805306+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 11% | Mem: 185.2/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+      15m 5s  gated_delta_prefill
+
+[2m2026-11-26T09:03:55.655115841+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 10% | Mem: 185.2/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+     15m 10s  gated_delta_prefill
+
+[2m2026-11-26T09:04:00.655160389+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 11% | Mem: 185.2/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+     15m 15s  gated_delta_prefill
+
+[2m2026-11-26T09:04:05.655126193+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 10% | Mem: 185.2/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+     15m 20s  gated_delta_prefill
+
+[2m2026-11-26T09:04:10.658050242+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 11% | Mem: 185.3/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+     15m 25s  gated_delta_prefill
+
+[2m2026-11-26T09:04:15.655993243+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 10% | Mem: 185.3/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+     15m 30s  gated_delta_prefill
+
+[2m2026-11-26T09:04:20.655114604+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 11% | Mem: 185.4/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+     15m 35s  gated_delta_prefill
+
+[2m2026-11-26T09:04:25.655131954+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 10% | Mem: 185.4/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+     15m 40s  gated_delta_prefill
+
+[2m2026-11-26T09:04:30.656070481+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 11% | Mem: 185.5/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+     15m 45s  gated_delta_prefill
+
+[2m2026-11-26T09:04:35.655352959+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 10% | Mem: 185.5/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+     15m 50s  gated_delta_prefill
+
+[2m2026-11-26T09:04:40.654625266+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 11% | Mem: 185.5/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+     15m 55s  gated_delta_prefill
+
+[2m2026-11-26T09:04:45.65513463+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 10% | Mem: 185.6/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+      16m 0s  gated_delta_prefill
+
+[2m2026-11-26T09:04:50.655129429+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 11% | Mem: 185.6/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+      16m 5s  gated_delta_prefill
+
+[2m2026-11-26T09:04:55.655110555+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 10% | Mem: 185.6/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+     16m 10s  gated_delta_prefill
+
+[2m2026-11-26T09:05:00.655431959+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 11% | Mem: 185.6/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+     16m 15s  gated_delta_prefill
+
+[2m2026-11-26T09:05:05.655123216+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 33/35 (94%) | Running: 2 | CPU: 10% | Mem: 185.4/1007.4GB (18%)
+  Slow kernels (>= 15m 0s, longest first):
+     Elapsed  Kernel
+     16m 20s  gated_delta_prefill
+
+[2m2026-11-26T09:05:10.655125059+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===================·] 34/35 (97%) | Running: 1 | CPU: 10% | Mem: 165.4/1007.4GB (16%)
+[2m2026-11-26T09:05:15.655127055+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===================·] 34/35 (97%) | Running: 1 | CPU: 10% | Mem: 165.5/1007.4GB (16%)
+[2m2026-11-26T09:05:20.655175046+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===================·] 34/35 (97%) | Running: 1 | CPU: 10% | Mem: 165.8/1007.4GB (16%)
+[2m2026-11-26T09:05:23.357813617+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m Stage1 dependency compilation finished: 35 succeeded, 0 failed, 35 total
+[2m2026-11-26T09:05:23.357853087+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m Compiling 109 kernels ...
+[2m2026-11-26T09:05:28.360610773+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [····················] 5/109 (4%) | Running: 3 | CPU: 9% | Mem: 164.0/1007.4GB (16%)
+[2m2026-11-26T09:05:33.361254264+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 11/109 (10%) | Running: 3 | CPU: 8% | Mem: 164.1/1007.4GB (16%)
+[2m2026-11-26T09:05:38.360705738+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 12/109 (11%) | Running: 3 | CPU: 10% | Mem: 165.0/1007.4GB (16%)
+[2m2026-11-26T09:05:43.360750536+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 13/109 (11%) | Running: 3 | CPU: 10% | Mem: 165.1/1007.4GB (16%)
+[2m2026-11-26T09:05:48.360845352+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 13/109 (11%) | Running: 3 | CPU: 10% | Mem: 165.7/1007.4GB (16%)
+[2m2026-11-26T09:05:53.360917956+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 14/109 (12%) | Running: 3 | CPU: 10% | Mem: 165.8/1007.4GB (16%)
+[2m2026-11-26T09:05:58.361036308+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 15/109 (13%) | Running: 3 | CPU: 10% | Mem: 166.1/1007.4GB (16%)
+[2m2026-11-26T09:06:03.364431689+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 15/109 (13%) | Running: 3 | CPU: 10% | Mem: 166.4/1007.4GB (17%)
+[2m2026-11-26T09:06:08.360542964+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 15/109 (13%) | Running: 3 | CPU: 10% | Mem: 166.6/1007.4GB (17%)
+[2m2026-11-26T09:06:13.361103067+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 15/109 (13%) | Running: 3 | CPU: 10% | Mem: 167.3/1007.4GB (17%)
+[2m2026-11-26T09:06:18.36130919+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==··················] 15/109 (13%) | Running: 3 | CPU: 6% | Mem: 167.7/1007.4GB (17%)
+[2m2026-11-26T09:06:23.360822092+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 20/109 (18%) | Running: 3 | CPU: 4% | Mem: 165.5/1007.4GB (16%)
+[2m2026-11-26T09:06:28.360677129+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===·················] 21/109 (19%) | Running: 3 | CPU: 6% | Mem: 166.2/1007.4GB (17%)
+[2m2026-11-26T09:06:33.361462505+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 22/109 (20%) | Running: 3 | CPU: 8% | Mem: 165.8/1007.4GB (16%)
+[2m2026-11-26T09:06:38.36050647+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 22/109 (20%) | Running: 3 | CPU: 10% | Mem: 165.9/1007.4GB (16%)
+[2m2026-11-26T09:06:43.361086767+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 23/109 (21%) | Running: 3 | CPU: 10% | Mem: 165.2/1007.4GB (16%)
+[2m2026-11-26T09:06:48.361118019+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 23/109 (21%) | Running: 3 | CPU: 10% | Mem: 165.4/1007.4GB (16%)
+[2m2026-11-26T09:06:53.361065941+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 23/109 (21%) | Running: 3 | CPU: 10% | Mem: 165.5/1007.4GB (16%)
+[2m2026-11-26T09:06:58.360752349+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 24/109 (22%) | Running: 3 | CPU: 10% | Mem: 164.8/1007.4GB (16%)
+[2m2026-11-26T09:07:03.361093469+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [====················] 25/109 (22%) | Running: 3 | CPU: 10% | Mem: 165.2/1007.4GB (16%)
+[2m2026-11-26T09:07:08.361387437+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=====···············] 29/109 (26%) | Running: 3 | CPU: 9% | Mem: 165.1/1007.4GB (16%)
+[2m2026-11-26T09:07:13.361265298+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 36/109 (33%) | Running: 3 | CPU: 10% | Mem: 164.2/1007.4GB (16%)
+[2m2026-11-26T09:07:18.360832413+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 37/109 (33%) | Running: 3 | CPU: 9% | Mem: 165.1/1007.4GB (16%)
+[2m2026-11-26T09:07:23.361082749+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 37/109 (33%) | Running: 3 | CPU: 8% | Mem: 166.9/1007.4GB (17%)
+[2m2026-11-26T09:07:28.361368319+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 38/109 (34%) | Running: 3 | CPU: 10% | Mem: 168.7/1007.4GB (17%)
+[2m2026-11-26T09:07:33.361032699+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [======··············] 38/109 (34%) | Running: 3 | CPU: 9% | Mem: 169.0/1007.4GB (17%)
+[2m2026-11-26T09:07:38.361187786+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=======·············] 39/109 (35%) | Running: 3 | CPU: 8% | Mem: 170.5/1007.4GB (17%)
+[2m2026-11-26T09:07:43.361063924+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=======·············] 40/109 (36%) | Running: 3 | CPU: 7% | Mem: 170.0/1007.4GB (17%)
+[2m2026-11-26T09:07:48.361551908+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=======·············] 41/109 (37%) | Running: 3 | CPU: 10% | Mem: 168.4/1007.4GB (17%)
+[2m2026-11-26T09:07:53.361133168+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=======·············] 42/109 (38%) | Running: 3 | CPU: 9% | Mem: 167.6/1007.4GB (17%)
+[2m2026-11-26T09:07:58.361433404+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=======·············] 43/109 (39%) | Running: 3 | CPU: 10% | Mem: 167.0/1007.4GB (17%)
+[2m2026-11-26T09:08:03.361031965+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=======·············] 43/109 (39%) | Running: 3 | CPU: 10% | Mem: 168.4/1007.4GB (17%)
+[2m2026-11-26T09:08:08.361345051+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 44/109 (40%) | Running: 3 | CPU: 10% | Mem: 168.7/1007.4GB (17%)
+[2m2026-11-26T09:08:13.36088849+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 46/109 (42%) | Running: 3 | CPU: 10% | Mem: 165.4/1007.4GB (16%)
+[2m2026-11-26T09:08:18.361587377+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 47/109 (43%) | Running: 3 | CPU: 10% | Mem: 165.2/1007.4GB (16%)
+[2m2026-11-26T09:08:23.361348485+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 49/109 (44%) | Running: 3 | CPU: 10% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T09:08:28.361484244+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [========············] 49/109 (44%) | Running: 3 | CPU: 10% | Mem: 165.0/1007.4GB (16%)
+[2m2026-11-26T09:08:33.361893722+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=========···········] 50/109 (45%) | Running: 3 | CPU: 10% | Mem: 164.9/1007.4GB (16%)
+[2m2026-11-26T09:08:38.361095776+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=========···········] 52/109 (47%) | Running: 3 | CPU: 10% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T09:08:43.361525177+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=========···········] 53/109 (48%) | Running: 3 | CPU: 10% | Mem: 164.6/1007.4GB (16%)
+[2m2026-11-26T09:08:48.361125366+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=========···········] 53/109 (48%) | Running: 3 | CPU: 10% | Mem: 164.9/1007.4GB (16%)
+[2m2026-11-26T09:08:53.361105063+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 55/109 (50%) | Running: 3 | CPU: 10% | Mem: 164.8/1007.4GB (16%)
+[2m2026-11-26T09:08:58.3619063+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 56/109 (51%) | Running: 3 | CPU: 10% | Mem: 164.8/1007.4GB (16%)
+[2m2026-11-26T09:09:03.360817607+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 58/109 (53%) | Running: 3 | CPU: 9% | Mem: 164.3/1007.4GB (16%)
+[2m2026-11-26T09:09:08.361330879+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 59/109 (54%) | Running: 3 | CPU: 10% | Mem: 164.8/1007.4GB (16%)
+[2m2026-11-26T09:09:13.3613066+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==========··········] 59/109 (54%) | Running: 3 | CPU: 10% | Mem: 164.9/1007.4GB (16%)
+[2m2026-11-26T09:09:18.36091078+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===========·········] 61/109 (55%) | Running: 3 | CPU: 9% | Mem: 164.8/1007.4GB (16%)
+[2m2026-11-26T09:09:23.361170117+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===========·········] 62/109 (56%) | Running: 3 | CPU: 10% | Mem: 164.7/1007.4GB (16%)
+[2m2026-11-26T09:09:28.361194053+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===========·········] 64/109 (58%) | Running: 3 | CPU: 9% | Mem: 164.3/1007.4GB (16%)
+[2m2026-11-26T09:09:33.36128713+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===========·········] 65/109 (59%) | Running: 3 | CPU: 10% | Mem: 164.6/1007.4GB (16%)
+[2m2026-11-26T09:09:38.360538511+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 66/109 (60%) | Running: 3 | CPU: 10% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T09:09:43.361333254+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 68/109 (62%) | Running: 3 | CPU: 10% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T09:09:48.361128588+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [============········] 68/109 (62%) | Running: 3 | CPU: 10% | Mem: 164.7/1007.4GB (16%)
+[2m2026-11-26T09:09:53.361544536+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 71/109 (65%) | Running: 3 | CPU: 9% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T09:09:58.361278307+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 71/109 (65%) | Running: 3 | CPU: 10% | Mem: 164.7/1007.4GB (16%)
+[2m2026-11-26T09:10:03.361402199+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 74/109 (67%) | Running: 3 | CPU: 9% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T09:10:08.361067434+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 74/109 (67%) | Running: 3 | CPU: 11% | Mem: 164.7/1007.4GB (16%)
+[2m2026-11-26T09:10:13.361094439+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=============·······] 76/109 (69%) | Running: 3 | CPU: 9% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T09:10:18.361105631+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==============······] 77/109 (70%) | Running: 3 | CPU: 10% | Mem: 164.7/1007.4GB (16%)
+[2m2026-11-26T09:10:23.361121478+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==============······] 78/109 (71%) | Running: 3 | CPU: 9% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T09:10:28.361412973+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==============······] 80/109 (73%) | Running: 3 | CPU: 10% | Mem: 164.7/1007.4GB (16%)
+[2m2026-11-26T09:10:33.362139276+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==============······] 80/109 (73%) | Running: 3 | CPU: 10% | Mem: 164.8/1007.4GB (16%)
+[2m2026-11-26T09:10:38.36103189+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 83/109 (76%) | Running: 3 | CPU: 9% | Mem: 164.6/1007.4GB (16%)
+[2m2026-11-26T09:10:43.361129038+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 83/109 (76%) | Running: 3 | CPU: 10% | Mem: 164.8/1007.4GB (16%)
+[2m2026-11-26T09:10:48.361539901+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 85/109 (77%) | Running: 3 | CPU: 10% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T09:10:53.361115892+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 86/109 (78%) | Running: 3 | CPU: 10% | Mem: 164.6/1007.4GB (16%)
+[2m2026-11-26T09:10:58.361120799+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===============·····] 87/109 (79%) | Running: 3 | CPU: 10% | Mem: 164.4/1007.4GB (16%)
+[2m2026-11-26T09:11:03.361144148+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 89/109 (81%) | Running: 3 | CPU: 9% | Mem: 164.6/1007.4GB (16%)
+[2m2026-11-26T09:11:08.360753376+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 89/109 (81%) | Running: 3 | CPU: 10% | Mem: 164.8/1007.4GB (16%)
+[2m2026-11-26T09:11:13.361049282+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 90/109 (82%) | Running: 3 | CPU: 9% | Mem: 164.9/1007.4GB (16%)
+[2m2026-11-26T09:11:18.361097476+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [================····] 92/109 (84%) | Running: 3 | CPU: 10% | Mem: 164.7/1007.4GB (16%)
+[2m2026-11-26T09:11:23.360992221+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 93/109 (85%) | Running: 3 | CPU: 9% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T09:11:28.361012717+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 95/109 (87%) | Running: 3 | CPU: 10% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T09:11:33.360787831+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 95/109 (87%) | Running: 3 | CPU: 10% | Mem: 164.8/1007.4GB (16%)
+[2m2026-11-26T09:11:38.361695523+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 96/109 (88%) | Running: 3 | CPU: 9% | Mem: 165.0/1007.4GB (16%)
+[2m2026-11-26T09:11:43.361811849+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 98/109 (89%) | Running: 3 | CPU: 10% | Mem: 164.9/1007.4GB (16%)
+[2m2026-11-26T09:11:48.361320269+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [=================···] 98/109 (89%) | Running: 3 | CPU: 10% | Mem: 165.1/1007.4GB (16%)
+[2m2026-11-26T09:11:53.361611843+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 99/109 (90%) | Running: 3 | CPU: 9% | Mem: 165.2/1007.4GB (16%)
+[2m2026-11-26T09:11:58.360622526+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 101/109 (92%) | Running: 3 | CPU: 10% | Mem: 164.9/1007.4GB (16%)
+[2m2026-11-26T09:12:03.361102088+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 101/109 (92%) | Running: 3 | CPU: 10% | Mem: 165.0/1007.4GB (16%)
+[2m2026-11-26T09:12:08.361103503+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [==================··] 102/109 (93%) | Running: 3 | CPU: 9% | Mem: 165.1/1007.4GB (16%)
+[2m2026-11-26T09:12:13.362438147+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===================·] 104/109 (95%) | Running: 3 | CPU: 10% | Mem: 164.9/1007.4GB (16%)
+[2m2026-11-26T09:12:18.361236687+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===================·] 104/109 (95%) | Running: 3 | CPU: 10% | Mem: 165.0/1007.4GB (16%)
+[2m2026-11-26T09:12:23.361144782+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===================·] 105/109 (96%) | Running: 3 | CPU: 9% | Mem: 165.1/1007.4GB (16%)
+[2m2026-11-26T09:12:28.361127213+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===================·] 107/109 (98%) | Running: 2 | CPU: 10% | Mem: 164.5/1007.4GB (16%)
+[2m2026-11-26T09:12:33.360779108+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m [===================·] 108/109 (99%) | Running: 1 | CPU: 8% | Mem: 164.1/1007.4GB (16%)
+[2m2026-11-26T09:12:35.787640116+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m Compilation finished: 109 succeeded, 0 failed, 109 total
+[2m2026-11-26T09:12:35.787989779+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::build::pipeline[0m[2m:[0m 
+  Stage1 Dependency Report:
+    Duration     Status  Stage1 dependency
+  ──────────  ─────────  ─────────────────────────────────────────────
+     16m 23s  succeeded  gated_delta_prefill
+     11m 27s  succeeded  mlp_broadcast
+      11m 4s  succeeded  gated_delta_prefill
+     10m 47s  succeeded  full_in_broadcast
+      8m 35s  succeeded  mlp_broadcast
+       8m 5s  succeeded  full_in_broadcast
+      6m 24s  succeeded  full_attention_bf16_dispatch
+      5m 58s  succeeded  lm_head_broadcast
+      4m 45s  succeeded  full_in_broadcast
+      4m 35s  succeeded  mlp_broadcast
+      4m 17s  succeeded  lin_in_broadcast
+       4m 9s  succeeded  full_out_broadcast
+      3m 49s  succeeded  qwen3_vl_32b_w16a16_vis_last_batch_sharded
+      3m 48s  succeeded  lm_head_broadcast
+      3m 30s  succeeded  lin_in_broadcast
+      3m 26s  succeeded  qwen3_vl_32b_w16a16_vis_last_batch_sharded
+       3m 7s  succeeded  lin_out_broadcast
+       3m 6s  succeeded  full_out_broadcast
+      2m 47s  succeeded  gdn_decode
+      2m 46s  succeeded  lin_out_broadcast
+      2m 45s  succeeded  qwen3_vl_32b_w16a16_vis_first_batch_sharded
+      2m 18s  succeeded  qwen3_vl_32b_w16a16_vis_mid_batch_sharded
+      1m 46s  succeeded  qwen3_vl_32b_w16a16_vis_first_batch_sharded
+      1m 20s  succeeded  qwen3_vl_32b_w16a16_vis_mid_batch_sharded
+      1m 10s  succeeded  full_attention_bf16_dispatch
+       59.2s  succeeded  lin_out_broadcast
+       56.9s  succeeded  full_out_broadcast
+       51.3s  succeeded  full_attention_bf16_dispatch
+       27.0s  succeeded  lin_in_broadcast
+       25.9s  succeeded  random_sample_broadcast
+       21.4s  succeeded  full_attention_bf16_dispatch
+       19.7s  succeeded  lm_head_broadcast
+       17.4s  succeeded  random_sample_broadcast
+       11.9s  succeeded  full_attention_bf16_dispatch
+        5.2s  succeeded  random_sample_broadcast
+
+  Build Report:
+    Duration     Status  Kernel                                        Bucket
+  ──────────  ─────────  ───────────────────────────────────────────── ────────────────────
+       52.5s  succeeded  txt_random_sample                             {"sampler":[{"input_size":256}]}
+       43.4s  succeeded  txt_lm_head                                   {"tokenwise":[256]}
+       41.1s  succeeded  txt_lm_head                                   {"tokenwise":[128]}
+       40.2s  succeeded  txt_lm_head                                   {"tokenwise":[1]}
+       33.6s  succeeded  txt_random_sample                             {"sampler":[{"input_size":128}]}
+       32.9s  succeeded  txt_gdn_prefill                               {"linear_attention":[{"batch_size":1,"seq_len":128}]}
+       32.8s  succeeded  txt_gdn_prefill                               {"linear_attention":[{"batch_size":1,"seq_len":256}]}
+       31.2s  succeeded  txt_gdn_prefill                               {"linear_attention":[{"batch_size":1,"seq_len":512}]}
+       27.0s  succeeded  txt_gdn_prefill                               {"linear_attention":[{"batch_size":1,"seq_len":1024}]}
+       21.3s  succeeded  txt_mlp                                       {"tokenwise":[256]}
+       16.2s  succeeded  txt_mlp                                       {"tokenwise":[128]}
+       15.5s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":4096,"batch_size":2}]}
+       15.5s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":1024,"batch_size":2}]}
+       15.4s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":576,"batch_size":2}]}
+       15.4s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":6400,"batch_size":2}]}
+       15.4s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":400,"batch_size":2}]}
+       15.4s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":1600,"batch_size":2}]}
+       15.1s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":256,"batch_size":2}]}
+       15.0s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":784,"batch_size":2}]}
+       14.7s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":3136,"batch_size":2}]}
+       13.7s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":4096,"batch_size":1}]}
+       13.5s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":3136,"batch_size":1}]}
+       13.4s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":9216,"batch_size":1}]}
+       13.3s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":16384,"batch_size":1}]}
+       13.2s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":576,"batch_size":2}]}
+       13.2s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":6400,"batch_size":2}]}
+       13.1s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":400,"batch_size":2}]}
+       13.1s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":4096,"batch_size":2}]}
+       13.0s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":1024,"batch_size":2}]}
+       13.0s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":6400,"batch_size":1}]}
+       12.9s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":1600,"batch_size":2}]}
+       12.9s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":9216,"batch_size":2}]}
+       12.7s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":256,"batch_size":2}]}
+       12.7s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":3136,"batch_size":1}]}
+       12.6s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":16384,"batch_size":2}]}
+       12.6s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":1600,"batch_size":1}]}
+       12.6s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":400,"batch_size":1}]}
+       12.6s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":576,"batch_size":1}]}
+       12.6s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":16384,"batch_size":1}]}
+       12.6s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":1024,"batch_size":1}]}
+       12.6s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":4096,"batch_size":1}]}
+       12.5s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":9216,"batch_size":1}]}
+       12.5s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":256,"batch_size":1}]}
+       12.4s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":9216,"batch_size":2}]}
+       12.4s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":2304,"batch_size":1}]}
+       12.3s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":3136,"batch_size":2}]}
+       12.3s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":2304,"batch_size":1}]}
+       12.3s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":784,"batch_size":1}]}
+       12.2s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":6400,"batch_size":1}]}
+       12.0s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":784,"batch_size":2}]}
+       11.9s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":256,"batch_size":2}]}
+       11.7s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":1024,"batch_size":2}]}
+       11.7s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":784,"batch_size":2}]}
+       11.7s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":16384,"batch_size":2}]}
+       11.7s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":400,"batch_size":2}]}
+       11.6s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":3136,"batch_size":2}]}
+       11.6s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":1600,"batch_size":1}]}
+       11.6s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":9216,"batch_size":2}]}
+       11.6s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":4096,"batch_size":2}]}
+       11.5s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":576,"batch_size":2}]}
+       11.5s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":256,"batch_size":1}]}
+       11.4s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":1600,"batch_size":2}]}
+       11.2s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":6400,"batch_size":2}]}
+       11.2s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":1024,"batch_size":1}]}
+       11.2s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":784,"batch_size":1}]}
+       11.2s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":6400,"batch_size":1}]}
+       11.1s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":16384,"batch_size":1}]}
+       11.1s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":2304,"batch_size":1}]}
+       11.1s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":784,"batch_size":1}]}
+       11.1s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":1600,"batch_size":1}]}
+       11.0s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":576,"batch_size":1}]}
+       10.9s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":4096,"batch_size":1}]}
+       10.9s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":1024,"batch_size":1}]}
+       10.9s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":9216,"batch_size":1}]}
+       10.9s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":3136,"batch_size":1}]}
+       10.7s  succeeded  vis_last_block                                {"patchwise":[{"num_patches":16384,"batch_size":2}]}
+       10.7s  succeeded  vis_mid_block                                 {"patchwise":[{"num_patches":400,"batch_size":1}]}
+       10.1s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":256,"batch_size":1}]}
+       10.1s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":576,"batch_size":1}]}
+        8.4s  succeeded  vis_first_block                               {"patchwise":[{"num_patches":400,"batch_size":1}]}
+        8.1s  succeeded  txt_mlp                                       {"tokenwise":[1]}
+        4.8s  succeeded  txt_lin_in                                    {"tokenwise":[128]}
+        4.7s  succeeded  txt_full_in                                   {"tokenwise":[128]}
+        4.4s  succeeded  txt_full_in                                   {"tokenwise":[256]}
+        4.0s  succeeded  txt_random_sample                             {"sampler":[{"input_size":1}]}
+        3.9s  succeeded  txt_lin_in                                    {"tokenwise":[256]}
+        3.7s  succeeded  txt_full_in                                   {"tokenwise":[1]}
+        2.6s  succeeded  txt_lin_in                                    {"tokenwise":[1]}
+        1.6s  succeeded  txt_full_out                                  {"tokenwise":[256]}
+        1.4s  succeeded  txt_gdn_decode                                {"linear_attention":[{"batch_size":256,"seq_len":1}]}
+        1.3s  succeeded  txt_gdn_decode                                {"linear_attention":[{"batch_size":16,"seq_len":1}]}
+        1.3s  succeeded  txt_gdn_decode                                {"linear_attention":[{"batch_size":512,"seq_len":1}]}
+        1.3s  succeeded  txt_gdn_decode                                {"linear_attention":[{"batch_size":8,"seq_len":1}]}
+        1.3s  succeeded  txt_gdn_decode                                {"linear_attention":[{"batch_size":128,"seq_len":1}]}
+        1.3s  succeeded  txt_gdn_decode                                {"linear_attention":[{"batch_size":64,"seq_len":1}]}
+        1.2s  succeeded  txt_gdn_decode                                {"linear_attention":[{"batch_size":4,"seq_len":1}]}
+        1.2s  succeeded  txt_full_out                                  {"tokenwise":[128]}
+        1.2s  succeeded  txt_gdn_decode                                {"linear_attention":[{"batch_size":32,"seq_len":1}]}
+        1.2s  succeeded  txt_lin_out                                   {"tokenwise":[128]}
+        1.2s  succeeded  txt_lin_out                                   {"tokenwise":[256]}
+        1.2s  succeeded  txt_gdn_decode                                {"linear_attention":[{"batch_size":1,"seq_len":1}]}
+        0.8s  succeeded  txt_gdn_decode                                {"linear_attention":[{"batch_size":2,"seq_len":1}]}
+        0.8s  succeeded  txt_full_attention                            {"attention":[{"batch_size":1,"attention_size":2048,"input_size":256}]}
+        0.7s  succeeded  txt_lin_out                                   {"tokenwise":[1]}
+        0.7s  succeeded  txt_full_attention                            {"attention":[{"batch_size":1,"attention_size":2048,"input_size":128}]}
+        0.5s  succeeded  txt_full_attention                            {"attention":[{"batch_size":1,"attention_size":256,"input_size":256}]}
+        0.5s  succeeded  txt_full_attention                            {"attention":[{"batch_size":1,"attention_size":2048,"input_size":1}]}
+        0.5s  succeeded  txt_full_out                                  {"tokenwise":[1]}
+        0.4s  succeeded  txt_full_attention                            {"attention":[{"batch_size":1,"attention_size":128,"input_size":128}]}
+  ──────────  ─────────  ─────────────────────────────────────────────
+    158m 40s             total (144 succeeded, 0 failed, concurrency=3)
+
+Artifact Build Completed

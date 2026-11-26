@@ -21,7 +21,7 @@ from torch.utils._pytree import tree_leaves
 from compile_model import build
 from detect_npu import decode, tensor
 
-MEDIA = "/root/furiosa_study/media"
+MEDIA = "/root/programming/npu/media"
 DURATION = 10
 
 

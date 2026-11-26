@@ -1,0 +1,29 @@
+[2026-11-25 23:54:03] WAIT start: waiting for PID 557607 (yolo) to finish before starting qwen36_fp8
+[2026-11-26 08:04:34] WAIT done: PID 557607 finished
+[2026-11-26 08:04:34] START 01_download: /root/miniconda3/envs/furiosa02/bin/python -I /root/programming/npu/furiosa_npu_tries/qwen36_fp8/download.py 42c206e3eee5f771e1ad53ca201957c30f41bf4e /root/.cache/qwen36_work/raw
+[2026-11-26 08:13:29] DONE  01_download: EXIT=0 elapsed=535.0s
+[2026-11-26 08:13:29] START 02_verify_shards: /root/miniconda3/envs/furiosa02/bin/python -I /root/programming/npu/furiosa_npu_tries/qwen36_fp8/verify_shards.py 42c206e3eee5f771e1ad53ca201957c30f41bf4e /root/.cache/qwen36_work/raw /root/.cache/qwen36_work/sha256.json
+[2026-11-26 08:13:39] DONE  02_verify_shards: EXIT=0 elapsed=10.0s
+[2026-11-26 08:13:39] START 03_quant_fp8: /root/miniconda3/envs/furiosa02/bin/python -I /root/programming/npu/furiosa_npu_tries/qwen36_fp8/quant_fp8.py /root/.cache/qwen36_work/raw /root/.cache/qwen36_work/fp8
+[2026-11-26 08:16:24] DONE  03_quant_fp8: EXIT=0 elapsed=165.0s
+[2026-11-26 08:16:24] START 04_make_config: /root/miniconda3/envs/furiosa02/bin/python -I /root/programming/npu/furiosa_npu_tries/qwen36_fp8/make_config.py /root/.cache/qwen36_work/raw/config.json /root/.cache/qwen36_work/fp8/config.json
+[2026-11-26 08:16:29] DONE  04_make_config: EXIT=0 elapsed=5.0s
+[2026-11-26 08:16:29] START 05_check_fp8: /root/miniconda3/envs/furiosa02/bin/python -I /root/programming/npu/furiosa_npu_tries/qwen36_fp8/check_fp8.py /root/.cache/qwen36_work/fp8
+[2026-11-26 08:16:34] DONE  05_check_fp8: EXIT=0 elapsed=5.0s
+[2026-11-26 08:16:34] START 06_cpu_smoke: /root/miniconda3/envs/furiosa02/bin/python -I /root/programming/npu/furiosa_npu_tries/qwen36_fp8/cpu_smoke.py /root/.cache/qwen36_work/raw /root/.cache/qwen36_work/fp8 48
+[2026-11-26 08:18:49] DONE  06_cpu_smoke: EXIT=0 elapsed=135.0s
+[2026-11-26 08:18:49] START 07_fxb_dry_run: /root/.cache/qwen36_npu_venv/bin/fxb build --dry-run /root/.cache/qwen36_work/fp8 /root/.cache/qwen36_work/check.fxb
+[2026-11-26 08:18:54] DONE  07_fxb_dry_run: EXIT=1 elapsed=5.0s
+[2026-11-26 08:18:54] START 08_build_fxb: /root/programming/npu/furiosa_npu_tries/qwen36_fp8/npu/build_fxb.sh /root/.cache/qwen36_work/logics-swe-1card-sdk5-p256.fxb /root/.cache/qwen36_work/compile-cache-sdk5
+[2026-11-26 09:12:39] DONE  08_build_fxb: EXIT=0 elapsed=3225.3s
+[2026-11-26 09:12:39] START 09_npu_smoke: /root/.cache/qwen36_npu_venv/bin/python -u /root/programming/npu/furiosa_npu_tries/qwen36_fp8/npu/npu_smoke.py /root/.cache/qwen36_work/fp8 /root/.cache/qwen36_work/logics-swe-1card-sdk5-p256.fxb
+[2026-11-26 09:13:09] DONE  09_npu_smoke: EXIT=0 elapsed=30.0s
+[2026-11-26 09:13:09] START 10_npu_eval: /root/.cache/qwen36_npu_venv/bin/python -u /root/programming/npu/furiosa_npu_tries/qwen36_fp8/npu/npu_eval.py /root/.cache/qwen36_work/fp8 /root/.cache/qwen36_work/logics-swe-1card-sdk5-p256.fxb /root/programming/npu/furiosa_npu_tries/qwen36_fp8/bench_logs/eval_npu.json
+[2026-11-26 09:13:29] DONE  10_npu_eval: EXIT=0 elapsed=20.0s
+[2026-11-26 09:13:29] START 11_cpu_ref: /root/miniconda3/envs/furiosa02/bin/python -u /root/programming/npu/furiosa_npu_tries/qwen36_fp8/npu/cpu_ref.py /root/.cache/qwen36_work/fp8 /root/programming/npu/furiosa_npu_tries/qwen36_fp8/bench_logs/eval_cpu.json
+[2026-11-26 09:18:09] DONE  11_cpu_ref: EXIT=0 elapsed=280.0s
+[2026-11-26 09:18:09] START 12_compare_eval: /root/.cache/qwen36_npu_venv/bin/python -u /root/programming/npu/furiosa_npu_tries/qwen36_fp8/npu/compare_eval.py /root/programming/npu/furiosa_npu_tries/qwen36_fp8/bench_logs/eval_npu.json /root/programming/npu/furiosa_npu_tries/qwen36_fp8/bench_logs/eval_cpu.json
+[2026-11-26 09:18:14] DONE  12_compare_eval: EXIT=1 elapsed=5.0s
+[2026-11-26 09:18:14] START 13_prefill_bench: /root/.cache/qwen36_npu_venv/bin/python -u /root/programming/npu/furiosa_npu_tries/qwen36_fp8/npu/prefill_bench.py /root/.cache/qwen36_work/fp8 /root/.cache/qwen36_work/logics-swe-1card-sdk5-p256.fxb /root/programming/npu/furiosa_npu_tries/qwen36_fp8/bench_logs/prefill_bench.json
+[2026-11-26 09:18:44] DONE  13_prefill_bench: EXIT=0 elapsed=30.0s
+[2026-11-26 09:18:44] ALL DONE -> qwen36_fp8/RESULTS.md written

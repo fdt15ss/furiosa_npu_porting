@@ -1,0 +1,23 @@
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+inputs 194 outputs 6
+load 0.08s
+== bus first=0.012s shapes=[(1, 64, 8400), (1, 1, 8400), (1, 64, 80, 80), (1, 128, 40, 40), (1, 256, 20, 20), (1, 51, 8400)]
+ [0] maxdiff=0.4546 rel=0.00858 cos=0.999965
+ [1] maxdiff=0.4921 rel=0.00241 cos=0.999994
+ [2] maxdiff=0.1819 rel=0.01096 cos=0.999920
+ [3] maxdiff=0.3256 rel=0.01421 cos=0.999795
+ [4] maxdiff=0.2574 rel=0.01395 cos=0.999791
+ [5] maxdiff=0.3454 rel=0.00986 cos=0.999936
+ detections cpu=4 npu=4
+ matched=4/4 conf diff max=0.0018 box diff max=0.30px kpt xy diff max=0.37px
+== zidane first=0.013s shapes=[(1, 64, 8400), (1, 1, 8400), (1, 64, 80, 80), (1, 128, 40, 40), (1, 256, 20, 20), (1, 51, 8400)]
+ [0] maxdiff=0.4280 rel=0.01059 cos=0.999943
+ [1] maxdiff=0.3710 rel=0.00256 cos=0.999994
+ [2] maxdiff=0.2048 rel=0.01172 cos=0.999914
+ [3] maxdiff=0.2945 rel=0.01488 cos=0.999824
+ [4] maxdiff=0.4833 rel=0.01507 cos=0.999781
+ [5] maxdiff=0.4177 rel=0.01042 cos=0.999926
+ detections cpu=2 npu=2
+ matched=2/2 conf diff max=0.0003 box diff max=0.13px kpt xy diff max=0.97px
+npu latency mean=6.20ms p50=6.20ms p99=6.23ms
+cpu (12 threads) latency mean=48.63ms

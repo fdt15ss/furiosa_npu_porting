@@ -1,0 +1,39 @@
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 11455.62it/s]
+npu whole=True cores=1 threads=1 total=  31.3 fps  ms={'npu': 5.7, 'decoder': 26.2}
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 11134.69it/s]
+npu whole=True cores=1 threads=2 total=  37.9 fps  ms={'npu': 5.5, 'decoder': 20.6}
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 9038.42it/s]
+Loading weights: 100%|██████████| 644/644 [00:00<00:00, 8751.41it/s]
+npu whole=True cores=2 threads=2 total=  94.9 fps  ms={'npu': 5.6, 'decoder': 15.4}
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 8159.56it/s]
+Loading weights: 100%|██████████| 644/644 [00:00<00:00, 7566.66it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 11081.84it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 7967.49it/s]
+npu whole=True cores=4 threads=2 total= 119.7 fps  ms={'npu': 7.0, 'decoder': 22.4}
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 9204.05it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 7107.14it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 7598.83it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 8757.09it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights:  96%|█████████▌| 619/644 [00:00<00:00, 6178.93it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 6294.67it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights:  82%|████████▏ | 531/644 [00:00<00:00, 5277.44it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 5278.72it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 6754.77it/s]
+Loading weights: 100%|██████████| 644/644 [00:00<00:00, 7475.03it/s]
+npu whole=True cores=8 threads=1 total= 110.1 fps  ms={'npu': 15.7, 'decoder': 55.8}
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 9595.60it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 7875.30it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 6762.50it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 7391.88it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 12326.45it/s]
+Loading weights: 100%|██████████| 644/644 [00:00<00:00, 8060.14it/s]
+Loading weights: 100%|██████████| 644/644 [00:00<00:00, 8468.53it/s]
+Loading weights: 100%|██████████| 644/644 [00:00<00:00, 11255.56it/s]
+npu whole=True cores=8 threads=2 total=  51.3 fps  ms={'npu': 19.6, 'decoder': 90.6}
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 7960.45it/s]
+Loading weights: 100%|██████████| 644/644 [00:00<00:00, 6606.08it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 8140.70it/s]
+Loading weights: 100%|██████████| 644/644 [00:00<00:00, 9528.78it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights:  92%|█████████▏| 593/644 [00:00<00:00, 5926.98it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 5891.53it/s]
+Loading weights: 100%|██████████| 644/644 [00:00<00:00, 7259.37it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 9013.42it/s]
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 9380.66it/s]
+npu whole=False cores=8 threads=1 total= 109.8 fps  ms={'npu': 14.4, 'decoder': 54.9}

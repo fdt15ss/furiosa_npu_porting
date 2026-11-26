@@ -1,0 +1,13 @@
+[KDownloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo11n-pose.pt to 'yolo11n-pose.pt': 100% ━━━━━━━━━━━━ 6.0MB 102.5MB/s 0.1s
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+head: Pose end2end False
+outputs: [(1, 64, 8400), (1, 1, 8400), (1, 64, 80, 80), (1, 128, 40, 40), (1, 256, 20, 20), (1, 51, 8400)]
+export ok 0.5s
+decompose ok 1.6s
+compile ok 3127.7s
+saved yolo11n-pose.edf 2124340
+Traceback (most recent call last):
+  File "/root/programming/npu/furiosa_npu_tries/yolo/compile_pose.py", line 52, in <module>
+    rt = rt.to(dev)
+         ^^^^^
+AttributeError: 'furiosa.torch._C.ir.Runnable' object has no attribute 'to'

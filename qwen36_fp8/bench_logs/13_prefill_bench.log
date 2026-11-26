@@ -1,0 +1,33 @@
+[2m2026-11-26T09:18:20.330183063+09:00[0m [32m INFO[0m [2mfuriosa_generator::entrypoint[0m[2m:[0m Using FXB: /root/.cache/qwen36_work/logics-swe-1card-sdk5-p256.fxb
+[2m2026-11-26T09:18:20.343305012+09:00[0m [33m WARN[0m [2mfuriosa_generator::entrypoint[0m[2m:[0m FXB manifest has no hub_repo_id; deriving the L3 cache namespace from the architecture fingerprint instead (model_id=Qwen3_5ForConditionalGeneration). L3 stays enabled.
+[2m2026-11-26T09:18:20.343335682+09:00[0m [32m INFO[0m [2mfuriosa_generator::entrypoint[0m[2m:[0m Device mesh: 1 DP group(s), TP=8, PP=1, devices=npu:7:0,npu:7:1,npu:7:2,npu:7:3,npu:7:4,npu:7:5,npu:7:6,npu:7:7
+[2m2026-11-26T09:18:20.343399052+09:00[0m [32m INFO[0m [2mpe_runtime::context::handle[0m[2m:[0m opening TpGroup [3mid[0m[2m=[0mTpGroupId(npu7) [3mtopology[0m[2m=[0mRingTopology { kind: Cluster, sqpoll_cpus: None }
+[2m2026-11-26T09:18:20.393081873+09:00[0m [32m INFO[0m [2mpe_runtime::context[0m[2m:[0m Memory dump thread for TpGroupId(npu7) started
+[2m2026-11-26T09:18:20.393135204+09:00[0m [32m INFO[0m [2mfuriosa_generator::entrypoint[0m[2m:[0m Loading DP group 1/1: PP=1, devices=[TpGroupId(npu7)]
+[2m2026-11-26T09:18:20.396018928+09:00[0m [32m INFO[0m [2mpe_runtime::cpu_buffer::alloc[0m[2m:[0m Support for huge page size of 2 MiB has been detected.
+[2m2026-11-26T09:18:21.176047898+09:00[0m [32m INFO[0m [2mfuriosa_generator::entrypoint[0m[2m:[0m   PP rank 1/1: device=TpGroupId(npu7), layers=0..64
+[2m2026-11-26T09:18:25.053633009+09:00[0m [32m INFO[0m [2mfuriosa_generator::entrypoint[0m[2m:[0m   PP rank 0: explicit_shared_io_reserve=4096 MB
+[2m2026-11-26T09:18:25.05375357+09:00[0m [32m INFO[0m [2mfuriosa_generator::entrypoint[0m[2m:[0m   PP rank 0: kv_cache_budget=17817 MB
+[2m2026-11-26T09:18:25.05375821+09:00[0m [32m INFO[0m [2mfuriosa_generator::entrypoint[0m[2m:[0m DP group 0: kv_cache_per_device=17817 MB
+[2m2026-11-26T09:18:25.05382422+09:00[0m [32m INFO[0m [2mfuriosa_generator::next_gen::scheduler::memory_manager::pool_plan[0m[2m:[0m Configured KV cache blocks, global_num_blocks: 144133, aux_num_blocks: None, ssm_num_blocks: Some(60)
+[2m2026-11-26T09:18:25.05383045+09:00[0m [32m INFO[0m [2mfuriosa_generator::entrypoint[0m[2m:[0m DP group 0: SSM state cache: 96 tensors, 8808 MB
+[2m2026-11-26T09:18:26.668058235+09:00[0m [32m INFO[0m [2mfuriosa_generator::structured_output::manager[0m[2m:[0m Initializing structured output manager. Preferred backend: Auto
+[2m2026-11-26T09:18:27.135789874+09:00[0m [33m WARN[0m [2mxgrammar[0m[2m:[0m Provided vocab_size 248320 does not match tokenizer vocab size 248077. Using provided vocab_size.
+[2m2026-11-26T09:18:27.399248724+09:00[0m [32m INFO[0m [2mfuriosa_generator::structured_output::manager[0m[2m:[0m XGrammar backend is initialized.
+[2m2026-11-26T09:18:28.385693106+09:00[0m [32m INFO[0m [2mfuriosa_generator::structured_output::manager[0m[2m:[0m LLGuidance backend is initialized.
+[2m2026-11-26T09:18:28.385742956+09:00[0m [32m INFO[0m [2mfuriosa_generator::next_gen::generator[0m[2m:[0m DP entry DpId(0) → PP devices [TpGroupId(npu7)]
+[2m2026-11-26T09:18:28.410488161+09:00[0m [32m INFO[0m [2mfuriosa_generator::next_gen::scheduler::memory_manager[0m[2m:[0m Initialize KVCacheManager with config: KVCacheConfig(kv_cache_memory: {TpGroupId(npu7): NpuBuffer { offset: 0x100000000, size: 0x459919e00, location: TpGroupId(npu7), mem_type: Dram, end: High }}, KVCachePlan(global_attention_config: LayerConfig(attention_type: Global, unit_block_size: 2048, block_size: 2048, num_chips: 1), global_kv_cache_tensors: 32, aux_attention_config: None, aux_kv_cache_tensors: 0)), is_prefix_cache_enabled: true
+[2m2026-11-26T09:18:28.410580662+09:00[0m [32m INFO[0m [2mfuriosa_generator::next_gen::scheduler::memory_manager::pool_plan[0m[2m:[0m Configured KV cache blocks, global_num_blocks: 144133, aux_num_blocks: None, ssm_num_blocks: Some(60)
+[2m2026-11-26T09:18:28.410603322+09:00[0m [32m INFO[0m [2mfuriosa_generator::next_gen::scheduler::memory_manager[0m[2m:[0m Configured host KV cache blocks, global_host_blocks: 0, aux_host_blocks: 0, global_staging_blocks: 0, aux_staging_blocks: 0, host_memory_ratio: 0, host_memory_bytes: None, configured_staging_memory_bytes: None
+[2m2026-11-26T09:18:28.416007107+09:00[0m [32m INFO[0m [2mfuriosa_generator::next_gen::generator[0m[2m:[0m Eager scheduler has started with: SchedulerConfig { scheduler_kind: None, npu_queue_limit: 1, max_processing_samples: 65536, profile_guided_decode_batching: false, batch_scheduling_budget_ms: 1, prefix_cache_config: PrefixCacheConfig { enabled: true, lookahead_requests: 2, ssm_state_interval: None }, kv_offload_config: KVOffloadConfig { enabled: false, host_memory_ratio: 0.0, host_memory_bytes: None, write_through_threshold: Some(2), write_back: false, staging_memory_bytes: None, overlap_l2_reload: false }, scheduling_loop_type: Some(Eager), experimental_aggressive_batching: false, max_concurrency: None, max_num_batched_tokens: None, data_parallel_routing_policy: Scoring, data_parallel_scoring_profile: Balanced, enable_npu_sampling: false, should_sample_inflight: true }
+[2m2026-11-26T09:18:28.416024907+09:00[0m [32m INFO[0m [2mfuriosa_generator::next_gen::generator[0m[2m:[0m max_model_len=2048, max_kv_len=144132, max_executable_len=2048 → effective_max_len=2048
+[2m2026-11-26T09:18:28.466574445+09:00[0m [32m INFO[0m [2mfuriosa_generator::safetensors[0m[2m:[0m Total size of parameters loaded: 28.3 GiB in 7.290449 s
+RESULT len 120 actual 119 median 62.5 ms min 62.5 ms
+RESULT len 250 actual 249 median 81.9 ms min 81.8 ms
+RESULT len 380 actual 379 median 140.1 ms min 140.0 ms
+RESULT len 500 actual 499 median 159.7 ms min 159.6 ms
+RESULT len 1000 actual 999 median 314.9 ms min 314.9 ms
+RESULT len 1500 actual 1499 median 470.5 ms min 470.4 ms
+RESULT len 1900 actual 1899 median 606.4 ms min 606.0 ms
+[2m2026-11-26T09:18:40.478341768+09:00[0m [32m INFO[0m [2mfuriosa_generator::next_gen::scheduler::memory_manager[0m[2m:[0m Resetting prefix cache with 33680 NPU global blocks, 0 host global blocks, and 0 aux blocks.
+[2m2026-11-26T09:18:40.482876586+09:00[0m [32m INFO[0m [2mfuriosa_generator::next_gen::generator[0m[2m:[0m Scheduler exits normally

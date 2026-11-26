@@ -29,7 +29,7 @@ def load(path):
     t = torch.from_numpy(im[..., ::-1].copy()).permute(2, 0, 1)[None].float() / 255
     return im, t
 
-_, x0 = load("/root/furiosa_study/media/bus.jpg")
+_, x0 = load("/root/programming/npu/media/bus.jpg")
 ep = torch.export.export(model, (x0,))
 dec = passes.decompose(ep)
 w = ExportedProgramWeight(dec)
@@ -49,7 +49,7 @@ def decode(leaves):
     return non_max_suppression(pred, conf_thres=0.25, iou_thres=0.7, nc=1)[0]
 
 for img in ("bus", "zidane"):
-    im, x = load(f"/root/furiosa_study/media/{img}.jpg")
+    im, x = load(f"/root/programming/npu/media/{img}.jpg")
     with torch.no_grad():
         cpu = [t for t in tree_leaves(model(x))]
     t = time.time(); out = cm(x.to(dev)); npu = [o.to("cpu") for o in tree_leaves(out)]; first = time.time()-t
@@ -68,7 +68,7 @@ for img in ("bus", "zidane"):
     for d in dn:
         a.box_label(d[:4].tolist(), f"person {d[4]:.2f}")
         a.kpts(d[6:].view(17, 3))
-    cv2.imwrite(f"/root/furiosa_study/media/{img}_{name}_npu.jpg", a.result())
+    cv2.imwrite(f"/root/programming/npu/media/{img}_{name}_npu.jpg", a.result())
 
 xd = x0.to(dev); ts = []
 for _ in range(110):

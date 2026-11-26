@@ -206,6 +206,34 @@ cd npu
 - 긴 프롬프트에서 CPU와의 로짓 차가 커지는 원인을 찾습니다.
 - 더 많은 프롬프트로 CPU와 비교합니다.
 
+## 포팅 주안점 한눈에 보기 (코드 변경 포인트)
+
+이 모델을 RNGD 1장(8 PE)에서 돌리기 위해 코드상에서 바뀐 핵심 지점은 크게 세 영역입니다.
+
+1. **BF16 → 공식 호환 Block FP8 변환 ([quant_fp8.py](quant_fp8.py), [make_config.py](make_config.py))**
+   - 공식 `Qwen/Qwen3.6-27B-FP8` 인덱스를 참조해 400개 Linear 가중치만 `128×128` 블록 단위 `float8_e4m3fn` + `BF16 weight_scale_inv`(`max_abs / 448`)로 변환하고, 비전 인코더·LM head·norm 등은 BF16을 유지합니다.
+   - `config.json`에 `quantization_config`(block `[128, 128]`, `quant_method: fp8`)와 `ignored_layers`를 공식 스키마에 맞게 주입합니다.
+2. **SDK 파일 수정 없이 런타임 내 1칩/SDK 패치 ([npu/fxb_single_card.py](npu/fxb_single_card.py))**
+   - **4칩 → 1칩 축소:** 커널 기본 인자 `num_chip=1` 강제, EDSL의 `operator = { Chip: X }` 힌트 제거, `all_reduce(...)` → `reshape(...)` 치환, `token_shard_threshold` 상향으로 토큰 샤딩 비활성화.
+   - **EDSL 컴파일 실패 우회:** `full_in_broadcast` `T=1` 구간을 `T=2`로 복제 계산 후 슬라이스(`tile_rotary`), `T=8` RoPE interleave를 `2T`로 패딩 후 슬라이스(`pad_rope`).
+   - **SDK `2026.5.0b3` ↔ `2026.4` 커널 패키지 연결:** 미공개 `furiosa.megakernels.qwen3_5`를 `furiosa.kernels.qwen3_5`로 모듈 에일리어싱하고, 커널 팩토리 반환 형식을 `(Kernel, metadata)` 튜플로 래핑하며, 2026.5 컴파일러에서 제거된 `@compiler_config` 옵션 4개와 `partial_sum_policy` 형식을 정리합니다.
+   - **텐서 정밀도 정렬:** 2026.5 런타임과 일치하도록 `lin_in` / `gdn_prefill` / `gdn_decode` 경계의 `g`, `beta`, SSM 캐시 선언을 `bf16 → f32`로 변경합니다(`gdn_f32`).
+   - **메모리 한도(80 GiB) 대응 버킷 제한:** `gdn_prefill`은 `GDN_MAX_SEQ`(256), 비전 인코더는 `VIS_MAX`(256패치), `gdn_decode`는 `DEC_MAX`(1) 초과 버킷을 해당 커널 재사용으로 우회합니다.
+3. **NPU 런타임 및 비전 안전장치 ([npu/npu_eval.py](npu/npu_eval.py), [npu/serve_vision.py](npu/serve_vision.py))**
+   - 하이브리드 SSM 모델 로더 패닉과 NPU 샘플링 실패를 막기 위해 `LLM(..., max_io_memory_mb=4096, scheduler_config=SchedulerConfig(profile_guided_decode_batching=False, enable_npu_sampling=False))`를 반드시 지정합니다.
+   - `serve_vision.py`는 프로세서가 `256`패치 비전 버킷만 선택하도록 제한해, 큰 프레임이 재사용 커널로 들어가 오답이 나오는 현상을 차단합니다.
+
+## 2026-11-26 재검증 실측 결과
+
+[run_full_qwen36.py](run_full_qwen36.py)로 NVMe 작업 디렉터리(`/root/.cache/qwen36_work`) 및 `SDK 2026.5.0b3` 환경에서 다운로드 → FP8 양자화 → CPU 스모크 → FXB 빌드 → NPU/CPU 비교 → 프리필 벤치마크 전체를 재측정한 결과입니다. 상세 수치는 [RESULTS.md](RESULTS.md)에 기록되어 있습니다.
+
+- **양자화 & CPU 검증:** 1,584개 텐서 일치(`30.4 GB`), `cpu_smoke.py` 기준 BF16 대비 logits 코사인 **0.9819**, Top-1 일치.
+- **FXB 빌드 & 스모크:** `build_fxb.sh` 256토큰 프리필 빌드 `53.8분` (`3225.3s`, `107.3 MB`), NPU 로드 `15s`, `npu_smoke.py` `MATCHES_CPU: True`. (참고: 패치 없는 순정 `fxb build --dry-run`은 예상대로 `furiosa.megakernels.qwen3_5` 미존재로 종료됨)
+- **NPU vs CPU 토큰 비교 (`npu_eval.py` vs `cpu_ref.py`):**
+  - `code`(28→25토큰, `32.5 tok/s`), `korean`(26→11토큰, `32.0 tok/s`), `long_200`(203→5토큰, `24.1 tok/s`), `long_500`(503→30토큰, `30.7 tok/s`) **4개 완전 일치 (`MATCH`)**
+  - `reason`(37→64토큰, `34.9 tok/s`): 19번째 토큰까지 일치 후 `### Step 1:` vs `### 1.` 서식 차이로 분기
+- **프리필 지연 (`prefill_bench.py` 중앙값):** 119토큰 `62.5 ms` · 249토큰 `81.9 ms` · 499토큰 `159.7 ms` · 999토큰 `314.9 ms` · 1,499토큰 `470.5 ms` · 1,899토큰 `606.4 ms`.
+
 ## 주의
 
 - 이 서버에서 Hugging Face Xet 전송이 마지막 파일에서 멈춘 적이 있어 `HF_HUB_DISABLE_XET=1`을 씁니다.

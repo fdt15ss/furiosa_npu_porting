@@ -1,0 +1,490 @@
+[
+  {
+    "name": "01_compile_yolo26n",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "compile_model.py",
+      "yolo26n"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 3920.58,
+    "peak_anon_delta_gib": 52.21,
+    "log": "bench_logs/01_compile_yolo26n.log"
+  },
+  {
+    "name": "02_run_detect",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "run_detect.py"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 15.0,
+    "peak_anon_delta_gib": 0.53,
+    "log": "bench_logs/02_run_detect.log"
+  },
+  {
+    "name": "03_detect_fps",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "detect_npu.py"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 145.02,
+    "peak_anon_delta_gib": 4.1,
+    "log": "bench_logs/03_detect_fps.log"
+  },
+  {
+    "name": "04_compile_yolo26n_1pe_pad4",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "compile_fusion.py",
+      "1",
+      "pad4"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 3920.57,
+    "peak_anon_delta_gib": 53.72,
+    "log": "bench_logs/04_compile_yolo26n_1pe_pad4.log"
+  },
+  {
+    "name": "05_compile_yolo26n_2pe",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "compile_fusion.py",
+      "2"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 3020.44,
+    "peak_anon_delta_gib": 39.61,
+    "log": "bench_logs/05_compile_yolo26n_2pe.log"
+  },
+  {
+    "name": "06_compile_yolo26n_2pe_pad4",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "compile_fusion.py",
+      "2",
+      "pad4"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 3000.43,
+    "peak_anon_delta_gib": 39.6,
+    "log": "bench_logs/06_compile_yolo26n_2pe_pad4.log"
+  },
+  {
+    "name": "07_bench_1pe_3ch",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "1",
+      "yolo26n.edf"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 30.0,
+    "peak_anon_delta_gib": 0.49,
+    "log": "bench_logs/07_bench_1pe_3ch.log"
+  },
+  {
+    "name": "08_bench_1pe_pad4",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "1",
+      "yolo26n-1pe-pad4.edf"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 30.0,
+    "peak_anon_delta_gib": 0.49,
+    "log": "bench_logs/08_bench_1pe_pad4.log"
+  },
+  {
+    "name": "09_bench_2pe_3ch",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "2",
+      "yolo26n-2pe.edf"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 30.0,
+    "peak_anon_delta_gib": 0.49,
+    "log": "bench_logs/09_bench_2pe_3ch.log"
+  },
+  {
+    "name": "10_bench_2pe_pad4",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "2",
+      "yolo26n-2pe-pad4.edf"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 30.0,
+    "peak_anon_delta_gib": 0.49,
+    "log": "bench_logs/10_bench_2pe_pad4.log"
+  },
+  {
+    "name": "11_bench_1pe_pad4_x2",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "1",
+      "yolo26n-1pe-pad4.edf",
+      "2"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 25.0,
+    "peak_anon_delta_gib": 1.31,
+    "log": "bench_logs/11_bench_1pe_pad4_x2.log"
+  },
+  {
+    "name": "12_bench_1pe_pad4_x8",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "1",
+      "yolo26n-1pe-pad4.edf",
+      "8"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 25.0,
+    "peak_anon_delta_gib": 4.11,
+    "log": "bench_logs/12_bench_1pe_pad4_x8.log"
+  },
+  {
+    "name": "13_bench_2pe_pad4_x2",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "2",
+      "yolo26n-2pe-pad4.edf",
+      "2"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 25.0,
+    "peak_anon_delta_gib": 1.32,
+    "log": "bench_logs/13_bench_2pe_pad4_x2.log"
+  },
+  {
+    "name": "14_bench_2pe_pad4_x4",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "2",
+      "yolo26n-2pe-pad4.edf",
+      "4"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 25.0,
+    "peak_anon_delta_gib": 2.25,
+    "log": "bench_logs/14_bench_2pe_pad4_x4.log"
+  },
+  {
+    "name": "15_compile_yolo26n_seg",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "compile_model.py",
+      "yolo26n-seg"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 4165.6,
+    "peak_anon_delta_gib": 55.31,
+    "log": "bench_logs/15_compile_yolo26n_seg.log"
+  },
+  {
+    "name": "16_compile_yolo26n_seg_protohead",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "compile_proto.py"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 165.02,
+    "peak_anon_delta_gib": 3.7,
+    "log": "bench_logs/16_compile_yolo26n_seg_protohead.log"
+  },
+  {
+    "name": "17_seg_check",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "seg_npu.py",
+      "check"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 10.0,
+    "peak_anon_delta_gib": 0.44,
+    "log": "bench_logs/17_seg_check.log"
+  },
+  {
+    "name": "18_seg_files",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "seg_npu.py",
+      "files"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 20.0,
+    "peak_anon_delta_gib": 0.57,
+    "log": "bench_logs/18_seg_files.log"
+  },
+  {
+    "name": "19_seg_fps",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "seg_npu.py",
+      "fps"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 115.02,
+    "peak_anon_delta_gib": 4.36,
+    "log": "bench_logs/19_seg_fps.log"
+  },
+  {
+    "name": "20_compile_dfine_encoder",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "compile_dfine.py",
+      "encoder"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 2070.29,
+    "peak_anon_delta_gib": 37.0,
+    "log": "bench_logs/20_compile_dfine_encoder.log"
+  },
+  {
+    "name": "21_compile_dfine_parte",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "compile_dfine_parts.py",
+      "e"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 215.03,
+    "peak_anon_delta_gib": 9.26,
+    "log": "bench_logs/21_compile_dfine_parte.log"
+  },
+  {
+    "name": "22_compile_dfine_parta",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "compile_dfine_parts.py",
+      "a"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 695.1,
+    "peak_anon_delta_gib": 16.42,
+    "log": "bench_logs/22_compile_dfine_parta.log"
+  },
+  {
+    "name": "23_compile_dfine_partb",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "compile_dfine_parts.py",
+      "b"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 150.02,
+    "peak_anon_delta_gib": 3.1,
+    "log": "bench_logs/23_compile_dfine_partb.log"
+  },
+  {
+    "name": "24_compile_dfine_partc",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "compile_dfine_parts.py",
+      "c"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 750.11,
+    "peak_anon_delta_gib": 14.41,
+    "log": "bench_logs/24_compile_dfine_partc.log"
+  },
+  {
+    "name": "25_dfine_check",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "dfine_npu.py",
+      "check"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 10.0,
+    "peak_anon_delta_gib": 0.5,
+    "log": "bench_logs/25_dfine_check.log"
+  },
+  {
+    "name": "26_dfine_files",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "dfine_npu.py",
+      "files"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 25.0,
+    "peak_anon_delta_gib": 0.52,
+    "log": "bench_logs/26_dfine_files.log"
+  },
+  {
+    "name": "27_dfine_fps",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "dfine_npu.py",
+      "fps"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 150.02,
+    "peak_anon_delta_gib": 4.42,
+    "log": "bench_logs/27_dfine_fps.log"
+  },
+  {
+    "name": "28_compile_yolo11n_pose",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "compile_pose.py",
+      "yolo11n-pose"
+    ],
+    "rc": 1,
+    "timed_out": false,
+    "elapsed_s": 3140.45,
+    "peak_anon_delta_gib": 44.35,
+    "log": "bench_logs/28_compile_yolo11n_pose.log"
+  },
+  {
+    "name": "29_compile_yolo26n_pose",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "compile_pose.py",
+      "yolo26n-pose"
+    ],
+    "rc": 1,
+    "timed_out": false,
+    "elapsed_s": 3930.57,
+    "peak_anon_delta_gib": 55.35,
+    "log": "bench_logs/29_compile_yolo26n_pose.log"
+  },
+  {
+    "name": "30_infer_yolo11n_pose",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "infer_pose.py",
+      "yolo11n-pose"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 15.0,
+    "peak_anon_delta_gib": 0.52,
+    "log": "bench_logs/30_infer_yolo11n_pose.log"
+  },
+  {
+    "name": "31_infer_yolo26n_pose",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "infer_pose.py",
+      "yolo26n-pose"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 15.0,
+    "peak_anon_delta_gib": 0.5,
+    "log": "bench_logs/31_infer_yolo26n_pose.log"
+  },
+  {
+    "name": "32_fps_pose",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "fps_pose.py"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 265.03,
+    "peak_anon_delta_gib": 4.18,
+    "log": "bench_logs/32_fps_pose.log"
+  },
+  {
+    "name": "33_video_yolo26n_pose",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "video_pose.py",
+      "yolo26n-pose",
+      "/root/programming/npu/media/people-detection.mp4"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 20.0,
+    "peak_anon_delta_gib": 0.53,
+    "log": "bench_logs/33_video_yolo26n_pose.log"
+  },
+  {
+    "name": "34_video_yolo11n_pose",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yolo/.venv/bin/python",
+      "-u",
+      "video_pose.py",
+      "yolo11n-pose",
+      "/root/programming/npu/media/people-detection.mp4"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 20.0,
+    "peak_anon_delta_gib": 0.53,
+    "log": "bench_logs/34_video_yolo11n_pose.log"
+  }
+]

@@ -1,0 +1,5 @@
+Fusion(num_fusion=1, num_pe_per_cluster=1, num_chips=1, num_clusters_per_chip=1) pad4
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 5.5 GFLOPs
+export+decompose 2.4s
+compile ok 3907.7s
+saved yolo26n-1pe-pad4.edf

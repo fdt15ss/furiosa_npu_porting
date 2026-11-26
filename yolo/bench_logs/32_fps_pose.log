@@ -1,0 +1,66 @@
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+yolo11n-pose npu raw  cores=1 total=  157.6 fps  per_core=157.6~157.6
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+yolo11n-pose npu raw  cores=2 total=  312.3 fps  per_core=155.6~156.7
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+yolo11n-pose npu raw  cores=4 total=  580.3 fps  per_core=142.4~146.6
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+yolo11n-pose npu raw  cores=8 total=  862.2 fps  per_core=106.4~111.0
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+yolo11n-pose npu full cores=1 total=  128.8 fps  per_core=128.8~128.8
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+yolo11n-pose npu full cores=8 total=  542.8 fps  per_core=66.8~69.6
+YOLO11n-pose summary (fused): 109 layers, 2,866,468 parameters, 0 gradients, 7.5 GFLOPs
+yolo11n-pose cpu raw  threads=12 total=   20.9 fps
+yolo11n-pose cpu full threads=12 total=   20.1 fps
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+yolo26n-pose npu raw  cores=1 total=  198.5 fps  per_core=198.5~198.5
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+yolo26n-pose npu raw  cores=2 total=  388.0 fps  per_core=191.6~196.5
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+yolo26n-pose npu raw  cores=4 total=  733.5 fps  per_core=180.9~186.0
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+yolo26n-pose npu raw  cores=8 total= 1160.1 fps  per_core=142.2~147.5
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+yolo26n-pose npu full cores=1 total=  170.2 fps  per_core=170.2~170.2
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+yolo26n-pose npu full cores=8 total=  822.9 fps  per_core=100.8~106.0
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+yolo26n-pose cpu raw  threads=12 total=   18.8 fps
+yolo26n-pose cpu full threads=12 total=   18.2 fps

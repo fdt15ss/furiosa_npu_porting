@@ -22,7 +22,7 @@ from furiosa.torch.export import passes
 from ultralytics import YOLO
 from ultralytics.data.augment import LetterBox
 
-EXAMPLE_IMAGE = "/root/furiosa_study/media/bus.jpg"
+EXAMPLE_IMAGE = "/root/programming/npu/media/bus.jpg"
 
 
 class PassThrough(nn.Module):

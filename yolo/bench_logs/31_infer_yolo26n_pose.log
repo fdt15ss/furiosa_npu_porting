@@ -1,0 +1,17 @@
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+inputs 223 outputs 3
+load 0.08s
+== bus first=0.010s shapes=[(1, 4, 8400), (1, 1, 8400), (1, 51, 8400)]
+ [0] maxdiff=2.2667 rel=0.00751 cos=0.999934
+ [1] maxdiff=1.1235 rel=0.00489 cos=0.999973
+ [2] maxdiff=2.7880 rel=0.01453 cos=0.999860
+ detections cpu=4 npu=4
+ matched=4/4 conf diff max=0.0095 box diff max=0.68px kpt xy diff max=1.22px
+== zidane first=0.009s shapes=[(1, 4, 8400), (1, 1, 8400), (1, 51, 8400)]
+ [0] maxdiff=0.9723 rel=0.00637 cos=0.999959
+ [1] maxdiff=0.8583 rel=0.00504 cos=0.999977
+ [2] maxdiff=1.6026 rel=0.01335 cos=0.999873
+ detections cpu=2 npu=2
+ matched=2/2 conf diff max=0.0011 box diff max=0.30px kpt xy diff max=0.63px
+npu latency mean=5.00ms p50=5.00ms p99=5.05ms
+cpu (12 threads) latency mean=50.40ms

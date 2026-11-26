@@ -1,0 +1,2 @@
+[2m2026-11-26T08:18:49.685822098+09:00[0m [32m INFO[0m [2mfuriosa_generator::fxb::metadata[0m[2m:[0m Using architecture Qwen3_5ForConditionalGeneration from config.json
+error: megakernel module 'furiosa.megakernels.qwen3_5' for model type 'qwen3_5' is not importable; add the module to furiosa-kernels-contrib

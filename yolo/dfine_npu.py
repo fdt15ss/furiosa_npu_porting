@@ -27,7 +27,7 @@ from furiosa.torch.export import (
 from compile_dfine import EncoderPart, build, example_input, run_decoder
 from compile_dfine_parts import parts
 
-MEDIA = "/root/furiosa_study/media"
+MEDIA = "/root/programming/npu/media"
 RESULT = f"{MEDIA}/result"
 NAME = "dfine-nano"
 DURATION = 10

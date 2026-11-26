@@ -1,0 +1,13 @@
+[KDownloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-pose.pt to 'yolo26n-pose.pt': 3% ──────────── 256.0KB/7.5MB 2.2MB/s 0.1s<3.3s[KDownloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-pose.pt to 'yolo26n-pose.pt': 6% ╸─────────── 496.0KB/7.5MB 2.3MB/s 0.2s<3.1s[KDownloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-pose.pt to 'yolo26n-pose.pt': 13% ━╸────────── 1.0/7.5MB 5.3MB/s 0.3s<1.2s[KDownloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-pose.pt to 'yolo26n-pose.pt': 100% ━━━━━━━━━━━━ 7.5MB 18.2MB/s 0.4s
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 7.6 GFLOPs
+head: Pose26 end2end False
+outputs: [(1, 4, 8400), (1, 1, 8400), (1, 51, 8400)]
+export ok 0.6s
+decompose ok 1.9s
+compile ok 3916.1s
+saved yolo26n-pose.edf 2632024
+Traceback (most recent call last):
+  File "/root/programming/npu/furiosa_npu_tries/yolo/compile_pose.py", line 52, in <module>
+    rt = rt.to(dev)
+         ^^^^^
+AttributeError: 'furiosa.torch._C.ir.Runnable' object has no attribute 'to'

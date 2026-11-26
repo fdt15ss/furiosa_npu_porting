@@ -1,0 +1,7 @@
+enable_tactic_pruning True
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 10818.20it/s]
+export ok 0.7s
+compile ok 2054.2s
+meta {'order': [0, 1], 'passthrough': 0, 'zero_sized': True}
+saved dfine-nano-encoder.edf

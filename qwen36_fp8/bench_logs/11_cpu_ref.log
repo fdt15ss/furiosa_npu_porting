@@ -1,0 +1,10 @@
+loaded
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+code 28 prompt tokens, 25 tokens '```python\ndef reverse_string(s: str) -> str:\n    return s[::-1]\n```<|im_end|>\n<|endoftext|>'
+korean 26 prompt tokens, 11 tokens '대한민국의 수도는 서울입니다.<|im_end|>\n<|endoftext|>'
+reason 37 prompt tokens, 64 tokens 'To find the average speed of the train, we use the standard formula for speed.\n\n### 1. Identify the Formula\nThe formula '
+long_200 203 prompt tokens, 5 tokens '12<|im_end|>\n<|endoftext|>'
+long_500 503 prompt tokens, 30 tokens 'The text consists of the sentence "The quick brown fox jumps over the lazy dog near the quiet river bank" repeated thirt'

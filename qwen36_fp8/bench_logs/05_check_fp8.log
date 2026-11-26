@@ -1,0 +1,4 @@
+tensors 1584 official(no mtp) 1584 missing 0 extra 0
+Counter({'BF16': 1184, 'F8_E4M3': 400})
+fp8 without scale 0
+size GB 30.4

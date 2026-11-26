@@ -1,0 +1,4 @@
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 5.5 GFLOPs
+cpu match: raw maxdiff=2.2306 det cpu=5 npu=5 same_classes=True box maxdiff=0.50px
+fusion=2 npu only n=4351 p50=2.29ms p99=2.32ms fps=435.2
+fusion=2 npu+copy n=3354 p50=2.98ms p99=3.01ms fps=335.4

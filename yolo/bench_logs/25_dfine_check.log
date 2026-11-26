@@ -1,0 +1,9 @@
+Loading weights:   0%|          | 0/644 [00:00<?, ?it/s]Loading weights: 100%|██████████| 644/644 [00:00<00:00, 11388.34it/s]
+bus feat cos [0.99983, 0.99987]
+bus cpu ['bus', 'person', 'person', 'person', 'person'] [0.941, 0.914, 0.912, 0.906, 0.785]
+bus npu ['bus', 'person', 'person', 'person', 'person'] [0.941, 0.914, 0.911, 0.898, 0.785]
+bus conf diff=0.0078 box diff=1.17px
+zidane feat cos [0.99978, 0.99982]
+zidane cpu ['person', 'person', 'tie', 'tie', 'tie', 'tie'] [0.924, 0.919, 0.847, 0.498, 0.452, 0.419]
+zidane npu ['person', 'person', 'tie', 'tie', 'tie', 'tie'] [0.918, 0.917, 0.846, 0.511, 0.447, 0.416]
+zidane conf diff=0.0131 box diff=0.70px

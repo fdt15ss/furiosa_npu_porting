@@ -1,0 +1,19 @@
+params 26.895998464
+meta buffers 0 []
+prompt tokens 28
+loaded wen36_work/raw 0 s
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+forward 12 s top5 [71093, 727, 12305, 687, 2]
+loaded wen36_work/fp8 69 s
+forward 4 s top5 [71093, 727, 12305, 687, 2]
+cosine 0.9819061756134033 rmse 0.35306262969970703 top1 match True
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+gen 30 s
+TEXT: ```python
+def reverse_string(s: str) -> str:
+    return s[::-1]
+```<|im_end|>
+<|endoftext|>
+SMOKEDONE

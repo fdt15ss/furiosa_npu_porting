@@ -13,7 +13,7 @@ import torch
 from torch.utils._pytree import tree_leaves
 
 DURATION = 10
-IMAGE = "/root/furiosa_study/media/bus.jpg"
+IMAGE = "/root/programming/npu/media/bus.jpg"
 RUNS = [(1, "raw"), (2, "raw"), (4, "raw"), (8, "raw"), (1, "full"), (8, "full")]
 
 

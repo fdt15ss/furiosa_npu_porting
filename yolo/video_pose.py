@@ -35,8 +35,8 @@ cap = cv2.VideoCapture(video)
 fps = cap.get(cv2.CAP_PROP_FPS)
 w, h = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 stem = pathlib.Path(video).stem
-out_path = f"/root/furiosa_study/media/{stem}_{name}_npu.mp4"
-tmp_path = f"/root/furiosa_study/yolo/.{stem}_{name}.tmp.mp4"
+out_path = f"/root/programming/npu/media/{stem}_{name}_npu.mp4"
+tmp_path = f".{stem}_{name}.tmp.mp4"
 writer = cv2.VideoWriter(tmp_path, cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
 letterbox = LetterBox(640, auto=False)
 times = {"read": [], "pre": [], "npu": [], "post": [], "draw": []}

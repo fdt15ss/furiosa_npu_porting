@@ -1,0 +1,7 @@
+code: prompt 28 tokens, NPU 25, CPU 25, same prefix 25, MATCH
+korean: prompt 26 tokens, NPU 11, CPU 11, same prefix 11, MATCH
+reason: prompt 37 tokens, NPU 64, CPU 64, same prefix 19, DIFF
+  NPU: 'To find the average speed of the train, we use the standard formula for speed.\n\n### Step 1: Identify the Formula\nThe formula for average speed is:\n$$ \\text{Spee'
+  CPU: 'To find the average speed of the train, we use the standard formula for speed.\n\n### 1. Identify the Formula\nThe formula for average speed is:\n$$ \\text{Speed} = '
+long_200: prompt 203 tokens, NPU 5, CPU 5, same prefix 5, MATCH
+long_500: prompt 503 tokens, NPU 30, CPU 30, same prefix 30, MATCH

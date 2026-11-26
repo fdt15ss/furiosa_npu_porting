@@ -1,0 +1,7 @@
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 9.3 GFLOPs
+bus cos [0.99984, 0.99999, 0.99987, 0.99978]
+bus cpu ['bus', 'person', 'person', 'person', 'person'] npu ['bus', 'person', 'person', 'person', 'person']
+bus conf diff=0.0033 box diff=1.19px mask iou min=0.9970 mean=0.9983
+zidane cos [0.9986, 0.99987, 0.99917, 0.99834]
+zidane cpu ['person', 'person', 'tie'] npu ['person', 'person', 'tie']
+zidane conf diff=0.0023 box diff=1.07px mask iou min=0.9912 mean=0.9958

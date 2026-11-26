@@ -10,7 +10,7 @@ from torch.utils._pytree import tree_leaves
 from compile_model import build
 
 NAME = "yolo26n"
-MEDIA = "/root/furiosa_study/media"
+MEDIA = "/root/programming/npu/media"
 DURATION = 10
 
 
