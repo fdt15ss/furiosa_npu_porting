@@ -9,6 +9,7 @@ from __future__ import annotations
 import datetime as dt
 import importlib.metadata as meta
 import json
+import os
 import pathlib
 import re
 import subprocess
@@ -62,16 +63,19 @@ def log_master(msg: str) -> None:
     print(line, flush=True)
 
 
-def run_step(name: str, cmd: list[str], timeout_s: int) -> dict:
+def run_step(name: str, cmd: list[str], timeout_s: int, extra_env: dict[str, str] | None = None) -> dict:
     log_path = LOGS / f"{name}.log"
     log_master(f"START {name}: {' '.join(cmd)}")
+    env = os.environ.copy()
+    if extra_env:
+        env.update(extra_env)
     base_anon = cgroup_anon_gib()
     peak_anon = base_anon
     start = time.time()
     rc = -1
     timed_out = False
     with log_path.open("w", encoding="utf-8") as lf:
-        proc = subprocess.Popen(cmd, cwd=ROOT, stdout=lf, stderr=subprocess.STDOUT)
+        proc = subprocess.Popen(cmd, cwd=ROOT, env=env, stdout=lf, stderr=subprocess.STDOUT)
         while proc.poll() is None:
             peak_anon = max(peak_anon, cgroup_anon_gib())
             if time.time() - start > timeout_s:
@@ -102,7 +106,9 @@ def read_log(name: str) -> str:
     return p.read_text(encoding="utf-8", errors="replace") if p.exists() else ""
 
 
-def fmt_duration(sec: float | None) -> str:
+def fmt_duration(sec: float | str | None) -> str:
+    if sec == "skipped":
+        return "건너뜀(기존 .edf)"
     if sec is None:
         return "실패/미측정"
     if sec >= 60:
@@ -163,11 +169,14 @@ def render_results(summary: list[dict]) -> None:
     ft_ver = meta.version("furiosa-torch")
     fw = get_firmware()
 
-    def ok_time(step: str) -> float | None:
+    def ok_time(step: str) -> float | str | None:
         s = by_name.get(step)
         if not s or s["rc"] != 0:
             return None
-        return parse_compile_time(read_log(step), s["elapsed_s"])
+        txt = read_log(step)
+        if "compile ok" not in txt and txt.lstrip().startswith("skip "):
+            return "skipped"
+        return parse_compile_time(txt, s["elapsed_s"])
 
     t_det = ok_time("01_compile_yoloe26_det")
     t_1pe_pad4 = ok_time("04_compile_yoloe26_det_1pe_pad4")
@@ -209,9 +218,9 @@ def render_results(summary: list[dict]) -> None:
     def row_fps(label: str, d: dict[tuple[str, int], float]) -> str:
         return f"| {label} | {fnum(d.get(('raw', 1)))} | {fnum(d.get(('raw', 8)))} | {fnum(d.get(('full', 1)))} | {fnum(d.get(('full', 8)))} |"
 
-    def row_fusion(label: str, ch: str, b: dict, ctime: float | None, step_name: str) -> str:
+    def row_fusion(label: str, ch: str, b: dict, ctime: float | str | None, step_name: str) -> str:
         s = by_name.get(step_name, {})
-        mem = f", 최대 Δ{s.get('peak_anon_delta_gib', 0):.1f} GiB" if s.get("rc") == 0 else ""
+        mem = f", 최대 Δ{s.get('peak_anon_delta_gib', 0):.1f} GiB" if s.get("rc") == 0 and isinstance(ctime, (int, float)) else ""
         p50 = f"{b['only_p50']:.2f} ms" if "only_p50" in b else "-"
         fps_o = fnum(b.get("only_fps"))
         fps_c = fnum(b.get("copy_fps"))
@@ -296,10 +305,11 @@ def main() -> None:
         render_results(summary)
         return
 
+    extra_env = {"FORCE_COMPILE": "1"} if "--force" in sys.argv else None
     (LOGS / "master.log").write_text("", encoding="utf-8")
     summary: list[dict] = []
     for name, cmd, timeout_s in STEPS:
-        rec = run_step(name, cmd, timeout_s)
+        rec = run_step(name, cmd, timeout_s, extra_env)
         summary.append(rec)
         (LOGS / "summary.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8")
     render_results(summary)

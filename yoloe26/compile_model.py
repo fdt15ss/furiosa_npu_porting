@@ -12,6 +12,11 @@ import pathlib
 import sys
 import time
 
+from edf_skip import skip_if_edf_exists
+
+if __name__ == "__main__" and len(sys.argv) >= 2:
+    skip_if_edf_exists(sys.argv[1] + ("-proto" if "proto" in sys.argv[2:] else "") + ".edf")
+
 import cv2
 import torch
 from torch import nn
