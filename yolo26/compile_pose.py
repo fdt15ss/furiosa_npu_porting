@@ -1,5 +1,11 @@
 """usage: run_model.py <yolo11n-pose|yolo26n-pose> ; compile, save, run on npu."""
 import subprocess, sys, time, traceback
+
+from edf_skip import skip_if_edf_exists
+
+if __name__ == "__main__" and len(sys.argv) >= 2:
+    skip_if_edf_exists(f"{sys.argv[1]}.edf")
+
 import cv2, numpy as np, torch
 import furiosa.torch as ft
 from furiosa.torch.export import passes

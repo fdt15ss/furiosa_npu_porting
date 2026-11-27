@@ -5,6 +5,11 @@ limit. As its own graph, it takes the feats output of yolo26n-seg.edf.
 """
 import time
 
+from edf_skip import skip_if_edf_exists
+
+if __name__ == "__main__":
+    skip_if_edf_exists("yolo26n-seg-protohead.edf")
+
 import torch
 import furiosa.torch as ft
 from torch import nn

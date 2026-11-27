@@ -8,6 +8,11 @@ input DMA; with 4 channels that DMA takes microseconds.
 import sys
 import time
 
+from edf_skip import skip_if_edf_exists
+
+if __name__ == "__main__" and len(sys.argv) >= 2:
+    skip_if_edf_exists(f"yolo26n-{int(sys.argv[1])}pe{'-pad4' if 'pad4' in sys.argv[2:] else ''}.edf")
+
 import torch
 import furiosa.torch as ft
 from furiosa.torch.export import passes

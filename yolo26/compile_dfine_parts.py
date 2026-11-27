@@ -12,6 +12,11 @@ usage: compile_dfine_parts.py <e|a|s0|s1|s2|b|c>
 import sys
 import time
 
+from edf_skip import skip_if_edf_exists
+
+if __name__ == "__main__" and len(sys.argv) >= 2:
+    skip_if_edf_exists(f"dfine-nano-part{sys.argv[1]}.edf")
+
 import torch
 from torch import nn
 
