@@ -9,7 +9,14 @@ PORT=${1:-8000}; MEDIA=${2:-/root/furiosa_study/media}
 HERE=$(cd "$(dirname "$0")"; pwd)
 ENV=${FURIOSA_ENV:-/root/miniconda3/envs/furiosa}
 MODEL=${MODEL:-/root/models/Logics-SWE-Qwen3.6-27B-FP8}
-FXB=${FXB:-/root/models/fxb/logics-swe-1card-sdk5-p256.fxb}
+BUNDLE_FXB="$HERE/../_fxb & compile/logics-swe-1card-sdk5-p256.fxb"
+if [ -z "${FXB:-}" ]; then
+  if [ -f "$BUNDLE_FXB" ]; then
+    FXB="$BUNDLE_FXB"
+  else
+    FXB=/root/models/fxb/logics-swe-1card-sdk5-p256.fxb
+  fi
+fi
 export PATH=$ENV/bin:$PATH VIS_BUCKETS=${VIS_BUCKETS:-256}   # MAX_LEN must match the FXB (default 2048)
 cd "$HERE"
 exec "$ENV/bin/python" serve_vision.py serve "$MODEL" --fxb "$FXB" --devices npu:6 --port "$PORT" \

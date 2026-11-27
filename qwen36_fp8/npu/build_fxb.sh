@@ -1,12 +1,37 @@
 #!/bin/bash
-# Build the one-card FXB. Usage: ./build_fxb.sh <out.fxb> [compile_cache_dir]
+# Build the one-card FXB. Usage: ./build_fxb.sh [out.fxb] [compile_cache_dir] [--force]
 # Prefill runs in GDN_MAX_SEQ-token chunks: 256 by default, 128 reproduces the 2026-11-07 FXB.
 # 256 is about 33% faster on long prompts; s512 does not fit in the 80 GiB pod limit.
 # Wall time from an empty cache: about 27 min for 128, 42 min for 256 (peak 25 GiB). With the cache about 8 min.
-# The cache defaults to compile-cache-sdk5 next to <out.fxb>; pass it explicitly when <out.fxb> lives elsewhere.
+# Defaults to ../_fxb & compile/logics-swe-1card-sdk5-p256.fxb and ../_fxb & compile/compile-cache-sdk5 when present.
+# Skips building when <out.fxb> already exists and is non-empty unless --force or FORCE_COMPILE=1 is set.
 # The FXB is reproducible: a rebuild differs only in manifest.json created_at and uuid.
 set -euo pipefail
-OUT=${1:?output fxb}; HERE=$(cd "$(dirname "$0")"; pwd); CACHE=${2:-$(dirname "$OUT")/compile-cache-sdk5}
+HERE=$(cd "$(dirname "$0")"; pwd)
+BUNDLE="$HERE/../_fxb & compile"
+force=${FORCE_COMPILE:-0}
+pos=()
+for arg in "$@"; do
+  if [ "$arg" = "--force" ]; then
+    force=1
+  else
+    pos+=("$arg")
+  fi
+done
+OUT=${pos[0]:-$BUNDLE/logics-swe-1card-sdk5-p256.fxb}
+if [ -n "${pos[1]:-}" ]; then
+  CACHE=${pos[1]}
+elif [ -d "$BUNDLE/compile-cache-sdk5" ]; then
+  CACHE="$BUNDLE/compile-cache-sdk5"
+else
+  CACHE="$(dirname "$OUT")/compile-cache-sdk5"
+fi
+if [ "$force" != "1" ] && [ -s "$OUT" ]; then
+  size=$(wc -c < "$OUT" | tr -d ' ')
+  echo "skip $OUT (already exists, ${size} bytes; pass --force or set FORCE_COMPILE=1 to rebuild)"
+  exit 0
+fi
+mkdir -p "$(dirname "$OUT")" "$CACHE"
 ENV=${FURIOSA_ENV:-/root/miniconda3/envs/furiosa}
 export GDN_MAX_SEQ=${GDN_MAX_SEQ:-256}
 # Vision buckets up to VIS_MAX patches per frame get real kernels (256 = 320x192 for 16:9, 1024 = about 640x360).

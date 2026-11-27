@@ -7,7 +7,11 @@ REV=42c206e3eee5f771e1ad53ca201957c30f41bf4e
 RAW=$W/raw; FP8=$W/fp8; mkdir -p "$RAW" "$FP8"; cd "$W"
 # Xet stalled on the last shard here, so plain HTTP is forced.
 HF_HOME=$W/hfhome HF_HUB_DISABLE_XET=1 "$PY" -I "$HERE/download.py" $REV "$RAW"
-"$PY" -I "$HERE/verify_shards.py" $REV "$RAW" "$W/sha256.json"
+if [ -f "$HERE/_fxb & compile/sha256.json" ]; then
+  "$PY" -I "$HERE/verify_shards.py" $REV "$RAW" "$W/sha256.json" "$HERE/_fxb & compile/sha256.json"
+else
+  "$PY" -I "$HERE/verify_shards.py" $REV "$RAW" "$W/sha256.json"
+fi
 "$PY" -I "$HERE/quant_fp8.py" "$RAW" "$FP8"
 "$PY" -I "$HERE/make_config.py" "$RAW/config.json" "$FP8/config.json"
 "$PY" -I "$HERE/check_fp8.py" "$FP8"

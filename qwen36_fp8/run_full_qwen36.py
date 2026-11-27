@@ -20,8 +20,12 @@ LOGS = ROOT / "bench_logs"
 WORK = pathlib.Path("/root/.cache/qwen36_work")
 RAW = WORK / "raw"
 FP8 = WORK / "fp8"
-FXB = WORK / "logics-swe-1card-sdk5-p256.fxb"
-CACHE = WORK / "compile-cache-sdk5"
+BUNDLE = ROOT / "_fxb & compile"
+BUNDLED_FXB = BUNDLE / "logics-swe-1card-sdk5-p256.fxb"
+BUNDLED_CACHE = BUNDLE / "compile-cache-sdk5"
+BUNDLED_SHA256 = BUNDLE / "sha256.json"
+FXB = BUNDLED_FXB if BUNDLE.is_dir() else WORK / "logics-swe-1card-sdk5-p256.fxb"
+CACHE = BUNDLED_CACHE if BUNDLED_CACHE.is_dir() else WORK / "compile-cache-sdk5"
 
 CPU_PY = "/root/miniconda3/envs/furiosa02/bin/python"
 NPU_ENV = "/root/.cache/qwen36_npu_venv"
@@ -85,14 +89,21 @@ def render_results(summary: list[dict]) -> None:
     by_name = {s["name"]: s for s in summary}
     today = dt.datetime.now().strftime("%Y-%m-%d")
 
-    def fmt_time(sec: float | None) -> str:
+    def fmt_time(sec: float | str | None) -> str:
+        if sec == "skipped":
+            return "건너뜀(기존 .fxb)"
         if sec is None:
             return "실패/미측정"
         return f"{sec / 60:.1f}분 ({sec:.1f}s)" if sec >= 60 else f"{sec:.1f}초"
 
-    def step_time(name: str) -> float | None:
+    def step_time(name: str) -> float | str | None:
         s = by_name.get(name)
-        return s["elapsed_s"] if s and s["rc"] == 0 else None
+        if not s or s["rc"] != 0:
+            return None
+        txt = read_log(name)
+        if txt.lstrip().startswith("skip "):
+            return "skipped"
+        return s["elapsed_s"]
 
     chk_txt = read_log("05_check_fp8")
     smoke_txt = read_log("06_cpu_smoke")
@@ -128,7 +139,7 @@ def render_results(summary: list[dict]) -> None:
     ]
     for s in summary:
         st = "성공" if s["rc"] == 0 else ("시간 초과" if s["timed_out"] else f"실패 (exit={s['rc']})")
-        lines.append(f"| `{s['name']}` | {st} | {fmt_time(s['elapsed_s'])} |")
+        lines.append(f"| `{s['name']}` | {st} | {fmt_time(step_time(s['name']) if s['rc'] == 0 else None)} |")
 
     lines.extend([
         "",
@@ -220,10 +231,16 @@ def main() -> None:
         "FURIOSA_ENV": NPU_ENV,
         "HF_HOME": str(WORK / "hfhome"),
     }
+    if "--force" in sys.argv:
+        npu_env["FORCE_COMPILE"] = "1"
+
+    verify_cmd = [CPU_PY, "-I", str(ROOT / "verify_shards.py"), REV, str(RAW), str(WORK / "sha256.json")]
+    if BUNDLED_SHA256.is_file():
+        verify_cmd.append(str(BUNDLED_SHA256))
 
     steps: list[tuple[str, list[str], pathlib.Path, dict[str, str], int]] = [
         ("01_download", [CPU_PY, "-I", str(ROOT / "download.py"), REV, str(RAW)], WORK, cpu_env, 7200),
-        ("02_verify_shards", [CPU_PY, "-I", str(ROOT / "verify_shards.py"), REV, str(RAW), str(WORK / "sha256.json")], WORK, cpu_env, 1800),
+        ("02_verify_shards", verify_cmd, WORK, cpu_env, 1800),
         ("03_quant_fp8", [CPU_PY, "-I", str(ROOT / "quant_fp8.py"), str(RAW), str(FP8)], WORK, cpu_env, 3600),
         ("04_make_config", [CPU_PY, "-I", str(ROOT / "make_config.py"), str(RAW / "config.json"), str(FP8 / "config.json")], WORK, cpu_env, 300),
         ("05_check_fp8", [CPU_PY, "-I", str(ROOT / "check_fp8.py"), str(FP8)], WORK, cpu_env, 300),
