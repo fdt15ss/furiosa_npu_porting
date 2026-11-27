@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>YOLO26 Furiosa RNGD NPU · Detection & Segmentation</title>
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --panel: #131a26;
+      --panel-2: #1a2333;
+      --border: #27344a;
+      --text: #e6edf7;
+      --muted: #8ea0b8;
+      --accent: #38bdf8;
+      --accent-2: #818cf8;
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --err: #ef4444;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      background: radial-gradient(circle at top right, #162136 0%, var(--bg) 55%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(19, 26, 38, 0.85);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand h1 { font-size: 1.05rem; margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+    .badge {
+      font-size: 0.75rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      font-weight: 600;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--warn);
+      box-shadow: 0 0 8px currentColor;
+    }
+    .dot.ok { background: var(--ok); }
+    .dot.err { background: var(--err); }
+
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 18px;
+    }
+    @media (max-width: 980px) {
+      .container { grid-template-columns: 1fr; padding: 12px; }
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .tabs {
+      display: inline-flex;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 3px;
+      gap: 3px;
+    }
+    .tab-btn {
+      background: transparent;
+      color: var(--muted);
+      border: none;
+      border-radius: 7px;
+      padding: 7px 12px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #07101f;
+    }
+
+    button.btn {
+      background: var(--panel-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    button.btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+    button.btn.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #07101f;
+      border: none;
+    }
+    button.btn.danger {
+      background: rgba(239, 68, 68, 0.16);
+      border-color: rgba(239, 68, 68, 0.45);
+      color: #fca5a5;
+    }
+    button.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .stage-wrap {
+      position: relative;
+      width: 100%;
+      background: #05080d;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    video#player {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    canvas#overlay {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .empty-hint {
+      position: absolute;
+      text-align: center;
+      color: var(--muted);
+      padding: 20px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .notice {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fcd34d;
+      display: none;
+    }
+
+    .sidebar { display: flex; flex-direction: column; gap: 14px; }
+    .section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
+    .control-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .control-row label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+    .control-row label span.val { color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 600; }
+    input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+    select {
+      width: 100%;
+      background: var(--panel-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.85rem;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .metric {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+    }
+    .metric .k { font-size: 0.72rem; color: var(--muted); }
+    .metric .v { font-size: 1.15rem; font-weight: 700; margin-top: 2px; font-variant-numeric: tabular-nums; }
+
+    .class-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      min-height: 28px;
+    }
+    .class-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+    }
+    .swatch { width: 9px; height: 9px; border-radius: 50%; }
+
+    .upload-box {
+      display: none;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 10px;
+      background: var(--panel-2);
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+    }
+    .upload-box.active { display: flex; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>YOLO26 Live Vision</h1>
+      <span class="badge">YOLO26n-seg Only · Furiosa RNGD NPU</span>
+    </div>
+    <div class="status-pill">
+      <span class="dot" id="wsDot"></span>
+      <span id="statusText">초기화 중...</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <div class="toolbar">
+        <div class="tabs" id="sourceTabs">
+          <button class="tab-btn active" data-source="camera">실시간 카메라</button>
+          <button class="tab-btn" data-source="video">동영상 / 샘플</button>
+        </div>
+
+        <button class="btn primary" id="startCamBtn">카메라 시작</button>
+        <button class="btn danger" id="stopCamBtn" disabled>정지</button>
+        <button class="btn" id="flipCamBtn" title="전면/후면 카메라 전환">전/후면 전환</button>
+        <button class="btn" id="snapBtn" disabled>스냅샷 저장</button>
+      </div>
+
+      <div class="upload-box" id="videoControls">
+        <input type="file" id="videoFileInput" accept="video/*" />
+        <select id="sampleSelect" style="width:auto; min-width: 180px;">
+          <option value="">샘플 동영상 선택...</option>
+        </select>
+        <button class="btn primary" id="playSampleBtn" disabled>샘플 재생</button>
+        <button class="btn" id="renderServerBtn" disabled title="서버에서 전체 영상 NPU 렌더링 후 MP4 다운로드">서버 MP4 렌더링</button>
+        <a id="downloadVideoLink" style="display:none; color: var(--accent); font-size:0.84rem;" download>결과 MP4 다운로드</a>
+      </div>
+
+      <div class="stage-wrap" id="stageWrap">
+        <video id="player" playsinline muted></video>
+        <canvas id="overlay"></canvas>
+        <div class="empty-hint" id="emptyHint">
+          <b>카메라 시작</b>을 누르면 브라우저 카메라 영상이 Furiosa NPU의 <b>YOLO26n-seg</b>로 전송되어<br/>
+          실시간 <b>Detection + Segmentation</b> 결과를 오버레이합니다.<br/>
+          <small style="color:#6d809b">(외부 웹/모바일 접속 시 Cloudflare Tunnel HTTPS 주소에서 카메라 권한이 활성화됩니다)</small>
+        </div>
+      </div>
+
+      <div class="notice" id="httpsNotice"></div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="card">
+        <h2 class="section-title">YOLO26 추론 모드</h2>
+        <div class="tabs" id="modeTabs" style="width:100%; display:grid; grid-template-columns: repeat(3, 1fr); margin-bottom:12px;">
+          <button class="tab-btn active" data-mode="both">둘 다</button>
+          <button class="tab-btn" data-mode="detect">Detection</button>
+          <button class="tab-btn" data-mode="segment">Segmentation</button>
+        </div>
+
+        <div class="control-row">
+          <label>Confidence <span class="val" id="confVal">0.25</span></label>
+          <input type="range" id="confRange" min="0.05" max="0.90" step="0.05" value="0.25" />
+        </div>
+        <div class="control-row">
+          <label>IoU Threshold <span class="val" id="iouVal">0.70</span></label>
+          <input type="range" id="iouRange" min="0.10" max="0.95" step="0.05" value="0.70" />
+        </div>
+        <div class="control-row">
+          <label>Mask Opacity <span class="val" id="alphaVal">0.42</span></label>
+          <input type="range" id="alphaRange" min="0.10" max="0.85" step="0.05" value="0.42" />
+        </div>
+        <div class="control-row" style="margin-bottom:0;">
+          <label>전송 해상도</label>
+          <select id="resSelect">
+            <option value="640">640px (최고 속도)</option>
+            <option value="800">800px (균형)</option>
+            <option value="960">960px (고화질)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">실시간 성능 (NPU)</h2>
+        <div class="metrics-grid">
+          <div class="metric"><div class="k">추론 FPS</div><div class="v" id="mFps">-</div></div>
+          <div class="metric"><div class="k">왕복 RTT</div><div class="v" id="mRtt">-</div></div>
+          <div class="metric"><div class="k">NPU 시간</div><div class="v" id="mNpu">-</div></div>
+          <div class="metric"><div class="k">탐지 객체 수</div><div class="v" id="mCount">0</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">탐지된 클래스</h2>
+        <div class="class-list" id="classList">
+          <span style="font-size:0.82rem; color:var(--muted);">대기 중...</span>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const player = document.getElementById("player");
+    const overlay = document.getElementById("overlay");
+    const ctx = overlay.getContext("2d");
+    const captureCanvas = document.createElement("canvas");
+    const captureCtx = captureCanvas.getContext("2d");
+
+    const wsDot = document.getElementById("wsDot");
+    const statusText = document.getElementById("statusText");
+    const emptyHint = document.getElementById("emptyHint");
+    const httpsNotice = document.getElementById("httpsNotice");
+
+    const startCamBtn = document.getElementById("startCamBtn");
+    const stopCamBtn = document.getElementById("stopCamBtn");
+    const flipCamBtn = document.getElementById("flipCamBtn");
+    const snapBtn = document.getElementById("snapBtn");
+
+    const videoControls = document.getElementById("videoControls");
+    const videoFileInput = document.getElementById("videoFileInput");
+    const sampleSelect = document.getElementById("sampleSelect");
+    const playSampleBtn = document.getElementById("playSampleBtn");
+    const renderServerBtn = document.getElementById("renderServerBtn");
+    const downloadVideoLink = document.getElementById("downloadVideoLink");
+
+    const confRange = document.getElementById("confRange");
+    const iouRange = document.getElementById("iouRange");
+    const alphaRange = document.getElementById("alphaRange");
+    const resSelect = document.getElementById("resSelect");
+
+    let sourceMode = "camera";
+    let inferMode = "both";
+    let facingMode = "environment";
+    let mediaStream = null;
+    let ws = null;
+    let streaming = false;
+    let inFlight = false;
+    let seq = 0;
+    let sentTimes = new Map();
+    let fpsWindow = [];
+    let lastResult = null;
+    let uploadedFile = null;
+
+    function checkSecureContext() {
+      const isLocal = ["localhost", "127.0.0.1"].includes(location.hostname);
+      if (!window.isSecureContext && !isLocal) {
+        httpsNotice.style.display = "block";
+        httpsNotice.innerHTML =
+          "<b>HTTPS 안내:</b> 현재 비보안 HTTP 주소로 접속되어 브라우저가 카메라 접근을 차단할 수 있습니다. " +
+          "Cloudflare Tunnel로 발급된 <code>https://*.trycloudflare.com</code> 주소를 사용해주세요.";
+      }
+    }
+
+    function setWsState(state, text) {
+      wsDot.className = "dot " + (state === "ok" ? "ok" : state === "err" ? "err" : "");
+      statusText.textContent = text;
+    }
+
+    function connectWS() {
+      return new Promise((resolve, reject) => {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+          resolve(ws);
+          return;
+        }
+        const proto = location.protocol === "https:" ? "wss:" : "ws:";
+        ws = new WebSocket(`${proto}//${location.host}/ws/infer`);
+        ws.binaryType = "arraybuffer";
+        ws.onopen = () => {
+          setWsState("ok", "NPU 연결됨 (YOLO26n-seg)");
+          sendConfig();
+          resolve(ws);
+        };
+        ws.onerror = (err) => {
+          setWsState("err", "WebSocket 연결 오류");
+          reject(err);
+        };
+        ws.onclose = () => {
+          inFlight = false;
+          if (streaming) setWsState("err", "연결 끊김 · 재연결 필요");
+        };
+        ws.onmessage = (evt) => {
+          const data = JSON.parse(evt.data);
+          if (data.type !== "result") return;
+          inFlight = false;
+          lastResult = data;
+
+          const now = performance.now();
+          const sentAt = sentTimes.get(data.seq);
+          if (sentAt !== undefined) {
+            sentTimes.delete(data.seq);
+            document.getElementById("mRtt").textContent = `${(now - sentAt).toFixed(1)} ms`;
+          }
+          fpsWindow.push(now);
+          while (fpsWindow.length && now - fpsWindow[0] > 1000) fpsWindow.shift();
+          document.getElementById("mFps").textContent = `${fpsWindow.length}`;
+          document.getElementById("mNpu").textContent = `${data.timing_ms.npu.toFixed(1)} ms`;
+          document.getElementById("mCount").textContent = `${data.count}`;
+
+          renderDetections(data);
+          renderClassChips(data.detections);
+        };
+      });
+    }
+
+    function sendConfig() {
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({
+          type: "config",
+          mode: inferMode,
+          conf: parseFloat(confRange.value),
+          iou: parseFloat(iouRange.value),
+        }));
+      }
+    }
+
+    function syncCanvasLayout() {
+      const rect = player.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const targetW = Math.round(rect.width * dpr);
+      const targetH = Math.round(rect.height * dpr);
+      if (overlay.width !== targetW || overlay.height !== targetH) {
+        overlay.width = targetW;
+        overlay.height = targetH;
+      }
+    }
+
+    function getVideoContentRect() {
+      const vw = player.videoWidth || 1;
+      const vh = player.videoHeight || 1;
+      const cw = overlay.width;
+      const ch = overlay.height;
+      const scale = Math.min(cw / vw, ch / vh);
+      const drawW = vw * scale;
+      const drawH = vh * scale;
+      const offsetX = (cw - drawW) / 2;
+      const offsetY = (ch - drawH) / 2;
+      return { offsetX, offsetY, drawW, drawH };
+    }
+
+    function renderDetections(data) {
+      syncCanvasLayout();
+      ctx.clearRect(0, 0, overlay.width, overlay.height);
+      if (!data || !data.detections) return;
+
+      const { offsetX, offsetY, drawW, drawH } = getVideoContentRect();
+      const maskAlpha = parseFloat(alphaRange.value);
+      const showBoxes = inferMode === "both" || inferMode === "detect";
+      const showMasks = inferMode === "both" || inferMode === "segment";
+
+      ctx.save();
+      ctx.lineJoin = "round";
+
+      for (const det of data.detections) {
+        const [r, g, b] = det.color;
+
+        if (showMasks && det.polygons && det.polygons.length) {
+          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${maskAlpha})`;
+          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.92)`;
+          ctx.lineWidth = 2;
+          for (const poly of det.polygons) {
+            if (poly.length < 3) continue;
+            ctx.beginPath();
+            ctx.moveTo(offsetX + poly[0][0] * drawW, offsetY + poly[0][1] * drawH);
+            for (let i = 1; i < poly.length; i++) {
+              ctx.lineTo(offsetX + poly[i][0] * drawW, offsetY + poly[i][1] * drawH);
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+          }
+        }
+
+        if (showBoxes) {
+          const [nx1, ny1, nx2, ny2] = det.bbox;
+          const x = offsetX + nx1 * drawW;
+          const y = offsetY + ny1 * drawH;
+          const w = (nx2 - nx1) * drawW;
+          const h = (ny2 - ny1) * drawH;
+
+          ctx.strokeStyle = `rgb(${r}, ${g}, ${b})`;
+          ctx.lineWidth = Math.max(2, overlay.width * 0.0025);
+          ctx.strokeRect(x, y, w, h);
+
+          const label = `${det.label} ${(det.conf * 100).toFixed(0)}%`;
+          ctx.font = `600 ${Math.max(12, Math.round(overlay.width * 0.015))}px sans-serif`;
+          const textW = ctx.measureText(label).width;
+          const boxH = Math.max(20, Math.round(overlay.width * 0.022));
+          const ly = Math.max(0, y - boxH);
+
+          ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+          ctx.fillRect(x, ly, textW + 10, boxH);
+          ctx.fillStyle = (r * 0.299 + g * 0.587 + b * 0.114) > 150 ? "#081018" : "#ffffff";
+          ctx.fillText(label, x + 5, ly + boxH - 5);
+        }
+      }
+      ctx.restore();
+    }
+
+    function renderClassChips(detections) {
+      const el = document.getElementById("classList");
+      if (!detections || !detections.length) {
+        el.innerHTML = '<span style="font-size:0.82rem; color:var(--muted);">탐지된 객체 없음</span>';
+        return;
+      }
+      const counts = new Map();
+      for (const d of detections) {
+        const prev = counts.get(d.label) || { count: 0, color: d.color };
+        prev.count += 1;
+        counts.set(d.label, prev);
+      }
+      el.innerHTML = Array.from(counts.entries())
+        .sort((a, b) => b[1].count - a[1].count)
+        .map(([label, info]) => {
+          const [r, g, b] = info.color;
+          return `<span class="class-chip"><span class="swatch" style="background:rgb(${r},${g},${b})"></span>${label} × ${info.count}</span>`;
+        })
+        .join("");
+    }
+
+    function pumpFrames() {
+      if (!streaming) return;
+      if (!inFlight && ws && ws.readyState === WebSocket.OPEN && player.readyState >= 2 && !player.paused) {
+        const vw = player.videoWidth;
+        const vh = player.videoHeight;
+        if (vw > 0 && vh > 0) {
+          const maxDim = parseInt(resSelect.value, 10);
+          const scale = Math.min(1, maxDim / Math.max(vw, vh));
+          const cw = Math.max(2, Math.round(vw * scale));
+          const ch = Math.max(2, Math.round(vh * scale));
+          captureCanvas.width = cw;
+          captureCanvas.height = ch;
+          captureCtx.drawImage(player, 0, 0, cw, ch);
+
+          inFlight = true;
+          captureCanvas.toBlob(async (blob) => {
+            if (!blob || !streaming || !ws || ws.readyState !== WebSocket.OPEN) {
+              inFlight = false;
+              return;
+            }
+            seq = (seq + 1) >>> 0;
+            const buf = new ArrayBuffer(4 + blob.size);
+            new DataView(buf).setUint32(0, seq, false);
+            new Uint8Array(buf, 4).set(new Uint8Array(await blob.arrayBuffer()));
+            sentTimes.set(seq, performance.now());
+            if (sentTimes.size > 30) {
+              const firstKey = sentTimes.keys().next().value;
+              sentTimes.delete(firstKey);
+            }
+            ws.send(buf);
+          }, "image/jpeg", 0.8);
+        }
+      }
+      requestAnimationFrame(pumpFrames);
+    }
+
+    async function safePlay(videoEl) {
+      if (videoEl.readyState < 1) {
+        await new Promise((resolve) => {
+          const onMeta = () => {
+            videoEl.removeEventListener("loadedmetadata", onMeta);
+            resolve();
+          };
+          videoEl.addEventListener("loadedmetadata", onMeta, { once: true });
+        });
+      }
+      try {
+        await videoEl.play();
+      } catch (err) {
+        if (err && err.name === "AbortError") return;
+        throw err;
+      }
+    }
+
+    async function startCamera() {
+      stopAll();
+      startCamBtn.disabled = true;
+      try {
+        await connectWS();
+        mediaStream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: { ideal: facingMode },
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+          },
+          audio: false,
+        });
+        player.loop = false;
+        player.controls = false;
+        player.srcObject = mediaStream;
+        await safePlay(player);
+        emptyHint.style.display = "none";
+        streaming = true;
+        stopCamBtn.disabled = false;
+        snapBtn.disabled = false;
+        requestAnimationFrame(pumpFrames);
+      } catch (err) {
+        stopAll();
+        setWsState("err", `카메라 실패: ${err.message || err}`);
+        alert("카메라를 시작할 수 없습니다: " + (err.message || err));
+      }
+    }
+
+    function stopAll() {
+      streaming = false;
+      inFlight = false;
+      if (mediaStream) {
+        mediaStream.getTracks().forEach((t) => t.stop());
+        mediaStream = null;
+      }
+      player.pause();
+      player.srcObject = null;
+      if (player.hasAttribute("src")) {
+        player.removeAttribute("src");
+        player.load();
+      }
+      ctx.clearRect(0, 0, overlay.width, overlay.height);
+      startCamBtn.disabled = false;
+      stopCamBtn.disabled = true;
+      snapBtn.disabled = true;
+      emptyHint.style.display = "block";
+    }
+
+    async function startVideoUrl(url) {
+      stopAll();
+      try {
+        await connectWS();
+        player.srcObject = null;
+        player.loop = true;
+        player.controls = true;
+        player.src = url;
+        await safePlay(player);
+        emptyHint.style.display = "none";
+        streaming = true;
+        stopCamBtn.disabled = false;
+        snapBtn.disabled = false;
+        requestAnimationFrame(pumpFrames);
+      } catch (err) {
+        stopAll();
+        setWsState("err", `동영상 재생 실패: ${err.message || err}`);
+        alert("동영상을 재생할 수 없습니다: " + (err.message || err));
+      }
+    }
+
+    // Event bindings
+    startCamBtn.onclick = startCamera;
+    stopCamBtn.onclick = stopAll;
+    flipCamBtn.onclick = () => {
+      facingMode = facingMode === "environment" ? "user" : "environment";
+      if (sourceMode === "camera" && streaming) startCamera();
+    };
+
+    snapBtn.onclick = () => {
+      if (!player.videoWidth) return;
+      const snap = document.createElement("canvas");
+      snap.width = overlay.width || player.videoWidth;
+      snap.height = overlay.height || player.videoHeight;
+      const sctx = snap.getContext("2d");
+      const { offsetX, offsetY, drawW, drawH } = getVideoContentRect();
+      sctx.fillStyle = "#000";
+      sctx.fillRect(0, 0, snap.width, snap.height);
+      sctx.drawImage(player, offsetX, offsetY, drawW, drawH);
+      sctx.drawImage(overlay, 0, 0);
+      const a = document.createElement("a");
+      a.href = snap.toDataURL("image/png");
+      a.download = `yolo26n_seg_${Date.now()}.png`;
+      a.click();
+    };
+
+    document.querySelectorAll("#sourceTabs .tab-btn").forEach((btn) => {
+      btn.onclick = () => {
+        document.querySelectorAll("#sourceTabs .tab-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        sourceMode = btn.dataset.source;
+        videoControls.classList.toggle("active", sourceMode === "video");
+        startCamBtn.style.display = sourceMode === "camera" ? "inline-block" : "none";
+        flipCamBtn.style.display = sourceMode === "camera" ? "inline-block" : "none";
+        player.controls = sourceMode === "video";
+        stopAll();
+      };
+    });
+
+    document.querySelectorAll("#modeTabs .tab-btn").forEach((btn) => {
+      btn.onclick = () => {
+        document.querySelectorAll("#modeTabs .tab-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        inferMode = btn.dataset.mode;
+        sendConfig();
+        if (lastResult) renderDetections(lastResult);
+      };
+    });
+
+    confRange.oninput = () => {
+      document.getElementById("confVal").textContent = parseFloat(confRange.value).toFixed(2);
+      sendConfig();
+    };
+    iouRange.oninput = () => {
+      document.getElementById("iouVal").textContent = parseFloat(iouRange.value).toFixed(2);
+      sendConfig();
+    };
+    alphaRange.oninput = () => {
+      document.getElementById("alphaVal").textContent = parseFloat(alphaRange.value).toFixed(2);
+      if (lastResult) renderDetections(lastResult);
+    };
+
+    videoFileInput.onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      uploadedFile = file;
+      renderServerBtn.disabled = false;
+      downloadVideoLink.style.display = "none";
+      const objUrl = URL.createObjectURL(file);
+      await startVideoUrl(objUrl);
+    };
+
+    sampleSelect.onchange = () => {
+      playSampleBtn.disabled = !sampleSelect.value;
+    };
+    playSampleBtn.onclick = async () => {
+      if (!sampleSelect.value) return;
+      await startVideoUrl(`/api/samples/${encodeURIComponent(sampleSelect.value)}`);
+    };
+
+    renderServerBtn.onclick = async () => {
+      if (!uploadedFile) return;
+      renderServerBtn.disabled = true;
+      renderServerBtn.textContent = "NPU 렌더링 중...";
+      try {
+        const fd = new FormData();
+        fd.append("file", uploadedFile);
+        fd.append("mode", inferMode);
+        fd.append("conf", confRange.value);
+        fd.append("iou", iouRange.value);
+        const res = await fetch("/api/infer/video", { method: "POST", body: fd });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "렌더링 실패");
+        downloadVideoLink.href = data.video_url;
+        downloadVideoLink.style.display = "inline-block";
+        downloadVideoLink.textContent = `MP4 다운로드 (${data.processing_fps} FPS · ${data.frames}프레임)`;
+      } catch (err) {
+        alert("서버 렌더링 오류: " + err.message);
+      } finally {
+        renderServerBtn.disabled = false;
+        renderServerBtn.textContent = "서버 MP4 렌더링";
+      }
+    };
+
+    async function init() {
+      checkSecureContext();
+      try {
+        const [healthRes, samplesRes] = await Promise.all([
+          fetch("/api/health"),
+          fetch("/api/samples"),
+        ]);
+        if (healthRes.ok) {
+          const h = await healthRes.json();
+          setWsState("ok", `준비됨 · ${h.model} (${h.device})`);
+        } else {
+          setWsState("err", "엔진 로딩 중...");
+        }
+        if (samplesRes.ok) {
+          const s = await samplesRes.json();
+          for (const item of s.samples || []) {
+            if (item.type !== "video") continue;
+            const opt = document.createElement("option");
+            opt.value = item.path;
+            opt.textContent = item.name;
+            sampleSelect.appendChild(opt);
+          }
+        }
+      } catch {
+        setWsState("err", "서버 연결 대기");
+      }
+    }
+
+    window.addEventListener("resize", () => {
+      if (lastResult) renderDetections(lastResult);
+    });
+
+    init();
+  </script>
+</body>
+</html>
