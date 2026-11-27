@@ -76,7 +76,7 @@
 ## 실행 방법
 
 ```bash
-cd yolo
+cd yolo26
 
 # 전체 모델 컴파일 + 정확도/FPS/퓨전/영상 벤치마크 일괄 실행 및 RESULTS.md 생성
 .venv/bin/python -u run_full_bench.py

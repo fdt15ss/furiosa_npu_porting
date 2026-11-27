@@ -1,0 +1,279 @@
+[
+  {
+    "name": "01_compile_yoloe26_det",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "compile_model.py",
+      "yoloe-26n-det"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 4345.59,
+    "peak_anon_delta_gib": 53.9,
+    "log": "bench_logs/01_compile_yoloe26_det.log"
+  },
+  {
+    "name": "02_run_detect",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "run_detect.py"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 15.0,
+    "peak_anon_delta_gib": 0.5,
+    "log": "bench_logs/02_run_detect.log"
+  },
+  {
+    "name": "03_detect_fps",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "detect_npu.py"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 135.02,
+    "peak_anon_delta_gib": 3.86,
+    "log": "bench_logs/03_detect_fps.log"
+  },
+  {
+    "name": "04_compile_yoloe26_det_1pe_pad4",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "compile_fusion.py",
+      "1",
+      "pad4"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 3815.56,
+    "peak_anon_delta_gib": 53.76,
+    "log": "bench_logs/04_compile_yoloe26_det_1pe_pad4.log"
+  },
+  {
+    "name": "05_compile_yoloe26_det_2pe",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "compile_fusion.py",
+      "2"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 2985.45,
+    "peak_anon_delta_gib": 39.66,
+    "log": "bench_logs/05_compile_yoloe26_det_2pe.log"
+  },
+  {
+    "name": "06_compile_yoloe26_det_2pe_pad4",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "compile_fusion.py",
+      "2",
+      "pad4"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 2975.44,
+    "peak_anon_delta_gib": 41.12,
+    "log": "bench_logs/06_compile_yoloe26_det_2pe_pad4.log"
+  },
+  {
+    "name": "07_bench_1pe_3ch",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "1",
+      "yoloe-26n-det.edf"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 30.0,
+    "peak_anon_delta_gib": 0.46,
+    "log": "bench_logs/07_bench_1pe_3ch.log"
+  },
+  {
+    "name": "08_bench_1pe_pad4",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "1",
+      "yoloe-26n-det-1pe-pad4.edf"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 30.0,
+    "peak_anon_delta_gib": 0.45,
+    "log": "bench_logs/08_bench_1pe_pad4.log"
+  },
+  {
+    "name": "09_bench_2pe_3ch",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "2",
+      "yoloe-26n-det-2pe.edf"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 30.0,
+    "peak_anon_delta_gib": 0.46,
+    "log": "bench_logs/09_bench_2pe_3ch.log"
+  },
+  {
+    "name": "10_bench_2pe_pad4",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "2",
+      "yoloe-26n-det-2pe-pad4.edf"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 30.0,
+    "peak_anon_delta_gib": 0.46,
+    "log": "bench_logs/10_bench_2pe_pad4.log"
+  },
+  {
+    "name": "11_bench_1pe_pad4_x2",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "1",
+      "yoloe-26n-det-1pe-pad4.edf",
+      "2"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 20.0,
+    "peak_anon_delta_gib": 1.22,
+    "log": "bench_logs/11_bench_1pe_pad4_x2.log"
+  },
+  {
+    "name": "12_bench_1pe_pad4_x8",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "1",
+      "yoloe-26n-det-1pe-pad4.edf",
+      "8"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 25.01,
+    "peak_anon_delta_gib": 3.82,
+    "log": "bench_logs/12_bench_1pe_pad4_x8.log"
+  },
+  {
+    "name": "13_bench_2pe_pad4_x2",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "2",
+      "yoloe-26n-det-2pe-pad4.edf",
+      "2"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 20.0,
+    "peak_anon_delta_gib": 1.22,
+    "log": "bench_logs/13_bench_2pe_pad4_x2.log"
+  },
+  {
+    "name": "14_bench_2pe_pad4_x4",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "bench_fusion.py",
+      "2",
+      "yoloe-26n-det-2pe-pad4.edf",
+      "4"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 20.0,
+    "peak_anon_delta_gib": 2.08,
+    "log": "bench_logs/14_bench_2pe_pad4_x4.log"
+  },
+  {
+    "name": "15_compile_yoloe26_seg",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "compile_model.py",
+      "yoloe-26n-seg"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 4145.61,
+    "peak_anon_delta_gib": 55.45,
+    "log": "bench_logs/15_compile_yoloe26_seg.log"
+  },
+  {
+    "name": "16_compile_yoloe26_seg_protohead",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "compile_proto.py"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 5.0,
+    "peak_anon_delta_gib": 0.0,
+    "log": "bench_logs/16_compile_yoloe26_seg_protohead.log"
+  },
+  {
+    "name": "17_seg_check",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "seg_npu.py",
+      "check"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 10.0,
+    "peak_anon_delta_gib": 0.42,
+    "log": "bench_logs/17_seg_check.log"
+  },
+  {
+    "name": "18_seg_files",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "seg_npu.py",
+      "files"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 15.0,
+    "peak_anon_delta_gib": 0.54,
+    "log": "bench_logs/18_seg_files.log"
+  },
+  {
+    "name": "19_seg_fps",
+    "cmd": [
+      "/root/programming/npu/furiosa_npu_tries/yoloe26/.venv/bin/python",
+      "-u",
+      "seg_npu.py",
+      "fps"
+    ],
+    "rc": 0,
+    "timed_out": false,
+    "elapsed_s": 115.01,
+    "peak_anon_delta_gib": 4.07,
+    "log": "bench_logs/19_seg_fps.log"
+  }
+]

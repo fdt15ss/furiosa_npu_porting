@@ -1,0 +1,7 @@
+[project]
+name = "yoloe26"
+version = "0.1.0"
+description = "YOLOE-26 NPU porting and benchmark on Furiosa RNGD"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []

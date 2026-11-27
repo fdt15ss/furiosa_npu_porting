@@ -1,0 +1,4 @@
+YOLOe-26n-seg summary (fused): 161 layers, 5,103,450 parameters, 1,883,186 gradients, 10.6 GFLOPs
+cpu match: raw maxdiff=1.6398 det cpu=6 npu=6 same_classes=True box maxdiff=0.37px
+fusion=1 npu only n=2457 p50=4.06ms p99=4.10ms fps=245.8
+fusion=1 npu+copy n=1669 p50=5.88ms p99=6.43ms fps=166.8

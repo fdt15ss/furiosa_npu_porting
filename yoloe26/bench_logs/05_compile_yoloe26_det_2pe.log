@@ -1,0 +1,5 @@
+Fusion(num_fusion=2, num_pe_per_cluster=2, num_chips=1, num_clusters_per_chip=1) 
+YOLOe-26n-seg summary (fused): 161 layers, 5,103,450 parameters, 1,883,186 gradients, 10.6 GFLOPs
+export+decompose 2.5s
+compile ok 2967.2s
+saved yoloe-26n-det-2pe.edf

@@ -2,10 +2,12 @@
 !/.gitignore
 !/README.md
 !/qwen36_fp8/
-!/yolo/
+!/yolo26/
+!/yoloe26/
 __pycache__/
 *.pyc
 *.edf
 *.pt
+*.ts
 *.fxb
 *.safetensors

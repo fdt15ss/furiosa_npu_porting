@@ -273,7 +273,7 @@ def render_results(summary: list[dict]) -> None:
     lines = [
         "# Furiosa RNGD 비전 모델 컴파일 및 NPU 측정 결과",
         "",
-        f"측정일: {today}. 환경: `yolo/.venv` (Python {sys.version.split()[0]}), `furiosa-torch` {ft_ver}, 펌웨어 `{fw}`, RNGD 1장(코어 8개, `furiosa:0`~`furiosa:7`), 입력 640×640.",
+        f"측정일: {today}. 환경: `yolo26/.venv` (Python {sys.version.split()[0]}), `furiosa-torch` {ft_ver}, 펌웨어 `{fw}`, RNGD 1장(코어 8개, `furiosa:0`~`furiosa:7`), 입력 640×640.",
         "",
         "## 결과 요약",
         "",
@@ -338,11 +338,11 @@ def render_results(summary: list[dict]) -> None:
         "## 실행 및 로그",
         "",
         "```bash",
-        "cd yolo",
+        "cd yolo26",
         ".venv/bin/python -u run_full_bench.py",
         "```",
         "",
-        f"- 전체 단계 로그: `yolo/bench_logs/` (`master.log`, `summary.json`)",
+        f"- 전체 단계 로그: `yolo26/bench_logs/` (`master.log`, `summary.json`)",
         f"- 생성된 이미지·영상 결과: `{MEDIA}/result` 및 `{MEDIA}`",
         "",
     ])

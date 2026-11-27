@@ -1,0 +1,3 @@
+YOLOe-26n-seg summary (fused): 161 layers, 5,103,450 parameters, 1,883,186 gradients, 10.6 GFLOPs
+YOLOe-26n-seg summary (fused): 161 layers, 5,103,450 parameters, 1,883,186 gradients, 10.6 GFLOPs
+fusion=2 devices=2 (4 PE) total=445.5 fps per_device=222.7~222.9

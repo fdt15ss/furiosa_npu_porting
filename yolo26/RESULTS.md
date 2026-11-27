@@ -1,6 +1,6 @@
 # Furiosa RNGD 비전 모델 컴파일 및 NPU 측정 결과
 
-측정일: 2026-11-26. 환경: `yolo/.venv` (Python 3.11.18), `furiosa-torch` 2026.3.0, 펌웨어 `2026.4.0, 93d67f3`, RNGD 1장(코어 8개, `furiosa:0`~`furiosa:7`), 입력 640×640.
+측정일: 2026-11-26. 환경: `yolo26/.venv` (Python 3.11.18), `furiosa-torch` 2026.3.0, 펌웨어 `2026.4.0, 93d67f3`, RNGD 1장(코어 8개, `furiosa:0`~`furiosa:7`), 입력 640×640.
 
 ## 결과 요약
 
@@ -54,9 +54,9 @@
 ## 실행 및 로그
 
 ```bash
-cd yolo
+cd yolo26
 .venv/bin/python -u run_full_bench.py
 ```
 
-- 전체 단계 로그: `yolo/bench_logs/` (`master.log`, `summary.json`)
+- 전체 단계 로그: `yolo26/bench_logs/` (`master.log`, `summary.json`)
 - 생성된 이미지·영상 결과: `/root/programming/npu/media/result` 및 `/root/programming/npu/media`
